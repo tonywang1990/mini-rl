@@ -3,16 +3,17 @@ from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
+import gym
+from typing import Union
+from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
-from source.agent import Agent
-from source.utils import *
+from agent import Agent
+from utils import *
 
 
 class DynaQAgent(Agent):
-    def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float, epsilon: float, step_size: float, agent_type: str, planning_steps: int):
-        super().__init__(state_space, action_space, discount_rate)
-        self._epsilon = epsilon
-        self._step_size = step_size
+    def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, agent_type: str, planning_steps: int):
+        super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._agent_type = agent_type
         self._planning_steps = planning_steps
         # action values
@@ -29,7 +30,13 @@ class DynaQAgent(Agent):
         return np.random.choice(len(self._policy[state]), p=self._policy[state])
 
     # update action value and policy
-    def control(self, state, action, reward, new_state, terminal):
+    def control(self, state, action, reward, new_state, terminal, epsilon: Optional[float] = None, learning_rate: Optional[float] = None):
+        # Overwrite
+        if epsilon is not None:
+            self._epsilon = epsilon
+        if learning_rate is not None:
+            self._learning_rate = learning_rate
+
         # Learn from real experience
         self.learning(state, action, reward, new_state, terminal)
         # NOTE!!! this is assuming "deterministic" environment
@@ -38,13 +45,14 @@ class DynaQAgent(Agent):
         self.planning(self._planning_steps)
 
         # update policy
+
         self._policy[state] = get_epsilon_greedy_policy_from_action_values(
             self._Q[state], self._epsilon)
 
-    def learning(self, state, action, reward, new_state, terminal):
+    def learning(self, state, action, reward, new_state, terminal, learning_rate: Optional[float] = None):
         # if new_state is a terminal state
         if terminal:
-            self._Q[state][action] += self._step_size * \
+            self._Q[state][action] += self._learning_rate * \
                 (reward - self._Q[state][action])
         else:
             if self._agent_type == 'q_learning':
@@ -53,7 +61,7 @@ class DynaQAgent(Agent):
                 returns = np.sum(self._Q[new_state] * self._policy[new_state])
             else:
                 raise NotImplementedError
-            self._Q[state][action] += self._step_size * \
+            self._Q[state][action] += self._learning_rate * \
                 (reward + self._discount_rate *
                  returns - self._Q[state][action])
 
@@ -72,7 +80,7 @@ def test_dyna_q_agent():
         action_space=Discrete(4),
         discount_rate=1.0,
         epsilon=1.0,
-        step_size=0.5,
+        learning_rate=0.5,
         agent_type='q_learning',
         planning_steps=1
     )
@@ -87,5 +95,6 @@ def test_dyna_q_agent():
     new_action = agent.control(state, action, reward, new_state, False)
     np.testing.assert_almost_equal(agent._Q[state, action], 8.5)
     print("test_dyna_q_agent passed!")
+
 
 test_dyna_q_agent()

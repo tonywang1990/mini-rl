@@ -6,20 +6,22 @@ from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 
 class Agent(object):
-    def __init__(self, state_space: Space, action_space: Space, discount_rate: float):
+    def __init__(self, state_space: Space, action_space: Space, discount_rate: float, epsilon: float, learning_rate: float):
         self._state_spacee = state_space
         self._action_space = action_space
         self._discount_rate = discount_rate
-        self._prev_action = None
-        self._prev_state = None
+        self._epsilon = epsilon
+        self._learning_rate = learning_rate
 
     def sample_action(self, state: int):
-        pass
+        raise NotImplementedError
 
     def control(self, state: int, action: int, reward: float, new_state: int, terminal: bool):
-        pass
+        raise NotImplementedError
 
-    def play_episode(self, env: gym.Env, learning: Optional[bool] = True, video: Optional[VideoRecorder] = None):
+    def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):
+        if video_path is not None:
+            video = VideoRecorder(env, video_path)
         state, info = env.reset()
         terminal = False
         steps = 0
@@ -27,9 +29,12 @@ class Agent(object):
             action = self.sample_action(state)
             new_state, reward, terminal, _, info = env.step(action)
             if learning:
-                self.control(state, action, reward, new_state, terminal)
+                self.control(state, action, reward,
+                             new_state, terminal, epsilon, learning_rate)
             state = new_state
             steps += 1
-            if video is not None:
+            if video_path is not None:
                 video.capture_frame()
+        if video_path is not None:
+            video.close()
         return reward, steps

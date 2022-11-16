@@ -3,8 +3,10 @@ from typing import Dict, List, Optional, Set, Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
+from gym import Env
+from tqdm import tqdm
 
-from source.agent import Agent
+from agent import Agent
 
 # Utils
 
@@ -80,21 +82,43 @@ def show_state_action_values(agent: Agent, game: str):
     for idx, val in np.ndenumerate(actions):
         named_actions[idx] = direction[val]
         #map[idx[0]][idx[1]] = direction[val]
-    #print(named_actions)
+    # print(named_actions)
 
+    # Action values
+    plt.figure(1, figsize=(16, 4))
     action_values = agent._Q.reshape(shape)
     num_actions = action_values.shape[-1]
-    plt.figure(2, figsize=(16, 4))
     plt.suptitle("action_values (Q)")
     for i in range(num_actions):
         plt.subplot(1, num_actions, i+1)
         plt.title(f"{i}, {direction[i]}")
         plt.imshow(action_values[:, :, i])
+        for (y, x), label in np.ndenumerate(action_values[:, :, i]):
+            plt.text(x, y, round(label, 2), ha='center', va='center')
+
         plt.colorbar(orientation='vertical')
         # print(action_values[:,:,i])
 
-    plt.figure(3)
+    # State values
+    plt.figure(2)
     state_values = get_state_values_from_action_values(agent._Q, agent._policy)
-    plt.imshow(state_values.reshape(shape[:2]))
+    values = state_values.reshape(shape[:2])
+    plt.imshow(values)
+    for (j, i), label in np.ndenumerate(values):
+        plt.text(i, j, round(label, 5), ha='center', va='center')
     plt.colorbar(orientation='vertical')
     plt.title("state_values")
+
+
+def estimate_success_rate(agent: Agent, env: Env, num_episode: int = 100000):
+    total_reward = 0
+    for _ in tqdm(range(num_episode)):
+        reward, _ = agent.play_episode(env, learning=False)
+        total_reward += reward
+    return total_reward / num_episode
+
+
+def create_decay_schedule(num_episodes: int, value_start: float = 1.0, value_decay: float = .9999, value_min: float = 1e-4):
+    # get 20% value at 50% espisode
+    value_decay = 0.2 ** (1/(0.5 * num_episodes))
+    return [max(value_min, (value_decay**i)*value_start) for i in range(num_episodes)]
