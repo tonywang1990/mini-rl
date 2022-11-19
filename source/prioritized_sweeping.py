@@ -6,12 +6,13 @@ import random
 import gym
 from typing import Union
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
+from queue import PriorityQueue
 
 from agent import Agent
 from utils import *
 
 
-class DynaQAgent(Agent):
+class PrioritizedSweepingAgent(Agent):
     def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, agent_type: str, planning_steps: int):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._agent_type = agent_type
@@ -20,10 +21,11 @@ class DynaQAgent(Agent):
         # np.full((state_space.n, action_space.n), 0.0)
         self._Q = np.random.rand(state_space.n, action_space.n)
         # environment model
-        self._model = defaultdict(set)
+        self._model = dict()
         # policy
         self._policy = get_epsilon_greedy_policy_from_action_values(
             self._Q, self._epsilon)
+        self._queue = PriorityQueue()
 
     # get an action from policy
     def sample_action(self, state):
@@ -38,21 +40,25 @@ class DynaQAgent(Agent):
             self._learning_rate = learning_rate
 
         # Learn from real experience
-        self.learning(state, action, reward, new_state, terminal)
-        # assuming non-determinsitc environment, storing all possible transitions 
-        self._model[(state, action)].add((reward, new_state, terminal))
+        update = self.learning(state, action, reward, new_state, terminal)
+        # TODO: change to support non-determinstic environment
+        if(state, action) in self._model:
+            reward, self._model[(state, action)].add((reward, new_state, terminal))
+        if update > 0:
+            self._queue.put((update, (state, action)))
         # Learn from simulated experience
         self.planning(self._planning_steps)
 
         # update policy
+
         self._policy[state] = get_epsilon_greedy_policy_from_action_values(
             self._Q[state], self._epsilon)
 
-    def learning(self, state, action, reward, new_state, terminal, learning_rate: Optional[float] = None):
+    def learning(self, state, action, reward, new_state, terminal, learning_rate: Optional[float] = None) -> float:
         # if new_state is a terminal state
         if terminal:
-            self._Q[state][action] += self._learning_rate * \
-                (reward - self._Q[state][action])
+            update = reward - self._Q[state][action] 
+            self._Q[state][action] += self._learning_rate * returns
         else:
             if self._agent_type == 'q_learning':
                 returns = np.max(self._Q[new_state])
@@ -60,13 +66,15 @@ class DynaQAgent(Agent):
                 returns = np.sum(self._Q[new_state] * self._policy[new_state])
             else:
                 raise NotImplementedError
-            self._Q[state][action] += self._learning_rate * \
-                (reward + self._discount_rate *
-                 returns - self._Q[state][action])
+            update =  reward + self._discount_rate * returns - self._Q[state][action]
+            self._Q[state][action] += self._learning_rate * returns
+        return update
+               
 
     def planning(self, n: int):
         for _ in range(n):
-            key, val = random.choice(list(self._model.items()))
+            key = self._queue.get()[1]
+            val = self._model[key]
             state, action = key
             reward, new_state, terminal = random.choice(tuple(val))
             self.learning(state, action, reward, new_state, terminal)
@@ -74,7 +82,7 @@ class DynaQAgent(Agent):
 
 def test_dyna_q_agent():
     np.random.seed(0)
-    agent = DynaQAgent(
+    agent = PrioritizedSweepingAgent(
         state_space=Discrete(4),
         action_space=Discrete(4),
         discount_rate=1.0,
@@ -86,14 +94,13 @@ def test_dyna_q_agent():
     state = 1
     action = 1
     new_state = 2
-    reward = 3.0
+    reward = 13.0
     agent._Q = np.full((4, 4), 0.0)
     agent._Q[state, action] = 10
     agent._Q[new_state, 3] = 5
     agent._policy[state] = np.full(4, 0.0)
     new_action = agent.control(state, action, reward, new_state, False)
-    np.testing.assert_almost_equal(agent._Q[state, action], 8.5)
+    np.testing.assert_almost_equal(agent._Q[state, action], 15)
     print("test_dyna_q_agent passed!")
-
 
 test_dyna_q_agent()

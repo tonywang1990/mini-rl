@@ -75,13 +75,13 @@ def show_state_action_values(agent: Agent, game: str):
         2: "RIGHT",
         3: "UP"
     }
-    actions = np.argmax(agent._policy, axis=1)
-    actions = actions.reshape(shape[:2])
-    named_actions = np.chararray(actions.shape, itemsize=4)
-    map = [[""] * shape[1]] * shape[0]
-    for idx, val in np.ndenumerate(actions):
-        named_actions[idx] = direction[val]
-        #map[idx[0]][idx[1]] = direction[val]
+    #actions = np.argmax(agent._policy, axis=1)
+    #actions = actions.reshape(shape[:2])
+    #named_actions = np.chararray(actions.shape, itemsize=4)
+    #map = [[""] * shape[1]] * shape[0]
+    #for idx, val in np.ndenumerate(actions):
+    #    named_actions[idx] = direction[val]
+    #    #map[idx[0]][idx[1]] = direction[val]
     # print(named_actions)
 
     # Action values
@@ -114,7 +114,7 @@ def estimate_success_rate(agent: Agent, env: Env, num_episode: int = 100000):
     total_reward = 0
     for _ in tqdm(range(num_episode)):
         reward, _ = agent.play_episode(env, learning=False)
-        total_reward += reward
+        total_reward += (reward > 0)
     return total_reward / num_episode
 
 
