@@ -25,12 +25,16 @@ class Agent(object):
         state, info = env.reset()
         terminal = False
         steps = 0
+        if epsilon is not None:
+            self._epsilon = epsilon
+        if learning_rate is not None:
+            self._learning_rate = learning_rate
         while not terminal:
             action = self.sample_action(state)
             new_state, reward, terminal, _, info = env.step(action)
             if learning:
                 self.control(state, action, reward,
-                             new_state, terminal, epsilon, learning_rate)
+                             new_state, terminal)
             state = new_state
             steps += 1
             if video_path is not None:

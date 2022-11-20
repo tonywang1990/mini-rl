@@ -21,7 +21,7 @@ class PrioritizedSweepingAgent(Agent):
         # np.full((state_space.n, action_space.n), 0.0)
         self._Q = np.random.rand(state_space.n, action_space.n)
         # environment model
-        self._model = dict()
+        self._model = defaultdict(set)
         # policy
         self._policy = get_epsilon_greedy_policy_from_action_values(
             self._Q, self._epsilon)
@@ -32,29 +32,21 @@ class PrioritizedSweepingAgent(Agent):
         return np.random.choice(len(self._policy[state]), p=self._policy[state])
 
     # update action value and policy
-    def control(self, state, action, reward, new_state, terminal, epsilon: Optional[float] = None, learning_rate: Optional[float] = None):
-        # Overwrite
-        if epsilon is not None:
-            self._epsilon = epsilon
-        if learning_rate is not None:
-            self._learning_rate = learning_rate
-
+    def control(self, state, action, reward, new_state, terminal):
         # Learn from real experience
         update = self.learning(state, action, reward, new_state, terminal)
         # TODO: change to support non-determinstic environment
-        if(state, action) in self._model:
-            reward, self._model[(state, action)].add((reward, new_state, terminal))
+        self._model[(state, action)].add((reward, new_state, terminal))
         if update > 0:
             self._queue.put((update, (state, action)))
         # Learn from simulated experience
         self.planning(self._planning_steps)
 
         # update policy
-
         self._policy[state] = get_epsilon_greedy_policy_from_action_values(
             self._Q[state], self._epsilon)
 
-    def learning(self, state, action, reward, new_state, terminal, learning_rate: Optional[float] = None) -> float:
+    def learning(self, state, action, reward, new_state, terminal) -> float:
         # if new_state is a terminal state
         if terminal:
             update = reward - self._Q[state][action] 
@@ -67,21 +59,24 @@ class PrioritizedSweepingAgent(Agent):
             else:
                 raise NotImplementedError
             update =  reward + self._discount_rate * returns - self._Q[state][action]
-            self._Q[state][action] += self._learning_rate * returns
+            self._Q[state][action] += self._learning_rate * update
         return update
                
 
     def planning(self, n: int):
         for _ in range(n):
             key = self._queue.get()[1]
+            print(key)
+            print(self._model)
+            if key not in self._model:
+                return
             val = self._model[key]
             state, action = key
             reward, new_state, terminal = random.choice(tuple(val))
             self.learning(state, action, reward, new_state, terminal)
 
 
-def test_dyna_q_agent():
-    np.random.seed(0)
+def test_prioritized_sweeping_agent():
     agent = PrioritizedSweepingAgent(
         state_space=Discrete(4),
         action_space=Discrete(4),
@@ -100,7 +95,7 @@ def test_dyna_q_agent():
     agent._Q[new_state, 3] = 5
     agent._policy[state] = np.full(4, 0.0)
     new_action = agent.control(state, action, reward, new_state, False)
-    np.testing.assert_almost_equal(agent._Q[state, action], 15)
-    print("test_dyna_q_agent passed!")
+    np.testing.assert_almost_equal(agent._Q[state, action], 16)
+    print("test_prioritized_sweeping_agent passed!")
 
-test_dyna_q_agent()
+test_prioritized_sweeping_agent()
