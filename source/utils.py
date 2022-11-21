@@ -6,7 +6,7 @@ import numpy as np
 from gym import Env
 from tqdm import tqdm
 
-from agent import Agent
+from source.agents.agent import Agent
 
 # Utils
 
