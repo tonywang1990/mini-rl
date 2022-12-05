@@ -50,8 +50,8 @@ def plot_history(history: list):
     plt.title("average reward per step")
     history_smoothed = [
         np.mean(history[max(0, i-num_episode//10): i+1]) for i in range(num_episode)]
-    plt.plot(history)
-    plt.plot(history_smoothed)
+    plt.plot(history, 'o', alpha=0.2)
+    plt.plot(history_smoothed, linewidth=5)
 
 
 def show_state_action_values(agent: Agent, game: str):
