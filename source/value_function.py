@@ -9,7 +9,6 @@ from tqdm import tqdm
 
 from source.agents.agent import Agent
 
-# TODO: possibly need a feature class for transforming raw state -> feature
 
 
 class Featurizer(object):
@@ -29,8 +28,6 @@ class IdentityFeaturizer(Featurizer):
 
 # get: Q(s, a)
 # set: Q.update(s, a, value)
-
-
 class ActionValue(object):
     def __init__(self, weight_shape: tuple, featurizer: Optional[Featurizer] = None, init: Optional[str] = 'random'):
         if init == 'zero':

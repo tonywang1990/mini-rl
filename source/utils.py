@@ -114,7 +114,7 @@ def estimate_success_rate(agent: Agent, env: Env, num_episode: int = 100000):
     total_reward = 0
     for _ in tqdm(range(num_episode)):
         reward, _ = agent.play_episode(env, learning=False)
-        total_reward += (reward > 0)
+        total_reward += reward 
     return total_reward / num_episode
 
 
