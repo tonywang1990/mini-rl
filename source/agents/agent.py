@@ -18,6 +18,9 @@ class Agent(object):
 
     def control(self, state: int, action: int, reward: float, new_state: int, terminal: bool):
         raise NotImplementedError
+    
+    def init_state(self, state):
+        return state
 
     def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):
         if video_path is not None:
@@ -31,18 +34,20 @@ class Agent(object):
         if learning_rate is not None:
             self._learning_rate = learning_rate
         while not terminal:
+            state = self.init_state(state)
             action = self.sample_action(state)
-            new_state, reward, terminal, _, info = env.step(action)
+            new_state, reward, terminal, truncated, info = env.step(action)
             total_reward += reward 
+            terminal = terminal or truncated
             if learning:
                 self.control(state, action, reward,
                              new_state, terminal)
             state = new_state
             steps += 1
+            #if steps > 1000:
+            #    terminal = True
             if video_path is not None:
                 video.capture_frame()
-            if steps > 300:
-                terminal = True
         if video_path is not None:
             video.close()
         return total_reward, steps

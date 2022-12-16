@@ -14,6 +14,7 @@ from copy import deepcopy
 from source.agents.agent import Agent
 from sklearn.neural_network import MLPRegressor
 import random
+import gc
 
 
 class Featurizer(object):
@@ -131,7 +132,7 @@ class LearnedActionValue(ActionValue):
     def __init__(self, state_space: Space, action_space: Discrete, featurizer: Optional[Featurizer] = None):
         super().__init__(state_space, action_space, featurizer)
         self._model = MLPRegressor(hidden_layer_sizes=(
-            8, 8, 8, 4, 2), random_state=1, max_iter=500, learning_rate_init=1)
+            128, 128), random_state=1, max_iter=500, learning_rate_init=1)
         self._fitted = False
 
     def _feature_vec(self, state: np.array, action: int) -> np.array:
@@ -163,6 +164,8 @@ class LearnedActionValue(ActionValue):
         return self._model.score(feature, value)
 
     def copy_from(self, action_value: LearnedActionValue):
+        del self._model
+        gc.collect()
         self._model = deepcopy(action_value._model)
         self._fitted = action_value._fitted
 
