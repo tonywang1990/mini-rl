@@ -21,7 +21,7 @@ def render_mp4(videopath: str) -> str:
     return f'<video width=400 controls><source src="data:video/mp4;' \
         f'base64,{base64_encoded_mp4}" type="video/mp4"></video>'
 
-
+# TODO: extend this function to take ActionValue as input
 def get_epsilon_greedy_policy_from_action_values(action_values: np.array, epsilon: Optional[float] = 0.0) -> np.array:
     optimal_actions = np.argmax(action_values, axis=-1)
     num_actions = action_values.shape[-1]

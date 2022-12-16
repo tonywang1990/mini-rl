@@ -25,6 +25,7 @@ class Agent(object):
         state, info = env.reset()
         terminal = False
         steps = 0
+        total_reward = 0
         if epsilon is not None:
             self._epsilon = epsilon
         if learning_rate is not None:
@@ -32,6 +33,7 @@ class Agent(object):
         while not terminal:
             action = self.sample_action(state)
             new_state, reward, terminal, _, info = env.step(action)
+            total_reward += reward 
             if learning:
                 self.control(state, action, reward,
                              new_state, terminal)
@@ -39,6 +41,8 @@ class Agent(object):
             steps += 1
             if video_path is not None:
                 video.capture_frame()
+            if steps > 300:
+                terminal = True
         if video_path is not None:
             video.close()
-        return reward, steps
+        return total_reward, steps
