@@ -19,7 +19,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 Transition = namedtuple('Transition',
-                        ('state', 'action', 'next_state', 'reward'))
+                        ('state', 'action', 'next_state', 'reward', 'terminal'))
 
 
 class ReplayMemory(object):
@@ -75,17 +75,18 @@ class DQNAgent(Agent):
         MEMORY_SIZE = 10000
 
         # Get number of actions from gym action space
-        n_actions = action_space.n
-        n_states = len(state_space.sample())
+        self._n_actions = action_space.n
+        self._n_states = len(state_space.sample())
 
-        self._policy_net = DenseNet(n_states, n_actions).to(self._device)
-        self._target_net = DenseNet(n_states, n_actions).to(self._device)
+        self._policy_net = DenseNet(self._n_states, self._n_actions).to(self._device)
+        self._target_net = DenseNet(self._n_states, self._n_actions).to(self._device)
         self._target_net.load_state_dict(self._policy_net.state_dict())
 
         self._optimizer = optim.AdamW(self._policy_net.parameters(), lr=self._learning_rate, amsgrad=True)
         self._memory = ReplayMemory(MEMORY_SIZE)
 
         self._step = 0
+        self._debug = False
 
     def init_state(self, state: list) -> torch.Tensor:
         # Convert state into tensor and unsqueeze: insert a new dim into tensor (at dim 0): e.g. 1 -> [1] or [1] -> [[1]] 
@@ -108,6 +109,7 @@ class DQNAgent(Agent):
                 action = self._policy_net(state).max(1)[1].view(1, 1)
         else:
             action = torch.tensor([[self._action_space.sample()]], device=self._device, dtype=torch.long)
+        assert list(action.shape) == [1, 1], f"{list(action.shape)} != {[1, 1]}"
         return action
 
     def _optimize_model(self):
@@ -119,20 +121,11 @@ class DQNAgent(Agent):
         # to Transition of batch-arrays.
         batch = Transition(*zip(*transitions))
 
-        # Compute a mask of non-final states and concatenate the batch elements
-        # (a final state would've been the one after which simulation ended)
-        non_final_mask = torch.tensor(tuple(map(lambda s: s is not None,
-                                            batch.next_state)), device=self._device, dtype=torch.bool)
-        non_final_next_states = [s for s in batch.next_state if s is not None]
-        if len(non_final_next_states) != 0:
-            non_final_next_states = torch.cat(non_final_next_states)
-        else:
-            non_final_next_states = None
-
         state_batch = torch.cat(batch.state) # [batch_size, n_states]
-        action_batch = torch.cat(batch.action) # [batch_size, 1]
+        action_batch = torch.cat(batch.action) # [batch_size, 1] - additional dim needed to perform gather
         reward_batch = torch.cat(batch.reward) # [batch_size]
-
+        next_state_batch = torch.cat(batch.next_state) # [batch_size, n_states]
+        terminal_batch = torch.cat(batch.terminal) # [batch_size]
         # update Q_policy to minimize:
         # reward + discount_rate * Q_target(new_state, new_action) - Q_policy(state, action)
 
@@ -140,16 +133,20 @@ class DQNAgent(Agent):
         # columns of actions taken. These are the actions which would've been taken
         # for each batch state according to policy_net
         state_action_values = self._policy_net(state_batch).gather(1, action_batch) # [batch_size, 1] 
+        if self._debug:
+            assert list(state_action_values.shape) == [self._batch_size, 1], f' {list(state_action_values.shape)} != {[self._batch_size, 1]}'
 
         # Compute V(s_{t+1}) for all next states.
         # Expected values of actions for non_final_next_states are computed based
         # on the "older" target_net; selecting their best reward with max(1)[0].
         # This is merged based on the mask, such that we'll have either the expected
         # state value or 0 in case the state was final.
-        next_state_values = torch.zeros(self._batch_size, device=self._device) # [batch_size]
-        if non_final_next_states is not None: 
-            with torch.no_grad():
-                next_state_values[non_final_mask] = self._target_net(non_final_next_states).max(1)[0]
+        next_state_values = self._target_net(next_state_batch).max(1)[0] * (~terminal_batch) # [batch_size, 1] 
+        #print(self._target_net(next_state_batch).max(1)[0])
+        #print(terminal_batch)
+        #print(next_state_values)
+        if self._debug:
+            assert list(next_state_values.shape) == [self._batch_size], f' {list(next_state_values.shape)} != {[self._batch_size]}'
         
         #next_state_values_new = torch.zeros(self._batch_size, device=self._device) # [batch_size]
         #print(batch.next_state)
@@ -159,6 +156,10 @@ class DQNAgent(Agent):
 
         # Compute the expected Q values
         expected_state_action_values = (next_state_values * self._discount_rate) + reward_batch # [batch_size]
+        if self._debug:
+            assert list(expected_state_action_values.shape) == [self._batch_size], f' {list(expected_state_action_values.shape)} != {[self._batch_size]}'
+        #print(expected_state_action_values.unsqueeze(1))
+        #xx
 
         # Compute Huber loss
         criterion = nn.SmoothL1Loss()
@@ -183,11 +184,12 @@ class DQNAgent(Agent):
     def control(self, state: torch.Tensor, action: torch.Tensor, reward: float, new_state: list, terminal: bool):
         reward = torch.tensor([reward], dtype=torch.float32, device=self._device)
         if terminal:
-            next_state = None
+            next_state = torch.zeros(self._n_states, device=self._device).unsqueeze(0)
         else:
             next_state = torch.tensor(new_state, dtype=torch.float32, device=self._device).unsqueeze(0)
+        terminal = torch.tensor([terminal], device=self._device, dtype=torch.bool)
         # Store the transition in memory
-        self._memory.push(state, action, next_state, reward)
+        self._memory.push(state, action, next_state, reward, terminal)
         # Perform one step of the optimization (on the policy network)
         self._optimize_model()
         self._update_target_net()
@@ -205,7 +207,7 @@ class DQNAgent(Agent):
         if learning_rate is not None:
             self._learning_rate = learning_rate
         while not terminal:
-            state = self.init_state(state)
+            state = torch.tensor(state, dtype=torch.float32, device=self._device).unsqueeze(0) 
             action = self.sample_action(state)
             new_state, reward, terminal, truncated, info = env.step(action.item())
             total_reward += reward 
