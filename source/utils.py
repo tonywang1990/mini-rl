@@ -110,7 +110,7 @@ def show_state_action_values(agent: Agent, game: str):
     plt.title("state_values")
 
 
-def estimate_success_rate(agent: Agent, env: Env, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
+def evaluate_agent(agent: Agent, env: Env, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
     total_reward = 0
     successful_episode = 0
     for _ in tqdm(range(num_episode)):
@@ -119,6 +119,9 @@ def estimate_success_rate(agent: Agent, env: Env, num_episode: int = 100000, eps
             successful_episode += 1
         total_reward += reward 
     return total_reward / num_episode, successful_episode / num_episode 
+
+def estimate_success_rate(agent: Agent, env: Env, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
+    return evaluate_agent(agent, env, num_episode, epsilon, threshold)[0]
 
 
 def create_decay_schedule(num_episodes: int, value_start: float = 0.9, value_decay: float = .9999, value_min: float = 0.05):
