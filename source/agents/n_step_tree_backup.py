@@ -100,13 +100,12 @@ class nStepTreeBackupAgent(Agent):
                     T = t + 1
                 else:
                     action = self.sample_action(new_state, policy_type)
-            stop = self.control(t, T)
-            t += 1
             if video_path is not None:
                 video.capture_frame()
+            stop = self.control(t, T)
+            t += 1
         if video_path is not None:
             video.close()
-
         return reward, T-1
 
 
