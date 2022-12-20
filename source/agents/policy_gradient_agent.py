@@ -49,8 +49,8 @@ class PolicyGradientAgent(Agent):
         self._n_states = len(state_space.sample().flatten())
 
         self._policy_net = DenseNet(self._n_states, self._n_actions).to(self._device)
-        #self._optimizer = optim.AdamW(self._policy_net.parameters(), lr=self._learning_rate, amsgrad=True)
-        self._optimizer = optim.Adam(self._policy_net.parameters(), lr=self._learning_rate)
+        self._optimizer = optim.AdamW(self._policy_net.parameters(), lr=self._learning_rate, amsgrad=True)
+        #self._optimizer = optim.Adam(self._policy_net.parameters(), lr=self._learning_rate)
 
         self._step = 0
         self._debug = True

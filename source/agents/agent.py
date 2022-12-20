@@ -13,6 +13,8 @@ class Agent(object):
         self._discount_rate = discount_rate
         self._epsilon = epsilon
         self._learning_rate = learning_rate
+        self._Q = None
+        self._policy = None
 
     def sample_action(self, state: Any):
         raise NotImplementedError

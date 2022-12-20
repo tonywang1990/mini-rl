@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from gym import Env
 from tqdm import tqdm
+import math
 
 from source.agents.agent import Agent
 
@@ -22,7 +23,7 @@ def render_mp4(videopath: str) -> str:
         f'base64,{base64_encoded_mp4}" type="video/mp4"></video>'
 
 # TODO: extend this function to take ActionValue as input
-def get_epsilon_greedy_policy_from_action_values(action_values: np.array, epsilon: Optional[float] = 0.0) -> np.array:
+def get_epsilon_greedy_policy_from_action_values(action_values: np.ndarray, epsilon: float = 0.0) -> np.ndarray:
     optimal_actions = np.argmax(action_values, axis=-1)
     num_actions = action_values.shape[-1]
     policy = np.full(action_values.shape, epsilon / num_actions)
@@ -36,7 +37,7 @@ def get_epsilon_greedy_policy_from_action_values(action_values: np.array, epsilo
     return policy
 
 
-def get_state_values_from_action_values(action_values: np.array, policy: Optional[np.array] = None) -> np.array:
+def get_state_values_from_action_values(action_values: np.ndarray, policy: Optional[np.ndarray] = None) -> np.ndarray:
     if policy is None:
         # assume greedy policy
         policy = get_epsilon_greedy_policy_from_action_values(action_values)
@@ -44,7 +45,7 @@ def get_state_values_from_action_values(action_values: np.array, policy: Optiona
     return state_values
 
 
-def plot_history(history: list):
+def plot_history(history: list[float]):
     num_episode = len(history)
     plt.figure(0, figsize=(16, 4))
     plt.title("average reward per step")
@@ -128,3 +129,12 @@ def create_decay_schedule(num_episodes: int, value_start: float = 0.9, value_dec
     # get 20% value at 50% espisode
     value_decay = 0.2 ** (1/(0.5 * num_episodes))
     return [max(value_min, (value_decay**i)*value_start) for i in range(num_episodes)]
+
+def epsilon(step: int) -> float:
+    # EPS_START is the starting value of epsilon
+    # EPS_END is the final value of epsilon
+    # EPS_DECAY controls the rate of exponential decay of epsilon, higher means a slower decay
+    _eps_start = 0.9
+    _eps_end = 0.05
+    _eps_decay = 1000
+    return _eps_end + (_eps_start - _eps_end) * math.exp(-1. * step / _eps_decay)

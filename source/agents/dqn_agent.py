@@ -50,17 +50,6 @@ class DenseNet(nn.Module):
         x = F.relu(self.layer3(x))
         return self.layer_output(x)
 
-class Epsilon(object):
-    def __init__(self):
-        # EPS_START is the starting value of epsilon
-        # EPS_END is the final value of epsilon
-        # EPS_DECAY controls the rate of exponential decay of epsilon, higher means a slower decay
-        self._eps_start = 0.9
-        self._eps_end = 0.05
-        self._eps_decay = 1000
-    def get(self, step: int) -> float:
-        return self._eps_end + (self._eps_start - self._eps_end) * math.exp(-1. * step / self._eps_decay)
-
 class DQNAgent(Agent):
     def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, batch_size: int, tau: float):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
@@ -96,15 +85,16 @@ class DQNAgent(Agent):
         return torch.tensor(data.flatten(), dtype=torch.float32, device=self._device).unsqueeze(0) 
     
     def to_array(self, tensor: torch.Tensor, shape: list) -> np.ndarray:
-        return tensor.numpy().reshape(shape)
+        return tensor.cpu().numpy().reshape(shape)
 
     def sample_action(self, state: torch.Tensor) -> torch.Tensor:
         # state: tensor of shape [1, n_states]
         # return: tensor of shape [1, n_actions]
         sample = random.random()
-        eps_threshold = self._epsilon #self._epsilon.get(self._step)
+        #eps_threshold = self._epsilon #self._epsilon.get(self._step)
+        self._epsilon = utils.epsilon(self._step)
         self._step += 1
-        if sample > eps_threshold:
+        if sample > self._epsilon:
             with torch.no_grad():
                 # t.max(1) will return largest column value of each row.
                 # second column on max result is index of where max element was
