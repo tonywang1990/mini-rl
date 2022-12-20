@@ -845,3 +845,843 @@
 2022-12-20 15:00:16 SERVER Update sent to subscription `persistent_36025`
 2022-12-20 15:00:16 PERFORMANCE Server request: 0.270s
 2022-12-20 15:00:16 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/utils.py))` processed
+2022-12-20 15:21:02 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))...
+2022-12-20 15:21:02 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:02 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:02 INFO Repopulating the environment...
+2022-12-20 15:21:02 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_agent.py)(priority 173)))(qualifier(source agents policy_gradient_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:21:02 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:21:02 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:21:02 MEMORY Shared memory size (size: 6)
+2022-12-20 15:21:02 PERFORMANCE Incremental check: 0.161s
+2022-12-20 15:21:02 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:02 PERFORMANCE Server request: 0.255s
+2022-12-20 15:21:02 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))` processed
+2022-12-20 15:21:11 SERVER Processing request (IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent copy.py"))...
+2022-12-20 15:21:11 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:11 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:11 INFO Repopulating the environment...
+2022-12-20 15:21:11 SERVER Explicit Module Update: (explicit_updates((New((raw((relative"source/agents/policy_gradient_agent copy.py")(priority 173)))(qualifier(source agents"policy_gradient_agent copy"))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:21:11 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:21:11 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:21:11 MEMORY Shared memory size (size: 6)
+2022-12-20 15:21:11 PERFORMANCE Incremental check: 0.143s
+2022-12-20 15:21:12 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:12 PERFORMANCE Server request: 0.330s
+2022-12-20 15:21:12 SERVER Request `(IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent copy.py"))` processed
+2022-12-20 15:21:23 SERVER Processing request (IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent copy.py"/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:21:23 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:23 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:23 INFO Repopulating the environment...
+2022-12-20 15:21:23 SERVER Explicit Module Update: (explicit_updates((New((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))(Delete(source agents"policy_gradient_agent copy"))))
+2022-12-20 15:21:23 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:21:23 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:21:23 MEMORY Shared memory size (size: 6)
+2022-12-20 15:21:23 PERFORMANCE Incremental check: 0.197s
+2022-12-20 15:21:23 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:23 PERFORMANCE Server request: 0.395s
+2022-12-20 15:21:23 SERVER Request `(IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent copy.py"/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:21:39 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:21:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:39 INFO Repopulating the environment...
+2022-12-20 15:21:39 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:21:39 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:21:39 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:21:39 MEMORY Shared memory size (size: 6)
+2022-12-20 15:21:39 PERFORMANCE Incremental check: 0.164s
+2022-12-20 15:21:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:21:39 PERFORMANCE Server request: 0.249s
+2022-12-20 15:21:39 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:22:13 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:22:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:13 INFO Repopulating the environment...
+2022-12-20 15:22:13 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:22:13 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:22:13 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:22:13 MEMORY Shared memory size (size: 6)
+2022-12-20 15:22:13 PERFORMANCE Incremental check: 0.158s
+2022-12-20 15:22:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:13 PERFORMANCE Server request: 0.245s
+2022-12-20 15:22:13 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:22:29 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:22:29 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:29 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:29 INFO Repopulating the environment...
+2022-12-20 15:22:29 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:22:29 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:22:29 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:22:29 MEMORY Shared memory size (size: 6)
+2022-12-20 15:22:29 PERFORMANCE Incremental check: 0.167s
+2022-12-20 15:22:29 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:29 PERFORMANCE Server request: 0.253s
+2022-12-20 15:22:29 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:22:35 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:22:35 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:35 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:35 INFO Repopulating the environment...
+2022-12-20 15:22:35 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:22:35 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:22:35 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:22:36 MEMORY Shared memory size (size: 6)
+2022-12-20 15:22:36 PERFORMANCE Incremental check: 0.158s
+2022-12-20 15:22:36 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:36 PERFORMANCE Server request: 0.249s
+2022-12-20 15:22:36 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:22:39 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:22:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:39 INFO Repopulating the environment...
+2022-12-20 15:22:39 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:22:39 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:22:39 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:22:39 MEMORY Shared memory size (size: 6)
+2022-12-20 15:22:39 PERFORMANCE Incremental check: 0.159s
+2022-12-20 15:22:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:22:39 PERFORMANCE Server request: 0.255s
+2022-12-20 15:22:39 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:23:15 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:23:15 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:23:15 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:23:15 INFO Repopulating the environment...
+2022-12-20 15:23:15 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:23:15 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:23:15 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:23:15 MEMORY Shared memory size (size: 6)
+2022-12-20 15:23:15 PERFORMANCE Incremental check: 0.188s
+2022-12-20 15:23:16 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:23:16 PERFORMANCE Server request: 0.285s
+2022-12-20 15:23:16 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:24:02 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))...
+2022-12-20 15:24:02 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:24:02 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:24:02 INFO Repopulating the environment...
+2022-12-20 15:24:02 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_agent.py)(priority 173)))(qualifier(source agents policy_gradient_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:24:02 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:24:02 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:24:02 MEMORY Shared memory size (size: 6)
+2022-12-20 15:24:02 PERFORMANCE Incremental check: 0.135s
+2022-12-20 15:24:02 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:24:02 PERFORMANCE Server request: 0.221s
+2022-12-20 15:24:02 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))` processed
+2022-12-20 15:24:35 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:24:35 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:24:35 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:24:35 INFO Repopulating the environment...
+2022-12-20 15:24:35 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:24:35 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:24:35 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:24:35 MEMORY Shared memory size (size: 6)
+2022-12-20 15:24:35 PERFORMANCE Incremental check: 0.168s
+2022-12-20 15:24:35 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:24:35 PERFORMANCE Server request: 0.256s
+2022-12-20 15:24:35 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:25:42 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:25:42 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:25:42 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:25:42 INFO Repopulating the environment...
+2022-12-20 15:25:42 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:25:42 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:25:42 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:25:43 MEMORY Shared memory size (size: 6)
+2022-12-20 15:25:43 PERFORMANCE Incremental check: 0.164s
+2022-12-20 15:25:43 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:25:43 PERFORMANCE Server request: 0.273s
+2022-12-20 15:25:43 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:26:39 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:26:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:40 INFO Repopulating the environment...
+2022-12-20 15:26:40 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:26:40 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:26:40 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:26:40 MEMORY Shared memory size (size: 7)
+2022-12-20 15:26:40 PERFORMANCE Incremental check: 0.146s
+2022-12-20 15:26:40 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:40 PERFORMANCE Server request: 0.235s
+2022-12-20 15:26:40 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:26:49 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:26:49 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:49 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:49 INFO Repopulating the environment...
+2022-12-20 15:26:49 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:26:49 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:26:49 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:26:49 MEMORY Shared memory size (size: 7)
+2022-12-20 15:26:49 PERFORMANCE Incremental check: 0.177s
+2022-12-20 15:26:49 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:49 PERFORMANCE Server request: 0.272s
+2022-12-20 15:26:49 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:26:52 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:26:52 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:52 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:52 INFO Repopulating the environment...
+2022-12-20 15:26:52 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:26:52 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:26:52 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:26:53 MEMORY Shared memory size (size: 7)
+2022-12-20 15:26:53 PERFORMANCE Incremental check: 0.152s
+2022-12-20 15:26:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:53 PERFORMANCE Server request: 0.246s
+2022-12-20 15:26:53 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:26:57 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:26:57 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:57 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:57 INFO Repopulating the environment...
+2022-12-20 15:26:57 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:26:57 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:26:57 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:26:57 MEMORY Shared memory size (size: 7)
+2022-12-20 15:26:57 PERFORMANCE Incremental check: 0.131s
+2022-12-20 15:26:57 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:26:57 PERFORMANCE Server request: 0.217s
+2022-12-20 15:26:57 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:27:09 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:27:09 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:27:09 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:27:09 INFO Repopulating the environment...
+2022-12-20 15:27:09 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:27:09 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:27:09 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:27:09 MEMORY Shared memory size (size: 7)
+2022-12-20 15:27:09 PERFORMANCE Incremental check: 0.179s
+2022-12-20 15:27:10 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:27:10 PERFORMANCE Server request: 0.272s
+2022-12-20 15:27:10 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:27:44 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))...
+2022-12-20 15:27:44 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:27:44 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:27:44 INFO Repopulating the environment...
+2022-12-20 15:27:44 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_agent.py)(priority 173)))(qualifier(source agents policy_gradient_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:27:44 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:27:44 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:27:45 MEMORY Shared memory size (size: 7)
+2022-12-20 15:27:45 PERFORMANCE Incremental check: 0.133s
+2022-12-20 15:27:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:27:45 PERFORMANCE Server request: 0.227s
+2022-12-20 15:27:45 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))` processed
+2022-12-20 15:29:13 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:29:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:29:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:29:13 INFO Repopulating the environment...
+2022-12-20 15:29:13 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:29:13 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:29:13 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:29:13 MEMORY Shared memory size (size: 7)
+2022-12-20 15:29:13 PERFORMANCE Incremental check: 0.162s
+2022-12-20 15:29:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:29:13 PERFORMANCE Server request: 0.262s
+2022-12-20 15:29:13 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:29:48 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:29:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:29:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:29:48 INFO Repopulating the environment...
+2022-12-20 15:29:48 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:29:48 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:29:48 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:29:48 MEMORY Shared memory size (size: 7)
+2022-12-20 15:29:48 PERFORMANCE Incremental check: 0.161s
+2022-12-20 15:29:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:29:48 PERFORMANCE Server request: 0.265s
+2022-12-20 15:29:48 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:31:12 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:31:12 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:31:12 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:31:12 INFO Repopulating the environment...
+2022-12-20 15:31:12 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:31:12 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:31:12 PERFORMANCE Module tracker updated: 0.001s
+2022-12-20 15:31:12 MEMORY Shared memory size (size: 7)
+2022-12-20 15:31:12 PERFORMANCE Incremental check: 0.131s
+2022-12-20 15:31:12 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:31:12 PERFORMANCE Server request: 0.243s
+2022-12-20 15:31:12 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:31:39 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))...
+2022-12-20 15:31:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:31:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:31:40 INFO Repopulating the environment...
+2022-12-20 15:31:40 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_agent.py)(priority 173)))(qualifier(source agents policy_gradient_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:31:40 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:31:40 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:31:40 MEMORY Shared memory size (size: 7)
+2022-12-20 15:31:40 PERFORMANCE Incremental check: 0.149s
+2022-12-20 15:31:40 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:31:40 PERFORMANCE Server request: 0.240s
+2022-12-20 15:31:40 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))` processed
+2022-12-20 15:32:49 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))...
+2022-12-20 15:32:49 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:32:49 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:32:50 INFO Repopulating the environment...
+2022-12-20 15:32:50 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_agent.py)(priority 173)))(qualifier(source agents policy_gradient_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:32:50 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:32:50 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:32:50 MEMORY Shared memory size (size: 7)
+2022-12-20 15:32:50 PERFORMANCE Incremental check: 0.138s
+2022-12-20 15:32:50 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:32:50 PERFORMANCE Server request: 0.232s
+2022-12-20 15:32:50 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))` processed
+2022-12-20 15:33:55 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:33:55 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:33:55 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:33:55 INFO Repopulating the environment...
+2022-12-20 15:33:55 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:33:55 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:33:55 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:33:55 MEMORY Shared memory size (size: 7)
+2022-12-20 15:33:55 PERFORMANCE Incremental check: 0.172s
+2022-12-20 15:33:55 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:33:55 PERFORMANCE Server request: 0.266s
+2022-12-20 15:33:55 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:34:03 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:34:03 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:34:03 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:34:03 INFO Repopulating the environment...
+2022-12-20 15:34:03 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:34:03 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:34:03 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:34:03 MEMORY Shared memory size (size: 7)
+2022-12-20 15:34:03 PERFORMANCE Incremental check: 0.129s
+2022-12-20 15:34:03 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:34:03 PERFORMANCE Server request: 0.216s
+2022-12-20 15:34:03 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:34:08 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:34:08 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:34:08 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:34:08 INFO Repopulating the environment...
+2022-12-20 15:34:08 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:34:08 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:34:08 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:34:08 MEMORY Shared memory size (size: 7)
+2022-12-20 15:34:08 PERFORMANCE Incremental check: 0.172s
+2022-12-20 15:34:08 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:34:08 PERFORMANCE Server request: 0.263s
+2022-12-20 15:34:08 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:34:44 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:34:44 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:34:44 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:34:44 INFO Repopulating the environment...
+2022-12-20 15:34:44 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:34:44 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:34:44 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:34:44 MEMORY Shared memory size (size: 7)
+2022-12-20 15:34:44 PERFORMANCE Incremental check: 0.199s
+2022-12-20 15:34:44 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:34:44 PERFORMANCE Server request: 0.294s
+2022-12-20 15:34:44 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:35:08 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:35:08 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:35:08 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:35:09 INFO Repopulating the environment...
+2022-12-20 15:35:09 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:35:09 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:35:09 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:35:09 MEMORY Shared memory size (size: 7)
+2022-12-20 15:35:09 PERFORMANCE Incremental check: 0.146s
+2022-12-20 15:35:09 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:35:09 PERFORMANCE Server request: 0.240s
+2022-12-20 15:35:09 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:36:32 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:36:32 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:36:32 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:36:32 INFO Repopulating the environment...
+2022-12-20 15:36:32 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:36:32 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:36:32 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:36:32 MEMORY Shared memory size (size: 7)
+2022-12-20 15:36:32 PERFORMANCE Incremental check: 0.160s
+2022-12-20 15:36:32 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:36:32 PERFORMANCE Server request: 0.252s
+2022-12-20 15:36:32 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:37:42 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:37:42 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:37:42 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:37:43 INFO Repopulating the environment...
+2022-12-20 15:37:43 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:37:43 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:37:43 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:37:43 MEMORY Shared memory size (size: 7)
+2022-12-20 15:37:43 PERFORMANCE Incremental check: 0.173s
+2022-12-20 15:37:43 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:37:43 PERFORMANCE Server request: 0.283s
+2022-12-20 15:37:43 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:37:54 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:37:54 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:37:54 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:37:55 INFO Repopulating the environment...
+2022-12-20 15:37:55 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:37:55 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:37:55 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:37:55 MEMORY Shared memory size (size: 7)
+2022-12-20 15:37:55 PERFORMANCE Incremental check: 0.155s
+2022-12-20 15:37:55 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:37:55 PERFORMANCE Server request: 0.258s
+2022-12-20 15:37:55 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:37:57 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:37:57 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:37:57 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:37:58 INFO Repopulating the environment...
+2022-12-20 15:37:58 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:37:58 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:37:58 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:37:58 MEMORY Shared memory size (size: 7)
+2022-12-20 15:37:58 PERFORMANCE Incremental check: 0.147s
+2022-12-20 15:37:58 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:37:58 PERFORMANCE Server request: 0.324s
+2022-12-20 15:37:58 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:38:28 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:38:28 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:38:28 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:38:28 INFO Repopulating the environment...
+2022-12-20 15:38:28 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:38:28 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:38:28 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:38:28 MEMORY Shared memory size (size: 7)
+2022-12-20 15:38:28 PERFORMANCE Incremental check: 0.142s
+2022-12-20 15:38:28 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:38:28 PERFORMANCE Server request: 0.238s
+2022-12-20 15:38:28 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:40:39 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:40:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:40:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:40:39 INFO Repopulating the environment...
+2022-12-20 15:40:39 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:40:39 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:40:39 PERFORMANCE Module tracker updated: 0.001s
+2022-12-20 15:40:39 MEMORY Shared memory size (size: 7)
+2022-12-20 15:40:39 PERFORMANCE Incremental check: 0.167s
+2022-12-20 15:40:39 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:40:39 PERFORMANCE Server request: 0.256s
+2022-12-20 15:40:39 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:41:05 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:41:05 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:41:05 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:41:05 INFO Repopulating the environment...
+2022-12-20 15:41:05 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:41:05 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:41:05 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:41:05 MEMORY Shared memory size (size: 7)
+2022-12-20 15:41:05 PERFORMANCE Incremental check: 0.164s
+2022-12-20 15:41:05 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:41:05 PERFORMANCE Server request: 0.256s
+2022-12-20 15:41:05 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:41:42 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:41:42 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:41:42 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:41:42 INFO Repopulating the environment...
+2022-12-20 15:41:42 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:41:42 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:41:42 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:41:42 MEMORY Shared memory size (size: 6)
+2022-12-20 15:41:42 PERFORMANCE Incremental check: 0.203s
+2022-12-20 15:41:42 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:41:42 PERFORMANCE Server request: 0.290s
+2022-12-20 15:41:42 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:41:45 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:41:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:41:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:41:45 INFO Repopulating the environment...
+2022-12-20 15:41:45 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:41:45 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:41:45 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:41:45 MEMORY Shared memory size (size: 6)
+2022-12-20 15:41:45 PERFORMANCE Incremental check: 0.161s
+2022-12-20 15:41:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:41:45 PERFORMANCE Server request: 0.251s
+2022-12-20 15:41:45 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:42:05 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:42:05 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:42:05 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:42:05 INFO Repopulating the environment...
+2022-12-20 15:42:05 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:42:05 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:42:05 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:42:05 MEMORY Shared memory size (size: 6)
+2022-12-20 15:42:05 PERFORMANCE Incremental check: 0.137s
+2022-12-20 15:42:05 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:42:05 PERFORMANCE Server request: 0.262s
+2022-12-20 15:42:05 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:42:52 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:42:52 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:42:52 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:42:52 INFO Repopulating the environment...
+2022-12-20 15:42:52 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:42:52 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:42:52 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:42:52 MEMORY Shared memory size (size: 6)
+2022-12-20 15:42:52 PERFORMANCE Incremental check: 0.144s
+2022-12-20 15:42:52 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:42:52 PERFORMANCE Server request: 0.235s
+2022-12-20 15:42:52 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:43:20 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:43:20 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:43:20 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:43:20 INFO Repopulating the environment...
+2022-12-20 15:43:20 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:43:20 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:43:20 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:43:20 MEMORY Shared memory size (size: 6)
+2022-12-20 15:43:20 PERFORMANCE Incremental check: 0.164s
+2022-12-20 15:43:20 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:43:20 PERFORMANCE Server request: 0.256s
+2022-12-20 15:43:20 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:43:45 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:43:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:43:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:43:45 INFO Repopulating the environment...
+2022-12-20 15:43:45 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:43:45 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:43:45 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:43:45 MEMORY Shared memory size (size: 6)
+2022-12-20 15:43:45 PERFORMANCE Incremental check: 0.168s
+2022-12-20 15:43:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:43:45 PERFORMANCE Server request: 0.257s
+2022-12-20 15:43:45 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:43:53 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:43:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:43:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:43:53 INFO Repopulating the environment...
+2022-12-20 15:43:53 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:43:53 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:43:53 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:43:53 MEMORY Shared memory size (size: 6)
+2022-12-20 15:43:53 PERFORMANCE Incremental check: 0.160s
+2022-12-20 15:43:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:43:53 PERFORMANCE Server request: 0.251s
+2022-12-20 15:43:53 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:44:44 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:44:44 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:44:44 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:44:44 INFO Repopulating the environment...
+2022-12-20 15:44:44 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:44:44 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:44:44 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:44:44 MEMORY Shared memory size (size: 6)
+2022-12-20 15:44:44 PERFORMANCE Incremental check: 0.163s
+2022-12-20 15:44:44 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:44:44 PERFORMANCE Server request: 0.251s
+2022-12-20 15:44:44 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:46:32 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:46:32 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:46:32 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:46:32 INFO Repopulating the environment...
+2022-12-20 15:46:32 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:46:32 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:46:32 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:46:32 MEMORY Shared memory size (size: 6)
+2022-12-20 15:46:32 PERFORMANCE Incremental check: 0.163s
+2022-12-20 15:46:32 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:46:32 PERFORMANCE Server request: 0.255s
+2022-12-20 15:46:32 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:46:53 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:46:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:46:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:46:53 INFO Repopulating the environment...
+2022-12-20 15:46:53 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:46:53 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:46:53 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:46:53 MEMORY Shared memory size (size: 6)
+2022-12-20 15:46:53 PERFORMANCE Incremental check: 0.135s
+2022-12-20 15:46:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:46:53 PERFORMANCE Server request: 0.237s
+2022-12-20 15:46:53 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:47:05 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))...
+2022-12-20 15:47:05 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:47:05 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:47:05 INFO Repopulating the environment...
+2022-12-20 15:47:05 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_agent.py)(priority 173)))(qualifier(source agents policy_gradient_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:47:05 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:47:05 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:47:05 MEMORY Shared memory size (size: 6)
+2022-12-20 15:47:05 PERFORMANCE Incremental check: 0.137s
+2022-12-20 15:47:05 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:47:05 PERFORMANCE Server request: 0.222s
+2022-12-20 15:47:05 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))` processed
+2022-12-20 15:47:12 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))...
+2022-12-20 15:47:12 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:47:12 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:47:12 INFO Repopulating the environment...
+2022-12-20 15:47:12 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_agent.py)(priority 173)))(qualifier(source agents policy_gradient_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:47:12 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:47:12 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:47:12 MEMORY Shared memory size (size: 6)
+2022-12-20 15:47:12 PERFORMANCE Incremental check: 0.146s
+2022-12-20 15:47:12 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:47:12 PERFORMANCE Server request: 0.262s
+2022-12-20 15:47:12 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_agent.py))` processed
+2022-12-20 15:47:20 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:47:20 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:47:20 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:47:20 INFO Repopulating the environment...
+2022-12-20 15:47:20 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:47:20 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:47:20 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:47:20 MEMORY Shared memory size (size: 7)
+2022-12-20 15:47:20 PERFORMANCE Incremental check: 0.144s
+2022-12-20 15:47:20 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:47:20 PERFORMANCE Server request: 0.238s
+2022-12-20 15:47:20 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:48:17 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:48:17 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:48:17 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:48:17 INFO Repopulating the environment...
+2022-12-20 15:48:17 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:48:17 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:48:17 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:48:17 MEMORY Shared memory size (size: 7)
+2022-12-20 15:48:17 PERFORMANCE Incremental check: 0.159s
+2022-12-20 15:48:17 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:48:17 PERFORMANCE Server request: 0.264s
+2022-12-20 15:48:17 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:48:19 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:48:19 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:48:19 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:48:19 INFO Repopulating the environment...
+2022-12-20 15:48:19 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:48:19 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:48:19 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:48:19 MEMORY Shared memory size (size: 7)
+2022-12-20 15:48:19 PERFORMANCE Incremental check: 0.137s
+2022-12-20 15:48:19 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:48:19 PERFORMANCE Server request: 0.229s
+2022-12-20 15:48:19 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:48:45 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:48:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:48:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:48:45 INFO Repopulating the environment...
+2022-12-20 15:48:45 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:48:45 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:48:45 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:48:45 MEMORY Shared memory size (size: 7)
+2022-12-20 15:48:45 PERFORMANCE Incremental check: 0.169s
+2022-12-20 15:48:45 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:48:45 PERFORMANCE Server request: 0.251s
+2022-12-20 15:48:45 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:50:00 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:50:00 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:00 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:00 INFO Repopulating the environment...
+2022-12-20 15:50:00 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:50:00 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:50:00 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:50:00 MEMORY Shared memory size (size: 7)
+2022-12-20 15:50:00 PERFORMANCE Incremental check: 0.152s
+2022-12-20 15:50:00 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:00 PERFORMANCE Server request: 0.252s
+2022-12-20 15:50:00 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:50:03 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:50:03 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:03 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:03 INFO Repopulating the environment...
+2022-12-20 15:50:03 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:50:03 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:50:03 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:50:03 MEMORY Shared memory size (size: 7)
+2022-12-20 15:50:03 PERFORMANCE Incremental check: 0.162s
+2022-12-20 15:50:03 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:03 PERFORMANCE Server request: 0.260s
+2022-12-20 15:50:03 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:50:48 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:50:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:49 INFO Repopulating the environment...
+2022-12-20 15:50:49 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:50:49 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:50:49 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:50:49 MEMORY Shared memory size (size: 7)
+2022-12-20 15:50:49 PERFORMANCE Incremental check: 0.153s
+2022-12-20 15:50:49 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:49 PERFORMANCE Server request: 0.236s
+2022-12-20 15:50:49 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:50:56 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:50:56 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:56 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:56 INFO Repopulating the environment...
+2022-12-20 15:50:56 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:50:56 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:50:56 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:50:56 MEMORY Shared memory size (size: 7)
+2022-12-20 15:50:56 PERFORMANCE Incremental check: 0.137s
+2022-12-20 15:50:56 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:50:56 PERFORMANCE Server request: 0.223s
+2022-12-20 15:50:56 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:53:48 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:53:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:53:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:53:48 INFO Repopulating the environment...
+2022-12-20 15:53:48 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:53:48 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:53:48 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:53:48 MEMORY Shared memory size (size: 7)
+2022-12-20 15:53:48 PERFORMANCE Incremental check: 0.177s
+2022-12-20 15:53:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:53:48 PERFORMANCE Server request: 0.266s
+2022-12-20 15:53:48 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:54:18 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:54:18 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:54:18 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:54:18 INFO Repopulating the environment...
+2022-12-20 15:54:18 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:54:18 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:54:18 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:54:18 MEMORY Shared memory size (size: 7)
+2022-12-20 15:54:18 PERFORMANCE Incremental check: 0.162s
+2022-12-20 15:54:19 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:54:19 PERFORMANCE Server request: 0.252s
+2022-12-20 15:54:19 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 15:57:53 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 15:57:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:57:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:57:53 INFO Repopulating the environment...
+2022-12-20 15:57:53 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 15:57:53 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 15:57:53 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 15:57:53 MEMORY Shared memory size (size: 7)
+2022-12-20 15:57:53 PERFORMANCE Incremental check: 0.158s
+2022-12-20 15:57:53 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 15:57:53 PERFORMANCE Server request: 0.246s
+2022-12-20 15:57:53 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:00:22 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:00:22 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:00:22 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:00:22 INFO Repopulating the environment...
+2022-12-20 16:00:22 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:00:22 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:00:22 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:00:22 MEMORY Shared memory size (size: 7)
+2022-12-20 16:00:22 PERFORMANCE Incremental check: 0.139s
+2022-12-20 16:00:22 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:00:22 PERFORMANCE Server request: 0.234s
+2022-12-20 16:00:22 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:01:23 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:01:23 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:01:23 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:01:24 INFO Repopulating the environment...
+2022-12-20 16:01:24 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:01:24 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:01:24 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:01:24 MEMORY Shared memory size (size: 7)
+2022-12-20 16:01:24 PERFORMANCE Incremental check: 0.158s
+2022-12-20 16:01:24 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:01:24 PERFORMANCE Server request: 0.272s
+2022-12-20 16:01:24 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:02:02 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:02:02 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:02 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:02 INFO Repopulating the environment...
+2022-12-20 16:02:02 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:02:02 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:02:02 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:02:02 MEMORY Shared memory size (size: 7)
+2022-12-20 16:02:02 PERFORMANCE Incremental check: 0.135s
+2022-12-20 16:02:02 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:02 PERFORMANCE Server request: 0.225s
+2022-12-20 16:02:02 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:02:13 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:02:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:13 INFO Repopulating the environment...
+2022-12-20 16:02:13 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:02:13 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:02:13 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:02:13 MEMORY Shared memory size (size: 7)
+2022-12-20 16:02:13 PERFORMANCE Incremental check: 0.143s
+2022-12-20 16:02:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:13 PERFORMANCE Server request: 0.240s
+2022-12-20 16:02:13 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:02:33 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:02:33 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:33 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:33 INFO Repopulating the environment...
+2022-12-20 16:02:33 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:02:33 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:02:33 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:02:33 MEMORY Shared memory size (size: 7)
+2022-12-20 16:02:33 PERFORMANCE Incremental check: 0.160s
+2022-12-20 16:02:33 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:33 PERFORMANCE Server request: 0.253s
+2022-12-20 16:02:33 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:02:47 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:02:47 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:47 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:47 INFO Repopulating the environment...
+2022-12-20 16:02:47 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:02:47 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:02:47 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:02:47 MEMORY Shared memory size (size: 7)
+2022-12-20 16:02:47 PERFORMANCE Incremental check: 0.153s
+2022-12-20 16:02:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:02:48 PERFORMANCE Server request: 0.244s
+2022-12-20 16:02:48 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:03:13 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:03:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:03:13 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:03:14 INFO Repopulating the environment...
+2022-12-20 16:03:14 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:03:14 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:03:14 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:03:14 MEMORY Shared memory size (size: 7)
+2022-12-20 16:03:14 PERFORMANCE Incremental check: 0.181s
+2022-12-20 16:03:14 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:03:14 PERFORMANCE Server request: 0.278s
+2022-12-20 16:03:14 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:06:36 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:06:36 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:06:36 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:06:37 INFO Repopulating the environment...
+2022-12-20 16:06:37 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:06:37 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:06:37 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:06:37 MEMORY Shared memory size (size: 7)
+2022-12-20 16:06:37 PERFORMANCE Incremental check: 0.164s
+2022-12-20 16:06:37 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:06:37 PERFORMANCE Server request: 0.265s
+2022-12-20 16:06:37 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:06:47 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:06:47 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:06:47 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:06:47 INFO Repopulating the environment...
+2022-12-20 16:06:47 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:06:47 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:06:47 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:06:47 MEMORY Shared memory size (size: 7)
+2022-12-20 16:06:47 PERFORMANCE Incremental check: 0.164s
+2022-12-20 16:06:47 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:06:47 PERFORMANCE Server request: 0.266s
+2022-12-20 16:06:47 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:07:21 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:07:21 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:07:21 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:07:21 INFO Repopulating the environment...
+2022-12-20 16:07:21 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:07:21 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:07:21 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:07:21 MEMORY Shared memory size (size: 7)
+2022-12-20 16:07:21 PERFORMANCE Incremental check: 0.161s
+2022-12-20 16:07:21 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:07:21 PERFORMANCE Server request: 0.253s
+2022-12-20 16:07:21 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:07:41 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:07:41 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:07:41 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:07:41 INFO Repopulating the environment...
+2022-12-20 16:07:41 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:07:41 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:07:41 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:07:41 MEMORY Shared memory size (size: 6)
+2022-12-20 16:07:41 PERFORMANCE Incremental check: 0.204s
+2022-12-20 16:07:41 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:07:41 PERFORMANCE Server request: 0.291s
+2022-12-20 16:07:41 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-20 16:09:48 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-20 16:09:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:09:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:09:48 INFO Repopulating the environment...
+2022-12-20 16:09:48 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 16:09:48 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 16:09:48 PERFORMANCE Module tracker updated: 0.000s
+2022-12-20 16:09:48 MEMORY Shared memory size (size: 6)
+2022-12-20 16:09:48 PERFORMANCE Incremental check: 0.135s
+2022-12-20 16:09:48 SERVER Update sent to subscription `persistent_36025`
+2022-12-20 16:09:48 PERFORMANCE Server request: 0.227s
+2022-12-20 16:09:48 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
