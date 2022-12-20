@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import namedtuple, deque
 from gym.spaces import Discrete, Box, Space
 import random
@@ -46,31 +45,37 @@ class PolicyGradientAgent(Agent):
 
         # Get number of actions from gym action space
         self._n_actions = action_space.n
-        self._n_states = len(state_space.sample())
+        self._state_dim = state_space.sample().shape
+        self._n_states = len(state_space.sample().flatten())
 
         self._policy_net = DenseNet(self._n_states, self._n_actions).to(self._device)
         #self._optimizer = optim.AdamW(self._policy_net.parameters(), lr=self._learning_rate, amsgrad=True)
         self._optimizer = optim.Adam(self._policy_net.parameters(), lr=self._learning_rate)
 
         self._step = 0
-        self._debug = False
+        self._debug = True
 
-    def _init_state(self, state: int) -> torch.Tensor:
+    def to_feature(self, data: np.ndarray) -> torch.Tensor:
         # Convert state into tensor and unsqueeze: insert a new dim into tensor (at dim 0): e.g. 1 -> [1] or [1] -> [[1]] 
-        # state: Int
+        # state: np.array
         # returns: torch.Tensor of shape [1]
-        # why increase dimension??
-        return torch.tensor(state, dtype=torch.float32, device=self._device)
+        if self._debug:
+            assert isinstance(data, np.ndarray), f'data is not of type ndarray: {type(data)}'
+        return torch.tensor(data.flatten(), dtype=torch.float32, device=self._device)
 
     def reset(self):
         del self._rewards[:]
         del self._log_prob[:]
 
-    def sample_action(self, state: int) -> int:
+    def sample_action(self, state: np.ndarray) -> int:
         # state: tensor of shape [n_states]
         # return: int
-        state = self._init_state(state) 
-        p_actions = self._policy_net(state) # [n_actions]
+        state_tensor = self.to_feature(state) # [n_states]
+        if self._debug:
+            assert list(state_tensor.shape) == [self._n_states], f"state_tensor has wrong shape: {state_tensor.shape}"
+        p_actions = self._policy_net(state_tensor) # [n_actions]
+        if self._debug:
+            assert list(p_actions.shape) == [self._n_actions], f"p_actions has wrong shape: {p_actions.shape}"
         dist = Categorical(p_actions)
         action = dist.sample()
         self._log_prob.append(dist.log_prob(action))
@@ -85,17 +90,19 @@ class PolicyGradientAgent(Agent):
         for reward in self._rewards[::-1]:
             G = self._discount_rate * G + reward 
             returns.appendleft(G)  # insert left to maintain same order as _log_prob
-        returns = torch.tensor(returns, device=self._device)
+        returns_tensor = torch.tensor(returns, device=self._device)
         # batch norm
-        returns = (returns - returns.mean()) / (returns.std() + self._eps)
+        returns_tensor = (returns_tensor - returns_tensor.mean()) / (returns_tensor.std() + self._eps)
+        if self._debug:
+            assert list(returns_tensor.shape) == [len(self._rewards)], f"returns_tensor has wrong shape: {returns_tensor.shape}"
         # calcuate loss term
-        for R, log_prob in zip(returns, self._log_prob):
+        for R, log_prob in zip(returns_tensor, self._log_prob):
             policy_loss.append((-R*log_prob).view(1)) # reshape to allow concat
         # sum up loss to a single value
-        policy_loss = torch.cat(policy_loss).sum() 
+        policy_loss_tensor = torch.cat(policy_loss).sum() 
         # backprop
         self._optimizer.zero_grad()
-        policy_loss.backward()
+        policy_loss_tensor.backward()
         self._optimizer.step()
         # reset
         self.reset()
@@ -106,8 +113,6 @@ class PolicyGradientAgent(Agent):
         state, info = env.reset()
         terminal = False
         total_reward, num_steps = 0, 0
-        if epsilon is not None:
-            self._epsilon = epsilon
         if learning_rate is not None:
             self._learning_rate = learning_rate
         while not terminal:
@@ -127,7 +132,7 @@ class PolicyGradientAgent(Agent):
         return total_reward, num_steps
 
 def test_agent():
-    agent = PolicyGradientAgent(Box(low=0, high=1, shape=[4]), Discrete(2), 1.0, 0.1, 1.0)
+    agent = PolicyGradientAgent(Box(low=0, high=1, shape=[4,4,3]), Discrete(2), 1.0, 0.1, 1.0)
     for _ in range(5):
         state = agent._state_space.sample()
         _ = agent.sample_action(state)

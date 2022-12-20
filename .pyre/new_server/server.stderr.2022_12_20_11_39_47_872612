@@ -57,3 +57,7 @@
 2022-12-20 11:42:19 SERVER Update sent to subscription `persistent_35362`
 2022-12-20 11:42:19 PERFORMANCE Server request: 0.278s
 2022-12-20 11:42:19 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/dqn_agent.py))` processed
+2022-12-20 11:43:10 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/.pyre_configuration))...
+2022-12-20 11:43:10 SERVER Update sent to subscription `persistent_35362`
+2022-12-20 11:43:10 INFO Server interrupted with signal `sigint`
+2022-12-20 11:43:10 INFO Server is going down. Cleaning up...

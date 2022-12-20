@@ -3,6 +3,7 @@ from typing import Dict, List, Optional, Set, Tuple
 import gym
 from gym.spaces import Space
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
+from typing import Any
 
 
 class Agent(object):
@@ -13,10 +14,10 @@ class Agent(object):
         self._epsilon = epsilon
         self._learning_rate = learning_rate
 
-    def sample_action(self, state: int):
+    def sample_action(self, state: Any):
         raise NotImplementedError
 
-    def control(self, state: int, action: int, reward: float, new_state: int, terminal: bool):
+    def control(self, state: Any, action: Any, reward: float, new_state: Any, terminal: bool):
         raise NotImplementedError
     
     def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:

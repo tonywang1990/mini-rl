@@ -87,7 +87,7 @@ class DQNAgent(Agent):
         self._step = 0
         self._debug = True
 
-    def to_feature(self, data: np.array) -> torch.Tensor:
+    def to_feature(self, data: np.ndarray) -> torch.Tensor:
         # Convert state into tensor and unsqueeze: insert a new dim into tensor (at dim 0): e.g. 1 -> [1] or [1] -> [[1]] 
         # state: np.array
         # returns: torch.Tensor of shape [1]
@@ -95,10 +95,10 @@ class DQNAgent(Agent):
             assert isinstance(data, np.ndarray), f'data is not of type ndarray: {type(data)}'
         return torch.tensor(data.flatten(), dtype=torch.float32, device=self._device).unsqueeze(0) 
     
-    def to_array(self, tensor: torch.Tensor, shape: list) -> np.array:
+    def to_array(self, tensor: torch.Tensor, shape: list) -> np.ndarray:
         return tensor.numpy().reshape(shape)
 
-    def sample_action(self, state: torch.Tensor):
+    def sample_action(self, state: torch.Tensor) -> torch.Tensor:
         # state: tensor of shape [1, n_states]
         # return: tensor of shape [1, n_actions]
         sample = random.random()
@@ -185,14 +185,14 @@ class DQNAgent(Agent):
         self._target_net.load_state_dict(target_net_state_dict)
 
     def control(self, state: torch.Tensor, action: torch.Tensor, reward: float, new_state: torch.Tensor, terminal: bool):
-        reward = torch.tensor([reward], dtype=torch.float32, device=self._device)
+        reward_tensor = torch.tensor([reward], dtype=torch.float32, device=self._device)
         if terminal:
             next_state = torch.zeros(self._n_states, device=self._device).unsqueeze(0)
         else:
             next_state = new_state
-        terminal = torch.tensor([terminal], device=self._device, dtype=torch.bool)
+        terminal_tensor = torch.tensor([terminal], device=self._device, dtype=torch.bool)
         # Store the transition in memory
-        self._memory.push(state, action, next_state, reward, terminal)
+        self._memory.push(state, action, next_state, reward_tensor, terminal_tensor)
         # Perform one step of the optimization (on the policy network)
         self._optimize_model()
         self._update_target_net()
@@ -236,5 +236,6 @@ def test_agent():
     action = agent.sample_action(state_tensor)
     new_state = agent.to_array(state_tensor, agent._state_dim)
     np.testing.assert_equal(state, new_state)
+    print('dqn_agent test passed!')
 
 test_agent()
