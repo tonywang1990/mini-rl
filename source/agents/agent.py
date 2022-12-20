@@ -7,7 +7,7 @@ from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 class Agent(object):
     def __init__(self, state_space: Space, action_space: Space, discount_rate: float, epsilon: float, learning_rate: float):
-        self._state_spacee = state_space
+        self._state_space = state_space
         self._action_space = action_space
         self._discount_rate = discount_rate
         self._epsilon = epsilon
