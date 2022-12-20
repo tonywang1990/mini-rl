@@ -1,0 +1,59 @@
+2022-12-20 11:39:49 INFO Initializing file watching service...
+2022-12-20 11:39:49 INFO Connecting to watchman...
+2022-12-20 11:39:49 INFO Established watchman connection.
+2022-12-20 11:39:49 INFO Request watchman subscription at /Users/tonywy/Desktop/mini-rl
+2022-12-20 11:39:49 INFO Server has started listening on socket `/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock`
+2022-12-20 11:39:49 INFO Initializing shared memory [heap_size=8589934592, dep_table_pow=27, hash_table_pow=26]
+2022-12-20 11:39:49 INFO Initializing server state from scratch...
+2022-12-20 11:39:49 INFO Creating environment...
+2022-12-20 11:39:49 INFO Building module tracker...
+2022-12-20 11:39:50 PERFORMANCE Module tracker built: 0.901s
+2022-12-20 11:39:50 PERFORMANCE Full environment built: 0.973s
+2022-12-20 11:39:50 INFO Checking 215 functions...
+2022-12-20 11:39:51 PROGRESS Processed 12 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 24 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 36 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 48 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 60 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 72 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 84 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 96 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 108 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 120 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 132 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 144 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 156 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 167 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 179 of 215 functions
+2022-12-20 11:39:51 PROGRESS Processed 191 of 215 functions
+2022-12-20 11:39:52 PROGRESS Processed 203 of 215 functions
+2022-12-20 11:39:52 PROGRESS Processed 215 of 215 functions
+2022-12-20 11:39:52 PERFORMANCE Check_TypeCheck: 1.291s
+2022-12-20 11:39:52 MEMORY Shared memory size post-typecheck (size: 6)
+2022-12-20 11:39:52 PROGRESS Postprocessing 24 sources...
+2022-12-20 11:39:52 PROGRESS Postprocessed 24 of 24 sources
+2022-12-20 11:39:52 PERFORMANCE Check_Postprocessing: 0.026s
+2022-12-20 11:39:52 PERFORMANCE Initialization: 2.549s
+2022-12-20 11:39:52 INFO Server state initialized.
+2022-12-20 11:39:52 SERVER Connection established
+2022-12-20 11:39:52 SERVER Processing request (DisplayTypeError())...
+2022-12-20 11:39:52 PERFORMANCE Server request: 0.004s
+2022-12-20 11:39:52 SERVER Request `(DisplayTypeError())` processed
+2022-12-20 11:39:52 SERVER Connection closed
+2022-12-20 11:41:38 SERVER Connection established
+2022-12-20 11:41:38 SERVER Subscription added: persistent_35362
+2022-12-20 11:41:38 SERVER Processing request (DisplayTypeError())...
+2022-12-20 11:41:38 PERFORMANCE Server request: 0.002s
+2022-12-20 11:41:38 SERVER Request `(DisplayTypeError())` processed
+2022-12-20 11:42:19 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/dqn_agent.py))...
+2022-12-20 11:42:19 SERVER Update sent to subscription `persistent_35362`
+2022-12-20 11:42:19 SERVER Update sent to subscription `persistent_35362`
+2022-12-20 11:42:19 INFO Repopulating the environment...
+2022-12-20 11:42:19 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/dqn_agent.py)(priority 173)))(qualifier(source agents dqn_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-20 11:42:19 SERVER Implicit Module Update: (implicit_updates())
+2022-12-20 11:42:19 PERFORMANCE Module tracker updated: 0.001s
+2022-12-20 11:42:19 MEMORY Shared memory size (size: 6)
+2022-12-20 11:42:19 PERFORMANCE Incremental check: 0.181s
+2022-12-20 11:42:19 SERVER Update sent to subscription `persistent_35362`
+2022-12-20 11:42:19 PERFORMANCE Server request: 0.278s
+2022-12-20 11:42:19 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/dqn_agent.py))` processed

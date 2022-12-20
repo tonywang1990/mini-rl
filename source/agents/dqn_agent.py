@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import namedtuple, deque
 from gym.spaces import Discrete, Box, Space
 import random
@@ -8,7 +7,6 @@ from typing import Union, Optional
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
 
-from source.value_function import ActionValue, LearnedActionValue
 from source.agents.agent import Agent
 from source import utils
 
@@ -76,7 +74,8 @@ class DQNAgent(Agent):
 
         # Get number of actions from gym action space
         self._n_actions = action_space.n
-        self._n_states = len(state_space.sample())
+        self._state_dim = state_space.sample().shape
+        self._n_states = len(state_space.sample().flatten())
 
         self._policy_net = DenseNet(self._n_states, self._n_actions).to(self._device)
         self._target_net = DenseNet(self._n_states, self._n_actions).to(self._device)
@@ -86,14 +85,18 @@ class DQNAgent(Agent):
         self._memory = ReplayMemory(MEMORY_SIZE)
 
         self._step = 0
-        self._debug = False
+        self._debug = True
 
-    def init_state(self, state: list) -> torch.Tensor:
+    def to_feature(self, data: np.array) -> torch.Tensor:
         # Convert state into tensor and unsqueeze: insert a new dim into tensor (at dim 0): e.g. 1 -> [1] or [1] -> [[1]] 
-        # state: Int
+        # state: np.array
         # returns: torch.Tensor of shape [1]
-        # why increase dimension??
-        return torch.tensor(state, dtype=torch.float32, device=self._device).unsqueeze(0) 
+        if self._debug:
+            assert isinstance(data, np.ndarray), f'data is not of type ndarray: {type(data)}'
+        return torch.tensor(data.flatten(), dtype=torch.float32, device=self._device).unsqueeze(0) 
+    
+    def to_array(self, tensor: torch.Tensor, shape: list) -> np.array:
+        return tensor.numpy().reshape(shape)
 
     def sample_action(self, state: torch.Tensor):
         # state: tensor of shape [1, n_states]
@@ -181,12 +184,12 @@ class DQNAgent(Agent):
             target_net_state_dict[key] = policy_net_state_dict[key]*self._tau + target_net_state_dict[key]*(1-self._tau)
         self._target_net.load_state_dict(target_net_state_dict)
 
-    def control(self, state: torch.Tensor, action: torch.Tensor, reward: float, new_state: list, terminal: bool):
+    def control(self, state: torch.Tensor, action: torch.Tensor, reward: float, new_state: torch.Tensor, terminal: bool):
         reward = torch.tensor([reward], dtype=torch.float32, device=self._device)
         if terminal:
             next_state = torch.zeros(self._n_states, device=self._device).unsqueeze(0)
         else:
-            next_state = torch.tensor(new_state, dtype=torch.float32, device=self._device).unsqueeze(0)
+            next_state = new_state
         terminal = torch.tensor([terminal], device=self._device, dtype=torch.bool)
         # Store the transition in memory
         self._memory.push(state, action, next_state, reward, terminal)
@@ -199,6 +202,7 @@ class DQNAgent(Agent):
         if video_path is not None:
             video = VideoRecorder(env, video_path)
         state, info = env.reset()
+        state = self.to_feature(state) 
         terminal = False
         steps = 0
         total_reward = 0
@@ -207,11 +211,11 @@ class DQNAgent(Agent):
         if learning_rate is not None:
             self._learning_rate = learning_rate
         while not terminal:
-            state = torch.tensor(state, dtype=torch.float32, device=self._device).unsqueeze(0) 
             action = self.sample_action(state)
             new_state, reward, terminal, truncated, info = env.step(action.item())
             total_reward += reward 
             terminal = terminal or truncated
+            new_state = self.to_feature(new_state)
             if learning:
                 self.control(state, action, reward,
                              new_state, terminal)
@@ -224,3 +228,13 @@ class DQNAgent(Agent):
         if video_path is not None:
             video.close()
         return total_reward, steps
+
+def test_agent():
+    agent = DQNAgent(Box(low=0, high=1, shape=[4,5,3]), Discrete(2), 1.0, 0.1, 1.0, 2, 0.001)
+    state =  agent._state_space.sample()
+    state_tensor = agent.to_feature(state)
+    action = agent.sample_action(state_tensor)
+    new_state = agent.to_array(state_tensor, agent._state_dim)
+    np.testing.assert_equal(state, new_state)
+
+test_agent()
