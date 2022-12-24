@@ -1685,3 +1685,8 @@
 2022-12-20 16:09:48 SERVER Update sent to subscription `persistent_36025`
 2022-12-20 16:09:48 PERFORMANCE Server request: 0.227s
 2022-12-20 16:09:48 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-21 00:18:57 SERVER Connection closed
+2022-12-21 00:18:57 SERVER Subscription removed: persistent_36025
+2022-12-21 00:19:04 INFO Shutting down watchman connection...
+2022-12-21 00:19:04 INFO Server is going down. Cleaning up...
+2022-12-21 00:19:04 INFO Watchman subscription error: Lost subscription connection to watchman

@@ -127,8 +127,6 @@ class PolicyGradientWithBaselineAgent(Agent):
         policy_loss_tensor.backward()
         self._policy_optimizer.step()
 
-
-
         # reset
         self.reset()
 

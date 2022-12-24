@@ -1,0 +1,1026 @@
+2022-12-21 17:40:48 INFO Initializing file watching service...
+2022-12-21 17:41:13 INFO Connecting to watchman...
+2022-12-21 17:41:13 INFO Established watchman connection.
+2022-12-21 17:41:13 INFO Request watchman subscription at /Users/tonywy/Desktop/mini-rl
+2022-12-21 17:41:14 INFO Server has started listening on socket `/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock`
+2022-12-21 17:41:14 INFO Initializing shared memory [heap_size=8589934592, dep_table_pow=27, hash_table_pow=26]
+2022-12-21 17:41:14 INFO Initializing server state from scratch...
+2022-12-21 17:41:14 INFO Creating environment...
+2022-12-21 17:41:14 INFO Building module tracker...
+2022-12-21 17:41:15 PERFORMANCE Module tracker built: 1.010s
+2022-12-21 17:41:15 PERFORMANCE Full environment built: 1.089s
+2022-12-21 17:41:15 INFO Checking 225 functions...
+2022-12-21 17:41:16 PROGRESS Processed 13 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 26 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 39 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 52 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 65 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 78 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 91 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 104 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 117 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 130 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 143 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 156 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 160 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 173 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 186 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 199 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 212 of 225 functions
+2022-12-21 17:41:16 PROGRESS Processed 225 of 225 functions
+2022-12-21 17:41:16 PERFORMANCE Check_TypeCheck: 1.014s
+2022-12-21 17:41:16 MEMORY Shared memory size post-typecheck (size: 6)
+2022-12-21 17:41:16 PROGRESS Postprocessing 25 sources...
+2022-12-21 17:41:16 PROGRESS Postprocessed 25 of 25 sources
+2022-12-21 17:41:16 PERFORMANCE Check_Postprocessing: 0.018s
+2022-12-21 17:41:16 PERFORMANCE Initialization: 2.501s
+2022-12-21 17:41:16 INFO Server state initialized.
+2022-12-21 17:41:16 SERVER Connection established
+2022-12-21 17:41:16 SERVER Subscription added: persistent_967
+2022-12-21 17:41:16 SERVER Processing request (DisplayTypeError())...
+2022-12-21 17:41:16 PERFORMANCE Server request: 0.004s
+2022-12-21 17:41:16 SERVER Request `(DisplayTypeError())` processed
+2022-12-21 18:31:25 SERVER Processing request (IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"))...
+2022-12-21 18:31:25 SERVER Update sent to subscription `persistent_967`
+2022-12-21 18:31:25 SERVER Update sent to subscription `persistent_967`
+2022-12-21 18:31:25 INFO Repopulating the environment...
+2022-12-21 18:31:25 SERVER Explicit Module Update: (explicit_updates((New((raw((relative"source/agents/policy_gradient_with_baseline_agent copy.py")(priority 173)))(qualifier(source agents"policy_gradient_with_baseline_agent copy"))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 18:31:25 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 18:31:25 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 18:31:25 MEMORY Shared memory size (size: 6)
+2022-12-21 18:31:25 PERFORMANCE Incremental check: 0.182s
+2022-12-21 18:31:26 SERVER Update sent to subscription `persistent_967`
+2022-12-21 18:31:26 PERFORMANCE Server request: 0.339s
+2022-12-21 18:31:26 SERVER Request `(IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"))` processed
+2022-12-21 18:31:34 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py /Users/tonywy/Desktop/mini-rl/source/agents/actor_cri.py))...
+2022-12-21 18:31:34 SERVER Update sent to subscription `persistent_967`
+2022-12-21 18:31:34 SERVER Update sent to subscription `persistent_967`
+2022-12-21 18:31:35 INFO Repopulating the environment...
+2022-12-21 18:31:35 SERVER Explicit Module Update: (explicit_updates((Delete(source agents policy_gradient_with_baseline_agent))(New((raw((relative source/agents/actor_cri.py)(priority 173)))(qualifier(source agents actor_cri))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 18:31:35 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 18:31:35 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 18:31:35 MEMORY Shared memory size (size: 6)
+2022-12-21 18:31:35 PERFORMANCE Incremental check: 0.150s
+2022-12-21 18:31:35 SERVER Update sent to subscription `persistent_967`
+2022-12-21 18:31:35 PERFORMANCE Server request: 0.322s
+2022-12-21 18:31:35 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py /Users/tonywy/Desktop/mini-rl/source/agents/actor_cri.py))` processed
+2022-12-21 18:32:12 SERVER Processing request (IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 18:32:12 SERVER Update sent to subscription `persistent_967`
+2022-12-21 18:32:12 SERVER Update sent to subscription `persistent_967`
+2022-12-21 18:32:13 INFO Repopulating the environment...
+2022-12-21 18:32:13 SERVER Explicit Module Update: (explicit_updates((Delete(source agents"policy_gradient_with_baseline_agent copy"))(New((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 18:32:13 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 18:32:13 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 18:32:13 MEMORY Shared memory size (size: 6)
+2022-12-21 18:32:13 PERFORMANCE Incremental check: 0.157s
+2022-12-21 18:32:13 SERVER Update sent to subscription `persistent_967`
+2022-12-21 18:32:13 PERFORMANCE Server request: 0.325s
+2022-12-21 18:32:13 SERVER Request `(IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:43:05 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:43:05 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:43:05 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:43:05 INFO Repopulating the environment...
+2022-12-21 19:43:05 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:43:05 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:43:05 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:43:05 MEMORY Shared memory size (size: 6)
+2022-12-21 19:43:05 PERFORMANCE Incremental check: 0.235s
+2022-12-21 19:43:05 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:43:05 PERFORMANCE Server request: 0.319s
+2022-12-21 19:43:05 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:46:59 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:46:59 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:46:59 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:46:59 INFO Repopulating the environment...
+2022-12-21 19:46:59 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:46:59 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:46:59 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:46:59 MEMORY Shared memory size (size: 6)
+2022-12-21 19:46:59 PERFORMANCE Incremental check: 0.156s
+2022-12-21 19:46:59 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:46:59 PERFORMANCE Server request: 0.254s
+2022-12-21 19:46:59 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:47:27 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:47:27 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:27 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:27 INFO Repopulating the environment...
+2022-12-21 19:47:27 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:47:27 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:47:27 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:47:27 MEMORY Shared memory size (size: 6)
+2022-12-21 19:47:27 PERFORMANCE Incremental check: 0.158s
+2022-12-21 19:47:27 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:27 PERFORMANCE Server request: 0.255s
+2022-12-21 19:47:27 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:47:35 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:47:35 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:35 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:35 INFO Repopulating the environment...
+2022-12-21 19:47:35 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:47:35 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:47:35 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:47:35 MEMORY Shared memory size (size: 6)
+2022-12-21 19:47:35 PERFORMANCE Incremental check: 0.153s
+2022-12-21 19:47:35 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:35 PERFORMANCE Server request: 0.250s
+2022-12-21 19:47:35 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:47:50 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:47:50 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:50 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:50 INFO Repopulating the environment...
+2022-12-21 19:47:50 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:47:50 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:47:50 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:47:50 MEMORY Shared memory size (size: 6)
+2022-12-21 19:47:50 PERFORMANCE Incremental check: 0.159s
+2022-12-21 19:47:50 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:50 PERFORMANCE Server request: 0.259s
+2022-12-21 19:47:50 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:47:58 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:47:58 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:58 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:58 INFO Repopulating the environment...
+2022-12-21 19:47:58 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:47:58 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:47:58 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:47:58 MEMORY Shared memory size (size: 6)
+2022-12-21 19:47:58 PERFORMANCE Incremental check: 0.154s
+2022-12-21 19:47:58 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:47:58 PERFORMANCE Server request: 0.246s
+2022-12-21 19:47:58 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:48:32 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:48:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:48:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:48:32 INFO Repopulating the environment...
+2022-12-21 19:48:32 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:48:32 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:48:32 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:48:32 MEMORY Shared memory size (size: 6)
+2022-12-21 19:48:32 PERFORMANCE Incremental check: 0.168s
+2022-12-21 19:48:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:48:32 PERFORMANCE Server request: 0.259s
+2022-12-21 19:48:32 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:49:10 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:49:10 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:49:10 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:49:10 INFO Repopulating the environment...
+2022-12-21 19:49:10 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:49:10 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:49:10 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:49:10 MEMORY Shared memory size (size: 6)
+2022-12-21 19:49:10 PERFORMANCE Incremental check: 0.160s
+2022-12-21 19:49:10 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:49:10 PERFORMANCE Server request: 0.266s
+2022-12-21 19:49:10 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:51:55 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_cri.py))...
+2022-12-21 19:51:55 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:51:55 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:51:55 INFO Repopulating the environment...
+2022-12-21 19:51:55 SERVER Explicit Module Update: (explicit_updates((Delete(source agents actor_cri))))
+2022-12-21 19:51:55 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:51:55 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:51:55 MEMORY Shared memory size (size: 6)
+2022-12-21 19:51:55 PERFORMANCE Incremental check: 0.126s
+2022-12-21 19:51:55 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:51:55 PERFORMANCE Server request: 0.266s
+2022-12-21 19:51:55 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_cri.py))` processed
+2022-12-21 19:53:07 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py"/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"))...
+2022-12-21 19:53:07 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:07 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:07 INFO Repopulating the environment...
+2022-12-21 19:53:07 SERVER Explicit Module Update: (explicit_updates((New((raw((relative"source/agents/policy_gradient_with_baseline_agent copy.py")(priority 173)))(qualifier(source agents"policy_gradient_with_baseline_agent copy"))(is_stub false)(is_external false)(is_init false)))(Delete(source agents actor_critic_agent))))
+2022-12-21 19:53:07 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:53:07 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:53:07 MEMORY Shared memory size (size: 7)
+2022-12-21 19:53:07 PERFORMANCE Incremental check: 0.182s
+2022-12-21 19:53:07 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:07 PERFORMANCE Server request: 0.308s
+2022-12-21 19:53:07 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py"/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"))` processed
+2022-12-21 19:53:17 SERVER Processing request (IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-21 19:53:17 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:17 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:17 INFO Repopulating the environment...
+2022-12-21 19:53:17 SERVER Explicit Module Update: (explicit_updates((Delete(source agents"policy_gradient_with_baseline_agent copy"))(New((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:53:17 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:53:17 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:53:17 MEMORY Shared memory size (size: 7)
+2022-12-21 19:53:17 PERFORMANCE Incremental check: 0.204s
+2022-12-21 19:53:17 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:17 PERFORMANCE Server request: 0.327s
+2022-12-21 19:53:17 SERVER Request `(IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-21 19:53:19 SERVER Processing request (IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"))...
+2022-12-21 19:53:19 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:19 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:19 INFO Repopulating the environment...
+2022-12-21 19:53:19 SERVER Explicit Module Update: (explicit_updates((New((raw((relative"source/agents/policy_gradient_with_baseline_agent copy.py")(priority 173)))(qualifier(source agents"policy_gradient_with_baseline_agent copy"))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:53:19 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:53:19 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:53:20 MEMORY Shared memory size (size: 7)
+2022-12-21 19:53:20 PERFORMANCE Incremental check: 0.188s
+2022-12-21 19:53:20 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:20 PERFORMANCE Server request: 0.340s
+2022-12-21 19:53:20 SERVER Request `(IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"))` processed
+2022-12-21 19:53:32 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py /Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:53:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:32 INFO Repopulating the environment...
+2022-12-21 19:53:32 SERVER Explicit Module Update: (explicit_updates((New((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))(Delete(source agents policy_gradient_with_baseline_agent))))
+2022-12-21 19:53:32 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:53:32 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:53:32 MEMORY Shared memory size (size: 7)
+2022-12-21 19:53:32 PERFORMANCE Incremental check: 0.192s
+2022-12-21 19:53:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:32 PERFORMANCE Server request: 0.312s
+2022-12-21 19:53:32 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py /Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:53:57 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:53:57 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:57 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:57 INFO Repopulating the environment...
+2022-12-21 19:53:57 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:53:57 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:53:57 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:53:57 MEMORY Shared memory size (size: 7)
+2022-12-21 19:53:57 PERFORMANCE Incremental check: 0.151s
+2022-12-21 19:53:57 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:53:57 PERFORMANCE Server request: 0.244s
+2022-12-21 19:53:57 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:54:48 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:54:48 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:54:48 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:54:49 INFO Repopulating the environment...
+2022-12-21 19:54:49 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:54:49 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:54:49 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:54:49 MEMORY Shared memory size (size: 7)
+2022-12-21 19:54:49 PERFORMANCE Incremental check: 0.153s
+2022-12-21 19:54:49 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:54:49 PERFORMANCE Server request: 0.247s
+2022-12-21 19:54:49 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:55:19 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:55:19 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:55:19 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:55:19 INFO Repopulating the environment...
+2022-12-21 19:55:19 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:55:19 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:55:19 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:55:19 MEMORY Shared memory size (size: 7)
+2022-12-21 19:55:19 PERFORMANCE Incremental check: 0.162s
+2022-12-21 19:55:19 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:55:19 PERFORMANCE Server request: 0.248s
+2022-12-21 19:55:19 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:55:31 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:55:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:55:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:55:32 INFO Repopulating the environment...
+2022-12-21 19:55:32 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:55:32 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:55:32 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:55:32 MEMORY Shared memory size (size: 7)
+2022-12-21 19:55:32 PERFORMANCE Incremental check: 0.152s
+2022-12-21 19:55:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:55:32 PERFORMANCE Server request: 0.263s
+2022-12-21 19:55:32 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:56:04 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:56:04 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:56:04 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:56:04 INFO Repopulating the environment...
+2022-12-21 19:56:04 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:56:04 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:56:04 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:56:04 MEMORY Shared memory size (size: 7)
+2022-12-21 19:56:04 PERFORMANCE Incremental check: 0.177s
+2022-12-21 19:56:04 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:56:04 PERFORMANCE Server request: 0.277s
+2022-12-21 19:56:04 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:56:27 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:56:27 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:56:27 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:56:27 INFO Repopulating the environment...
+2022-12-21 19:56:27 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:56:27 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:56:27 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:56:27 MEMORY Shared memory size (size: 7)
+2022-12-21 19:56:27 PERFORMANCE Incremental check: 0.155s
+2022-12-21 19:56:27 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:56:27 PERFORMANCE Server request: 0.244s
+2022-12-21 19:56:27 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:56:41 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:56:41 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:56:41 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:56:41 INFO Repopulating the environment...
+2022-12-21 19:56:41 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:56:41 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:56:41 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:56:41 MEMORY Shared memory size (size: 7)
+2022-12-21 19:56:41 PERFORMANCE Incremental check: 0.152s
+2022-12-21 19:56:41 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:56:41 PERFORMANCE Server request: 0.254s
+2022-12-21 19:56:41 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:59:33 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:59:33 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:59:33 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:59:33 INFO Repopulating the environment...
+2022-12-21 19:59:33 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:59:33 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:59:33 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:59:33 MEMORY Shared memory size (size: 7)
+2022-12-21 19:59:33 PERFORMANCE Incremental check: 0.152s
+2022-12-21 19:59:33 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:59:33 PERFORMANCE Server request: 0.256s
+2022-12-21 19:59:33 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 19:59:39 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 19:59:39 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:59:39 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:59:39 INFO Repopulating the environment...
+2022-12-21 19:59:39 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 19:59:39 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 19:59:39 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 19:59:39 MEMORY Shared memory size (size: 7)
+2022-12-21 19:59:39 PERFORMANCE Incremental check: 0.138s
+2022-12-21 19:59:39 SERVER Update sent to subscription `persistent_967`
+2022-12-21 19:59:39 PERFORMANCE Server request: 0.227s
+2022-12-21 19:59:39 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:00:08 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:00:08 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:00:08 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:00:09 INFO Repopulating the environment...
+2022-12-21 20:00:09 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:00:09 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:00:09 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:00:09 MEMORY Shared memory size (size: 7)
+2022-12-21 20:00:09 PERFORMANCE Incremental check: 0.165s
+2022-12-21 20:00:09 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:00:09 PERFORMANCE Server request: 0.261s
+2022-12-21 20:00:09 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:02:49 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:02:49 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:02:49 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:02:49 INFO Repopulating the environment...
+2022-12-21 20:02:49 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:02:49 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:02:49 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:02:50 MEMORY Shared memory size (size: 7)
+2022-12-21 20:02:50 PERFORMANCE Incremental check: 0.162s
+2022-12-21 20:02:50 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:02:50 PERFORMANCE Server request: 0.263s
+2022-12-21 20:02:50 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:02:57 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:02:57 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:02:57 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:02:57 INFO Repopulating the environment...
+2022-12-21 20:02:57 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:02:57 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:02:57 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:02:57 MEMORY Shared memory size (size: 7)
+2022-12-21 20:02:57 PERFORMANCE Incremental check: 0.147s
+2022-12-21 20:02:57 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:02:57 PERFORMANCE Server request: 0.236s
+2022-12-21 20:02:57 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:03:30 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:03:30 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:03:30 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:03:31 INFO Repopulating the environment...
+2022-12-21 20:03:31 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:03:31 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:03:31 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:03:31 MEMORY Shared memory size (size: 7)
+2022-12-21 20:03:31 PERFORMANCE Incremental check: 0.177s
+2022-12-21 20:03:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:03:31 PERFORMANCE Server request: 0.272s
+2022-12-21 20:03:31 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:03:40 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:03:40 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:03:40 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:03:40 INFO Repopulating the environment...
+2022-12-21 20:03:40 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:03:40 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:03:40 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:03:40 MEMORY Shared memory size (size: 7)
+2022-12-21 20:03:40 PERFORMANCE Incremental check: 0.155s
+2022-12-21 20:03:40 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:03:40 PERFORMANCE Server request: 0.245s
+2022-12-21 20:03:40 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:04:12 SERVER Processing request (IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-21 20:04:12 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:04:12 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:04:12 INFO Repopulating the environment...
+2022-12-21 20:04:12 SERVER Explicit Module Update: (explicit_updates((Delete(source agents"policy_gradient_with_baseline_agent copy"))(New((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:04:12 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:04:12 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:04:13 MEMORY Shared memory size (size: 7)
+2022-12-21 20:04:13 PERFORMANCE Incremental check: 0.175s
+2022-12-21 20:04:13 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:04:13 PERFORMANCE Server request: 0.302s
+2022-12-21 20:04:13 SERVER Request `(IncrementalUpdate("/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent copy.py"/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-21 20:04:54 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/agent.py))...
+2022-12-21 20:04:54 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:04:54 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:04:54 INFO Repopulating the environment...
+2022-12-21 20:04:54 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/agent.py)(priority 173)))(qualifier(source agents agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:04:54 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:04:54 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:04:54 MEMORY Shared memory size (size: 7)
+2022-12-21 20:04:54 PERFORMANCE Incremental check: 0.418s
+2022-12-21 20:04:54 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:04:54 PERFORMANCE Server request: 0.513s
+2022-12-21 20:04:54 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/agent.py))` processed
+2022-12-21 20:06:28 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:06:28 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:06:28 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:06:29 INFO Repopulating the environment...
+2022-12-21 20:06:29 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:06:29 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:06:29 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:06:29 MEMORY Shared memory size (size: 6)
+2022-12-21 20:06:29 PERFORMANCE Incremental check: 0.396s
+2022-12-21 20:06:29 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:06:29 PERFORMANCE Server request: 0.494s
+2022-12-21 20:06:29 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:08:09 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/agent.py))...
+2022-12-21 20:08:09 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:08:09 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:08:09 INFO Repopulating the environment...
+2022-12-21 20:08:09 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/agent.py)(priority 173)))(qualifier(source agents agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:08:09 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:08:09 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:08:10 MEMORY Shared memory size (size: 6)
+2022-12-21 20:08:10 PERFORMANCE Incremental check: 0.452s
+2022-12-21 20:08:10 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:08:10 PERFORMANCE Server request: 0.541s
+2022-12-21 20:08:10 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/agent.py))` processed
+2022-12-21 20:08:12 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/agent.py))...
+2022-12-21 20:08:12 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:08:12 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:08:12 INFO Repopulating the environment...
+2022-12-21 20:08:12 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/agent.py)(priority 173)))(qualifier(source agents agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:08:12 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:08:12 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:08:13 MEMORY Shared memory size (size: 6)
+2022-12-21 20:08:13 PERFORMANCE Incremental check: 0.381s
+2022-12-21 20:08:13 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:08:13 PERFORMANCE Server request: 0.477s
+2022-12-21 20:08:13 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/agent.py))` processed
+2022-12-21 20:09:01 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:09:01 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:09:01 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:09:01 INFO Repopulating the environment...
+2022-12-21 20:09:01 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:09:01 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:09:01 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:09:01 MEMORY Shared memory size (size: 6)
+2022-12-21 20:09:01 PERFORMANCE Incremental check: 0.117s
+2022-12-21 20:09:01 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:09:01 PERFORMANCE Server request: 0.214s
+2022-12-21 20:09:01 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:09:33 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:09:33 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:09:33 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:09:33 INFO Repopulating the environment...
+2022-12-21 20:09:33 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:09:33 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:09:33 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:09:33 MEMORY Shared memory size (size: 6)
+2022-12-21 20:09:33 PERFORMANCE Incremental check: 0.129s
+2022-12-21 20:09:33 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:09:33 PERFORMANCE Server request: 0.224s
+2022-12-21 20:09:33 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:10:20 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:10:20 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:10:20 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:10:20 INFO Repopulating the environment...
+2022-12-21 20:10:20 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:10:20 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:10:20 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:10:20 MEMORY Shared memory size (size: 6)
+2022-12-21 20:10:20 PERFORMANCE Incremental check: 0.117s
+2022-12-21 20:10:20 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:10:20 PERFORMANCE Server request: 0.214s
+2022-12-21 20:10:20 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:10:29 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:10:29 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:10:29 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:10:29 INFO Repopulating the environment...
+2022-12-21 20:10:29 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:10:29 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:10:29 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:10:29 MEMORY Shared memory size (size: 6)
+2022-12-21 20:10:29 PERFORMANCE Incremental check: 0.115s
+2022-12-21 20:10:29 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:10:29 PERFORMANCE Server request: 0.194s
+2022-12-21 20:10:29 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:11:18 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:11:18 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:11:18 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:11:18 INFO Repopulating the environment...
+2022-12-21 20:11:18 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:11:18 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:11:18 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:11:18 MEMORY Shared memory size (size: 6)
+2022-12-21 20:11:18 PERFORMANCE Incremental check: 0.120s
+2022-12-21 20:11:18 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:11:18 PERFORMANCE Server request: 0.216s
+2022-12-21 20:11:18 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:11:39 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:11:39 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:11:39 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:11:39 INFO Repopulating the environment...
+2022-12-21 20:11:39 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:11:39 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:11:39 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:11:39 MEMORY Shared memory size (size: 6)
+2022-12-21 20:11:39 PERFORMANCE Incremental check: 0.112s
+2022-12-21 20:11:39 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:11:39 PERFORMANCE Server request: 0.219s
+2022-12-21 20:11:39 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:12:12 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:12:12 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:12 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:12 INFO Repopulating the environment...
+2022-12-21 20:12:12 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:12:12 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:12:12 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:12:12 MEMORY Shared memory size (size: 6)
+2022-12-21 20:12:12 PERFORMANCE Incremental check: 0.156s
+2022-12-21 20:12:12 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:12 PERFORMANCE Server request: 0.248s
+2022-12-21 20:12:12 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:12:32 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:12:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:32 INFO Repopulating the environment...
+2022-12-21 20:12:32 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:12:32 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:12:32 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:12:32 MEMORY Shared memory size (size: 6)
+2022-12-21 20:12:32 PERFORMANCE Incremental check: 0.170s
+2022-12-21 20:12:32 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:32 PERFORMANCE Server request: 0.261s
+2022-12-21 20:12:32 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:12:39 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:12:39 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:39 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:39 INFO Repopulating the environment...
+2022-12-21 20:12:39 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:12:39 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:12:39 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:12:39 MEMORY Shared memory size (size: 6)
+2022-12-21 20:12:39 PERFORMANCE Incremental check: 0.155s
+2022-12-21 20:12:39 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:39 PERFORMANCE Server request: 0.253s
+2022-12-21 20:12:39 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:12:51 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:12:51 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:51 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:51 INFO Repopulating the environment...
+2022-12-21 20:12:51 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:12:51 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:12:51 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:12:51 MEMORY Shared memory size (size: 7)
+2022-12-21 20:12:51 PERFORMANCE Incremental check: 0.126s
+2022-12-21 20:12:51 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:12:51 PERFORMANCE Server request: 0.223s
+2022-12-21 20:12:51 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:13:14 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:13:14 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:13:14 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:13:14 INFO Repopulating the environment...
+2022-12-21 20:13:14 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:13:14 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:13:14 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:13:14 MEMORY Shared memory size (size: 7)
+2022-12-21 20:13:14 PERFORMANCE Incremental check: 0.157s
+2022-12-21 20:13:14 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:13:14 PERFORMANCE Server request: 0.248s
+2022-12-21 20:13:14 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:13:22 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:13:22 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:13:22 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:13:22 INFO Repopulating the environment...
+2022-12-21 20:13:22 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:13:22 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:13:22 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:13:22 MEMORY Shared memory size (size: 7)
+2022-12-21 20:13:22 PERFORMANCE Incremental check: 0.136s
+2022-12-21 20:13:22 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:13:22 PERFORMANCE Server request: 0.228s
+2022-12-21 20:13:22 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:31:25 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:31:25 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:31:25 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:31:25 INFO Repopulating the environment...
+2022-12-21 20:31:25 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:31:25 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:31:25 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:31:25 MEMORY Shared memory size (size: 7)
+2022-12-21 20:31:25 PERFORMANCE Incremental check: 0.171s
+2022-12-21 20:31:25 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:31:25 PERFORMANCE Server request: 0.280s
+2022-12-21 20:31:25 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:31:30 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:31:30 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:31:30 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:31:30 INFO Repopulating the environment...
+2022-12-21 20:31:30 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:31:30 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:31:30 PERFORMANCE Module tracker updated: 0.001s
+2022-12-21 20:31:31 MEMORY Shared memory size (size: 7)
+2022-12-21 20:31:31 PERFORMANCE Incremental check: 0.140s
+2022-12-21 20:31:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:31:31 PERFORMANCE Server request: 0.234s
+2022-12-21 20:31:31 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:39:31 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:39:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:39:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:39:31 INFO Repopulating the environment...
+2022-12-21 20:39:31 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:39:31 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:39:31 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:39:31 MEMORY Shared memory size (size: 7)
+2022-12-21 20:39:31 PERFORMANCE Incremental check: 0.161s
+2022-12-21 20:39:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:39:31 PERFORMANCE Server request: 0.259s
+2022-12-21 20:39:31 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:43:29 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:43:29 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:43:29 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:43:29 INFO Repopulating the environment...
+2022-12-21 20:43:29 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:43:29 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:43:29 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:43:29 MEMORY Shared memory size (size: 7)
+2022-12-21 20:43:29 PERFORMANCE Incremental check: 0.160s
+2022-12-21 20:43:29 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:43:29 PERFORMANCE Server request: 0.254s
+2022-12-21 20:43:29 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:45:37 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:45:37 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:45:37 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:45:38 INFO Repopulating the environment...
+2022-12-21 20:45:38 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:45:38 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:45:38 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:45:38 MEMORY Shared memory size (size: 7)
+2022-12-21 20:45:38 PERFORMANCE Incremental check: 0.157s
+2022-12-21 20:45:38 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:45:38 PERFORMANCE Server request: 0.254s
+2022-12-21 20:45:38 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:46:54 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:46:54 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:46:54 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:46:55 INFO Repopulating the environment...
+2022-12-21 20:46:55 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:46:55 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:46:55 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:46:55 MEMORY Shared memory size (size: 7)
+2022-12-21 20:46:55 PERFORMANCE Incremental check: 0.133s
+2022-12-21 20:46:55 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:46:55 PERFORMANCE Server request: 0.233s
+2022-12-21 20:46:55 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:49:16 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:49:16 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:49:16 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:49:16 INFO Repopulating the environment...
+2022-12-21 20:49:16 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:49:16 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:49:16 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:49:16 MEMORY Shared memory size (size: 7)
+2022-12-21 20:49:16 PERFORMANCE Incremental check: 0.160s
+2022-12-21 20:49:16 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:49:16 PERFORMANCE Server request: 0.251s
+2022-12-21 20:49:16 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:53:41 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:53:41 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:53:41 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:53:41 INFO Repopulating the environment...
+2022-12-21 20:53:41 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:53:41 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:53:41 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:53:41 MEMORY Shared memory size (size: 7)
+2022-12-21 20:53:41 PERFORMANCE Incremental check: 0.160s
+2022-12-21 20:53:41 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:53:41 PERFORMANCE Server request: 0.270s
+2022-12-21 20:53:41 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:53:51 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:53:51 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:53:51 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:53:51 INFO Repopulating the environment...
+2022-12-21 20:53:51 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:53:51 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:53:51 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:53:51 MEMORY Shared memory size (size: 7)
+2022-12-21 20:53:51 PERFORMANCE Incremental check: 0.155s
+2022-12-21 20:53:51 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:53:51 PERFORMANCE Server request: 0.249s
+2022-12-21 20:53:51 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:55:37 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:55:37 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:55:37 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:55:37 INFO Repopulating the environment...
+2022-12-21 20:55:37 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:55:37 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:55:37 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:55:37 MEMORY Shared memory size (size: 7)
+2022-12-21 20:55:37 PERFORMANCE Incremental check: 0.151s
+2022-12-21 20:55:37 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:55:37 PERFORMANCE Server request: 0.259s
+2022-12-21 20:55:37 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:55:42 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:55:42 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:55:42 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:55:42 INFO Repopulating the environment...
+2022-12-21 20:55:42 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:55:42 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:55:42 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:55:42 MEMORY Shared memory size (size: 7)
+2022-12-21 20:55:42 PERFORMANCE Incremental check: 0.132s
+2022-12-21 20:55:42 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:55:42 PERFORMANCE Server request: 0.230s
+2022-12-21 20:55:42 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:55:48 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:55:48 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:55:48 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:55:48 INFO Repopulating the environment...
+2022-12-21 20:55:48 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:55:48 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:55:48 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:55:48 MEMORY Shared memory size (size: 7)
+2022-12-21 20:55:48 PERFORMANCE Incremental check: 0.146s
+2022-12-21 20:55:49 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:55:49 PERFORMANCE Server request: 0.244s
+2022-12-21 20:55:49 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:57:25 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:57:25 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:57:25 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:57:25 INFO Repopulating the environment...
+2022-12-21 20:57:25 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:57:25 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:57:25 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:57:25 MEMORY Shared memory size (size: 7)
+2022-12-21 20:57:25 PERFORMANCE Incremental check: 0.136s
+2022-12-21 20:57:25 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:57:25 PERFORMANCE Server request: 0.242s
+2022-12-21 20:57:25 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:59:00 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:59:00 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:59:00 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:59:01 INFO Repopulating the environment...
+2022-12-21 20:59:01 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:59:01 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:59:01 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:59:01 MEMORY Shared memory size (size: 7)
+2022-12-21 20:59:01 PERFORMANCE Incremental check: 0.138s
+2022-12-21 20:59:01 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:59:01 PERFORMANCE Server request: 0.247s
+2022-12-21 20:59:01 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 20:59:14 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 20:59:14 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:59:14 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:59:14 INFO Repopulating the environment...
+2022-12-21 20:59:14 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 20:59:14 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 20:59:14 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 20:59:14 MEMORY Shared memory size (size: 7)
+2022-12-21 20:59:14 PERFORMANCE Incremental check: 0.135s
+2022-12-21 20:59:14 SERVER Update sent to subscription `persistent_967`
+2022-12-21 20:59:14 PERFORMANCE Server request: 0.239s
+2022-12-21 20:59:14 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 21:00:16 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 21:00:16 SERVER Update sent to subscription `persistent_967`
+2022-12-21 21:00:16 SERVER Update sent to subscription `persistent_967`
+2022-12-21 21:00:16 INFO Repopulating the environment...
+2022-12-21 21:00:16 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 21:00:16 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 21:00:16 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 21:00:16 MEMORY Shared memory size (size: 7)
+2022-12-21 21:00:16 PERFORMANCE Incremental check: 0.145s
+2022-12-21 21:00:16 SERVER Update sent to subscription `persistent_967`
+2022-12-21 21:00:16 PERFORMANCE Server request: 0.247s
+2022-12-21 21:00:16 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 21:07:00 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 21:07:00 SERVER Update sent to subscription `persistent_967`
+2022-12-21 21:07:00 SERVER Update sent to subscription `persistent_967`
+2022-12-21 21:07:00 INFO Repopulating the environment...
+2022-12-21 21:07:00 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 21:07:00 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 21:07:00 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 21:07:00 MEMORY Shared memory size (size: 7)
+2022-12-21 21:07:00 PERFORMANCE Incremental check: 0.154s
+2022-12-21 21:07:00 SERVER Update sent to subscription `persistent_967`
+2022-12-21 21:07:00 PERFORMANCE Server request: 0.247s
+2022-12-21 21:07:00 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 21:07:41 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 21:07:41 SERVER Update sent to subscription `persistent_967`
+2022-12-21 21:07:41 SERVER Update sent to subscription `persistent_967`
+2022-12-21 21:07:41 INFO Repopulating the environment...
+2022-12-21 21:07:41 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 21:07:41 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 21:07:41 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 21:07:41 MEMORY Shared memory size (size: 7)
+2022-12-21 21:07:41 PERFORMANCE Incremental check: 0.124s
+2022-12-21 21:07:41 SERVER Update sent to subscription `persistent_967`
+2022-12-21 21:07:41 PERFORMANCE Server request: 0.228s
+2022-12-21 21:07:41 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 22:01:33 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-21 22:01:33 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:01:33 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:01:33 INFO Repopulating the environment...
+2022-12-21 22:01:33 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 22:01:33 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 22:01:33 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 22:01:33 MEMORY Shared memory size (size: 7)
+2022-12-21 22:01:33 PERFORMANCE Incremental check: 0.189s
+2022-12-21 22:01:33 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:01:33 PERFORMANCE Server request: 0.288s
+2022-12-21 22:01:33 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-21 22:02:58 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 22:02:58 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:02:58 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:02:58 INFO Repopulating the environment...
+2022-12-21 22:02:58 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 22:02:58 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 22:02:58 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 22:02:58 MEMORY Shared memory size (size: 7)
+2022-12-21 22:02:58 PERFORMANCE Incremental check: 0.164s
+2022-12-21 22:02:58 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:02:58 PERFORMANCE Server request: 0.268s
+2022-12-21 22:02:58 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 22:03:24 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 22:03:24 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:03:24 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:03:24 INFO Repopulating the environment...
+2022-12-21 22:03:24 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 22:03:24 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 22:03:24 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 22:03:24 MEMORY Shared memory size (size: 7)
+2022-12-21 22:03:24 PERFORMANCE Incremental check: 0.156s
+2022-12-21 22:03:24 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:03:24 PERFORMANCE Server request: 0.245s
+2022-12-21 22:03:24 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 22:06:00 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))...
+2022-12-21 22:06:00 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:06:00 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:06:00 INFO Repopulating the environment...
+2022-12-21 22:06:00 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/policy_gradient_with_baseline_agent.py)(priority 173)))(qualifier(source agents policy_gradient_with_baseline_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 22:06:00 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 22:06:00 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 22:06:00 MEMORY Shared memory size (size: 6)
+2022-12-21 22:06:00 PERFORMANCE Incremental check: 0.203s
+2022-12-21 22:06:00 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:06:00 PERFORMANCE Server request: 0.297s
+2022-12-21 22:06:00 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/policy_gradient_with_baseline_agent.py))` processed
+2022-12-21 22:08:43 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 22:08:43 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:08:43 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:08:43 INFO Repopulating the environment...
+2022-12-21 22:08:43 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 22:08:43 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 22:08:43 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 22:08:43 MEMORY Shared memory size (size: 6)
+2022-12-21 22:08:43 PERFORMANCE Incremental check: 0.134s
+2022-12-21 22:08:43 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:08:43 PERFORMANCE Server request: 0.230s
+2022-12-21 22:08:43 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 22:42:46 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 22:42:46 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:42:46 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:42:47 INFO Repopulating the environment...
+2022-12-21 22:42:47 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 22:42:47 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 22:42:47 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 22:42:47 MEMORY Shared memory size (size: 6)
+2022-12-21 22:42:47 PERFORMANCE Incremental check: 0.132s
+2022-12-21 22:42:47 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:42:47 PERFORMANCE Server request: 0.226s
+2022-12-21 22:42:47 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 22:44:31 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 22:44:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:44:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:44:31 INFO Repopulating the environment...
+2022-12-21 22:44:31 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 22:44:31 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 22:44:31 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 22:44:31 MEMORY Shared memory size (size: 6)
+2022-12-21 22:44:31 PERFORMANCE Incremental check: 0.141s
+2022-12-21 22:44:31 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:44:31 PERFORMANCE Server request: 0.229s
+2022-12-21 22:44:31 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 22:45:03 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 22:45:03 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:45:03 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:45:03 INFO Repopulating the environment...
+2022-12-21 22:45:03 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 22:45:03 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 22:45:03 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 22:45:03 MEMORY Shared memory size (size: 6)
+2022-12-21 22:45:03 PERFORMANCE Incremental check: 0.132s
+2022-12-21 22:45:03 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:45:03 PERFORMANCE Server request: 0.234s
+2022-12-21 22:45:03 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-21 22:50:43 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-21 22:50:43 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:50:43 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:50:43 INFO Repopulating the environment...
+2022-12-21 22:50:43 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-21 22:50:43 SERVER Implicit Module Update: (implicit_updates())
+2022-12-21 22:50:43 PERFORMANCE Module tracker updated: 0.000s
+2022-12-21 22:50:43 MEMORY Shared memory size (size: 6)
+2022-12-21 22:50:43 PERFORMANCE Incremental check: 0.142s
+2022-12-21 22:50:43 SERVER Update sent to subscription `persistent_967`
+2022-12-21 22:50:43 PERFORMANCE Server request: 0.239s
+2022-12-21 22:50:43 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-23 17:13:39 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-23 17:13:39 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:13:39 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:13:39 INFO Repopulating the environment...
+2022-12-23 17:13:39 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-23 17:13:39 SERVER Implicit Module Update: (implicit_updates())
+2022-12-23 17:13:39 PERFORMANCE Module tracker updated: 0.000s
+2022-12-23 17:13:39 MEMORY Shared memory size (size: 6)
+2022-12-23 17:13:39 PERFORMANCE Incremental check: 0.195s
+2022-12-23 17:13:39 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:13:39 PERFORMANCE Server request: 0.289s
+2022-12-23 17:13:39 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-23 17:13:47 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-23 17:13:47 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:13:47 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:13:48 INFO Repopulating the environment...
+2022-12-23 17:13:48 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-23 17:13:48 SERVER Implicit Module Update: (implicit_updates())
+2022-12-23 17:13:48 PERFORMANCE Module tracker updated: 0.000s
+2022-12-23 17:13:48 MEMORY Shared memory size (size: 6)
+2022-12-23 17:13:48 PERFORMANCE Incremental check: 0.180s
+2022-12-23 17:13:48 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:13:48 PERFORMANCE Server request: 0.281s
+2022-12-23 17:13:48 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-23 17:14:22 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-23 17:14:22 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:14:22 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:14:22 INFO Repopulating the environment...
+2022-12-23 17:14:22 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-23 17:14:22 SERVER Implicit Module Update: (implicit_updates())
+2022-12-23 17:14:22 PERFORMANCE Module tracker updated: 0.000s
+2022-12-23 17:14:22 MEMORY Shared memory size (size: 6)
+2022-12-23 17:14:22 PERFORMANCE Incremental check: 0.157s
+2022-12-23 17:14:22 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:14:22 PERFORMANCE Server request: 0.244s
+2022-12-23 17:14:22 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-23 17:14:50 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-23 17:14:50 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:14:50 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:14:50 INFO Repopulating the environment...
+2022-12-23 17:14:50 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-23 17:14:50 SERVER Implicit Module Update: (implicit_updates())
+2022-12-23 17:14:50 PERFORMANCE Module tracker updated: 0.000s
+2022-12-23 17:14:50 MEMORY Shared memory size (size: 6)
+2022-12-23 17:14:50 PERFORMANCE Incremental check: 0.141s
+2022-12-23 17:14:50 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:14:50 PERFORMANCE Server request: 0.234s
+2022-12-23 17:14:50 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-23 17:15:02 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-23 17:15:02 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:15:02 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:15:02 INFO Repopulating the environment...
+2022-12-23 17:15:02 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-23 17:15:02 SERVER Implicit Module Update: (implicit_updates())
+2022-12-23 17:15:02 PERFORMANCE Module tracker updated: 0.000s
+2022-12-23 17:15:02 MEMORY Shared memory size (size: 7)
+2022-12-23 17:15:02 PERFORMANCE Incremental check: 0.159s
+2022-12-23 17:15:02 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:15:02 PERFORMANCE Server request: 0.252s
+2022-12-23 17:15:02 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-23 17:15:30 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-23 17:15:30 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:15:30 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:15:30 INFO Repopulating the environment...
+2022-12-23 17:15:30 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-23 17:15:30 SERVER Implicit Module Update: (implicit_updates())
+2022-12-23 17:15:30 PERFORMANCE Module tracker updated: 0.000s
+2022-12-23 17:15:30 MEMORY Shared memory size (size: 7)
+2022-12-23 17:15:30 PERFORMANCE Incremental check: 0.159s
+2022-12-23 17:15:30 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:15:30 PERFORMANCE Server request: 0.256s
+2022-12-23 17:15:30 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-23 17:15:57 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-23 17:15:57 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:15:57 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:15:57 INFO Repopulating the environment...
+2022-12-23 17:15:57 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-23 17:15:57 SERVER Implicit Module Update: (implicit_updates())
+2022-12-23 17:15:57 PERFORMANCE Module tracker updated: 0.000s
+2022-12-23 17:15:57 MEMORY Shared memory size (size: 7)
+2022-12-23 17:15:57 PERFORMANCE Incremental check: 0.163s
+2022-12-23 17:15:57 SERVER Update sent to subscription `persistent_967`
+2022-12-23 17:15:57 PERFORMANCE Server request: 0.261s
+2022-12-23 17:15:57 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
+2022-12-23 19:14:57 SERVER Processing request (IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))...
+2022-12-23 19:14:57 SERVER Update sent to subscription `persistent_967`
+2022-12-23 19:14:57 SERVER Update sent to subscription `persistent_967`
+2022-12-23 19:14:57 INFO Repopulating the environment...
+2022-12-23 19:14:57 SERVER Explicit Module Update: (explicit_updates((Changed((raw((relative source/agents/actor_critic_agent.py)(priority 173)))(qualifier(source agents actor_critic_agent))(is_stub false)(is_external false)(is_init false)))))
+2022-12-23 19:14:57 SERVER Implicit Module Update: (implicit_updates())
+2022-12-23 19:14:57 PERFORMANCE Module tracker updated: 0.000s
+2022-12-23 19:14:57 MEMORY Shared memory size (size: 7)
+2022-12-23 19:14:57 PERFORMANCE Incremental check: 0.147s
+2022-12-23 19:14:57 SERVER Update sent to subscription `persistent_967`
+2022-12-23 19:14:57 PERFORMANCE Server request: 0.237s
+2022-12-23 19:14:57 SERVER Request `(IncrementalUpdate(/Users/tonywy/Desktop/mini-rl/source/agents/actor_critic_agent.py))` processed
