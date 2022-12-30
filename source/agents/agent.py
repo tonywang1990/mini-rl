@@ -7,12 +7,13 @@ from typing import Any
 
 
 class Agent(object):
-    def __init__(self, state_space: Space, action_space: Space, discount_rate: float, epsilon: float, learning_rate: float):
+    def __init__(self, state_space: Space, action_space: Space, discount_rate: float, epsilon: float, learning_rate: float, learning:float=True):
         self._state_space = state_space
         self._action_space = action_space
         self._discount_rate = discount_rate
         self._epsilon = epsilon
         self._learning_rate = learning_rate
+        self._learning = learning
         self._Q = None
         self._policy = None
 
@@ -25,7 +26,7 @@ class Agent(object):
     def reset(self):
         pass
     
-    def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:
+    def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:
         if video_path is not None:
             video = VideoRecorder(env, video_path)
         state, info = env.reset()
@@ -41,7 +42,7 @@ class Agent(object):
             new_state, reward, terminal, truncated, info = env.step(action)
             total_reward += reward 
             terminal = terminal or truncated
-            if learning:
+            if self._learning:
                 self.control(state, action, reward,
                              new_state, terminal)
             state = new_state

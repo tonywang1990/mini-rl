@@ -1,25 +1,25 @@
 import gym
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
+from typing import Optional
 
 from source.agents.agent import Agent
 from source.utils import *
 
 
-
 class ValueIterationAgent(Agent):
     def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float):
-        super().__init__(state_space, action_space, discount_rate, epsilon=0.0, learning_rate=0.0)
+        super().__init__(state_space, action_space,
+                         discount_rate, epsilon=0.0, learning_rate=0.0)
         self._num_state = state_space.n
         self._num_action = action_space.n
         self._state_values = np.full((state_space.n), 0.0)
         self._discount_rate = discount_rate
 
-    def value_iteration(self, env_dynamic: np.array, threshold):
+    def value_iteration(self, env_dynamic: np.ndarray, threshold):
         converged = False
         terminal_states = [self._num_state-1]
         while not converged:
@@ -46,7 +46,7 @@ class ValueIterationAgent(Agent):
                 # update state values
                 self._state_values[s] = new_state_value
 
-    def sample_action(self, state: int, env_dynamic: np.array) -> int:
+    def sample_action(self, state: int, env_dynamic: np.ndarray) -> int:
         # Take greedy action according to the state values.
         action_values = []
         for action in env_dynamic[state]:
@@ -59,28 +59,9 @@ class ValueIterationAgent(Agent):
                     (reward + self._discount_rate *
                      self._state_values[new_state])
             action_values.append(action_value)
-        action = random.choice(np.where(action_values == np.max(action_values))[
+        action = random.choice(np.where(action_values == np.max(np.array(action_values)))[
                                0])  # Random break tie
         return action
-
-    def play_episode(self, env: gym.Env, learning: Optional[bool] = True, video_path: str = None):
-        if video_path is not None:
-            video = VideoRecorder(env, video_path)
-        state, info = env.reset()
-        terminal = False
-        steps = 0
-        while not terminal:
-            action = self.sample_action(state, env.P)
-            new_state, reward, terminal, _, info = env.step(action)
-            if learning:
-                self.control(state, action, reward, new_state, terminal)
-            state = new_state
-            steps += 1
-            if video_path is not None:
-                video.capture_frame()
-        if video_path is not None:
-            video.close()
-        return reward, steps
 
 
 def test_value_iteration():

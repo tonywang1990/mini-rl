@@ -1,14 +1,8 @@
 import numpy as np
-from numpy.core.getlimits import inf
-from collections import defaultdict
 from gym.spaces import Discrete
-import random
-import gym
-from typing import Union
-from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 
 class TDOffPolicyAgent(Agent):
   def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float, epsilon:float, learning_rate:float, agent_type: str):
@@ -16,7 +10,7 @@ class TDOffPolicyAgent(Agent):
     # action values
     self._Q = np.random.rand(state_space.n, action_space.n) #np.full((state_space.n, action_space.n), 0.0) 
     # policy
-    self._policy = get_epsilon_greedy_policy_from_action_values(self._Q, self._epsilon)
+    self._policy = utils.get_epsilon_greedy_policy_from_action_values(self._Q, self._epsilon)
     self._agent_type = agent_type
 
   # get an action from policy
@@ -37,7 +31,7 @@ class TDOffPolicyAgent(Agent):
         raise NotImplementedError
       self._Q[state][action] += self._learning_rate * (reward + self._discount_rate * returns - self._Q[state][action])
     # update policy
-    self._policy[state] = get_epsilon_greedy_policy_from_action_values(self._Q[state], self._epsilon) 
+    self._policy[state] = utils.get_epsilon_greedy_policy_from_action_values(self._Q[state], self._epsilon) 
 
 def test_td_off_policy_agent():
   np.random.seed(0)

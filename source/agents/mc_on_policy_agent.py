@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
@@ -8,7 +7,7 @@ from typing import Union
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 
 class OnPolicyMonteCarloAgent(Agent):
   def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float, epsilon: float):

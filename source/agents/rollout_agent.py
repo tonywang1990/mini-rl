@@ -1,15 +1,12 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
 import gym
-from typing import Union, List, Tuple
-from gym.wrappers.monitoring.video_recorder import VideoRecorder
-import json
+from typing import Union, List, Tuple, Optional
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 from source.model import Model
 
 
@@ -23,7 +20,7 @@ class RolloutAgent(Agent):
         self._Q = np.random.rand(state_space.n, action_space.n)
         # environment model
         # policy
-        self._policy = get_epsilon_greedy_policy_from_action_values(
+        self._policy = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q, self._epsilon)
         self._model = Model()
 
@@ -39,7 +36,7 @@ class RolloutAgent(Agent):
         model = self._model
         #Q = np.zeros(self._action_space.n)
         Q = self._Q[state]
-        for action in range(self._action_space.n):
+        for action in range(self._action_space.n): #pyre-fixme[16]
             if model.check_action(state, action) == False:
                 continue
             action_values = []
@@ -55,8 +52,8 @@ class RolloutAgent(Agent):
                         self._discount_rate * value
                 action_values.append(discounted_return)
             if len(action_values) != 0:
-                Q[action] = np.mean(action_values)
-        policy = get_epsilon_greedy_policy_from_action_values(Q, self._epsilon)
+                Q[action] = np.mean(np.array(action_values))
+        policy = utils.get_epsilon_greedy_policy_from_action_values(Q, self._epsilon)
         return np.random.choice(len(policy), p=policy)
 
     def rollout(self, state) -> Tuple[float, bool]:
@@ -83,7 +80,7 @@ class RolloutAgent(Agent):
         self._model.update(state, action, reward, new_state, terminal)
 
         # update policy
-        self._policy[state] = get_epsilon_greedy_policy_from_action_values(
+        self._policy[state] = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q[state], self._epsilon)
 
     def learning(self, state, action, reward, new_state, terminal, learning_rate: Optional[float] = None):
@@ -104,7 +101,7 @@ class RolloutAgent(Agent):
 
     def planning(self, n: int):
         for _ in range(n):
-            key, val = random.choice(list(self._model.items()))
+            key, val = random.choice(list(self._model._data.items()))
             state, action = key
             reward, new_state, terminal = random.choice(tuple(val))
             self.learning(state, action, reward, new_state, terminal)

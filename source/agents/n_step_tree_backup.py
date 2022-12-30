@@ -1,15 +1,14 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
 import gym
 import sys
-from typing import Union
+from typing import Union, Optional, Tuple
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 
 
 class nStepTreeBackupAgent(Agent):
@@ -20,9 +19,9 @@ class nStepTreeBackupAgent(Agent):
         # np.full((state_space.n, action_space.n), 0.0)
         self._Q = np.random.rand(state_space.n, action_space.n)
         # policy
-        self._behavior_policy = get_epsilon_greedy_policy_from_action_values(
+        self._behavior_policy = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q, self._epsilon)
-        self._target_policy = get_epsilon_greedy_policy_from_action_values(
+        self._target_policy = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q)
         self.reset()
 
@@ -42,11 +41,12 @@ class nStepTreeBackupAgent(Agent):
         self._actions.append(action)
         return action
 
-    def record(self, state, reward: Optional[int] = None):
+    def record(self, state, reward: Optional[float] = None):
         self._states.append(state)
         if reward is not None:
             self._rewards.append(reward)
 
+    # pyre-fixme[14]
     def control(self, t: int, T: int):
         n = self._n
         # state that is visited at time step tao will be updated (it's n step before t)
@@ -64,7 +64,7 @@ class nStepTreeBackupAgent(Agent):
             for k in range(min(t, T-1), tao+1, -1):
                 leaves = 0
                 # suming up the expected return from leaf nodes that wasn't taken at step k
-                for i in range(self._action_space.n):
+                for i in range(self._action_space.n):  # pyre-fixme[16]
                     if i != self._actions[k]:
                         leaves += self._target_policy[self._states[k],
                                                       i] * self._Q[self._states[k], i]
@@ -76,19 +76,19 @@ class nStepTreeBackupAgent(Agent):
             self._Q[self._states[tao], self._actions[tao]] += self._learning_rate * \
                 (G - self._Q[self._states[tao], self._actions[tao]])
             # update policy of updated state
-            self._target_policy[self._states[tao]] = get_epsilon_greedy_policy_from_action_values(
+            self._target_policy[self._states[tao]] = utils.get_epsilon_greedy_policy_from_action_values(
                 self._Q[self._states[tao]])
-            self._behavior_policy[self._states[tao]] = get_epsilon_greedy_policy_from_action_values(
+            self._behavior_policy[self._states[tao]] = utils.get_epsilon_greedy_policy_from_action_values(
                 self._Q[self._states[tao]], self._epsilon)
         return tao == T-1
 
-    def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None, policy_type: Optional[str] = 'target') -> Tuple[float, int]:
+    def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None, policy_type: str = 'target') -> Tuple[float, int]:
         if video_path is not None:
             video = VideoRecorder(env, video_path)
         state, _ = env.reset()
         self.reset()
         self.record(state)
-        t = 0
+        t, reward = 0, 0.0
         T = sys.maxsize
         action = self.sample_action(state, policy_type)
         stop = False

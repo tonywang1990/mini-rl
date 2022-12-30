@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
@@ -9,7 +8,7 @@ from gym.wrappers.monitoring.video_recorder import VideoRecorder
 from queue import PriorityQueue
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 
 
 class PrioritizedSweepingAgent(Agent):
@@ -23,7 +22,7 @@ class PrioritizedSweepingAgent(Agent):
         # environment model
         self._model = defaultdict(set)
         # policy
-        self._policy = get_epsilon_greedy_policy_from_action_values(
+        self._policy = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q, self._epsilon)
         self._queue = PriorityQueue()
 
@@ -43,14 +42,14 @@ class PrioritizedSweepingAgent(Agent):
         self.planning(self._planning_steps)
 
         # update policy
-        self._policy[state] = get_epsilon_greedy_policy_from_action_values(
+        self._policy[state] = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q[state], self._epsilon)
 
     def learning(self, state, action, reward, new_state, terminal) -> float:
         # if new_state is a terminal state
         if terminal:
             update = reward - self._Q[state][action] 
-            self._Q[state][action] += self._learning_rate * returns
+            self._Q[state][action] += self._learning_rate * update
         else:
             if self._agent_type == 'q_learning':
                 returns = np.max(self._Q[new_state])

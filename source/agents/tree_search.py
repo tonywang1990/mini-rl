@@ -1,14 +1,11 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
-import gym
-from typing import Union
-from gym.wrappers.monitoring.video_recorder import VideoRecorder
+from typing import Tuple, Optional
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 
 
 class TreeSearchAgent(Agent):
@@ -22,7 +19,7 @@ class TreeSearchAgent(Agent):
         # environment model
         self._model = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
         # policy
-        self._policy = get_epsilon_greedy_policy_from_action_values(
+        self._policy = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q, self._epsilon)
 
     # get an action from policy
@@ -38,7 +35,7 @@ class TreeSearchAgent(Agent):
 
     def tree_search(self, state: int, steps: int) -> Tuple[int, float]:
         #policy_action = self.sample_policy(state)
-        greedy_action = np.argmax(self._Q[state])
+        greedy_action = np.argmax(self._Q[state]).astype(int)
         default = (greedy_action, self._Q[state][greedy_action])
         #print(self._model[state].keys())
         if state not in self._model or steps == 0:
@@ -46,7 +43,7 @@ class TreeSearchAgent(Agent):
             return default
         best_action_value = None
         best_action = None
-        for action in range(self._action_space.n):
+        for action in range(self._action_space.n): #pyre-fixme[16]
         #for action in self._model[state]:
             if action not in self._model[state]:
                 action_value = self._Q[state][action] 
@@ -65,7 +62,7 @@ class TreeSearchAgent(Agent):
             if best_action_value is None or best_action_value < action_value:
                 best_action_value = action_value
                 best_action = action
-        return best_action, best_action_value 
+        return best_action, best_action_value  #pyre-fixme[7]
 
     # update action value and policy
     def control(self, state, action, reward, new_state, terminal):
@@ -77,7 +74,7 @@ class TreeSearchAgent(Agent):
         #self.planning(self._planning_steps)
 
         # update policy
-        self._policy[state] = get_epsilon_greedy_policy_from_action_values(
+        self._policy[state] = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q[state], self._epsilon)
 
     def learning(self, state, action, reward, new_state, terminal, learning_rate: Optional[float] = None):

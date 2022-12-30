@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
@@ -8,12 +7,12 @@ from typing import Union
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 
 
 class DynaQAgent(Agent):
-    def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, agent_type: str, planning_steps: int):
-        super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
+    def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, agent_type: str, planning_steps: int, learning:bool=True):
+        super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate, learning)
         self._agent_type = agent_type
         self._planning_steps = planning_steps
         # action values
@@ -22,7 +21,7 @@ class DynaQAgent(Agent):
         # environment model
         self._model = defaultdict(set)
         # policy
-        self._policy = get_epsilon_greedy_policy_from_action_values(
+        self._policy = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q, self._epsilon)
 
     # get an action from policy
@@ -39,7 +38,7 @@ class DynaQAgent(Agent):
         self.planning(self._planning_steps)
 
         # update policy
-        self._policy[state] = get_epsilon_greedy_policy_from_action_values(
+        self._policy[state] = utils.get_epsilon_greedy_policy_from_action_values(
             self._Q[state], self._epsilon)
 
     def learning(self, state, action, reward, new_state, terminal):

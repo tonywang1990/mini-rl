@@ -1,14 +1,11 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
-import random
-import gym
 from typing import Union
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 
 class OffPolicyMonteCarloAgent(Agent):
   def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float):
@@ -17,9 +14,9 @@ class OffPolicyMonteCarloAgent(Agent):
     self._Q = np.full((state_space.n, action_space.n), 1.0 / action_space.n)# np.random.rand(state_space.n, action_space.n)
     self._C = np.full((state_space.n, action_space.n), 0.0) 
     # Target policy
-    self._policy = get_epsilon_greedy_policy_from_action_values(self._Q)
+    self._policy = utils.get_epsilon_greedy_policy_from_action_values(self._Q)
 
-  def prediction(self, behavior_policy: np.array, episode: list):
+  def prediction(self, behavior_policy: np.ndarray, episode: list):
     G = 0
     W = 1
     for i, (state, action, reward) in enumerate(episode[::-1]):
@@ -29,9 +26,9 @@ class OffPolicyMonteCarloAgent(Agent):
       self._C[state, action] += W
       self._Q[state, action] += W / self._C[state, action] * (G - self._Q[state, action])
       W *= self._policy[state, action] / behavior_policy[state, action]
-      
-  def control(self, behavior_policy: np.array, episode: list):
-    num_action = self._action_space.n
+  #pyre-fixme[14] 
+  def control(self, behavior_policy: np.ndarray, episode: list):
+    num_action = self._action_space.n #pyre-fixme[16]
     G = 0
     W = 1
     for i, (state, action, reward) in enumerate(episode[::-1]):
@@ -57,7 +54,7 @@ def test_prediction_off_policy_monte_carlo_agent():
   episode = [(0,1,0), (2,2,1)]
   #rand_policy = np.random.rand(4,4)
   #behavior_policy = rand_policy / rand_policy.sum(axis=1, keepdims=True)
-  behavior_policy = get_epsilon_greedy_policy_from_action_values(agent._Q, 0.1)
+  behavior_policy = utils.get_epsilon_greedy_policy_from_action_values(agent._Q, 0.1)
   agent.prediction(behavior_policy, episode)
   assert agent._Q[2][2] == 1.0
   episode = [(0,1,0)]

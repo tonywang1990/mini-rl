@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
@@ -8,7 +7,7 @@ from typing import Union
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 
 class SarsaAgent(Agent):
   def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float, epsilon:float, learning_rate:float):
@@ -18,7 +17,7 @@ class SarsaAgent(Agent):
     # action values
     self._Q = np.random.rand(state_space.n, action_space.n) #np.full((state_space.n, action_space.n), 0.0) 
     # policy
-    self._policy = get_epsilon_greedy_policy_from_action_values(self._Q, self._epsilon)
+    self._policy = utils.get_epsilon_greedy_policy_from_action_values(self._Q, self._epsilon)
 
   def sample_action(self, state):
     return np.random.choice(len(self._policy[state]), p = self._policy[state])
@@ -34,7 +33,7 @@ class SarsaAgent(Agent):
       # update Q value
       self._Q[state][action] += self._learning_rate * (reward + self._discount_rate * self._Q[new_state][new_action] - self._Q[state][action])
     # update policy
-    self._policy[state] = get_epsilon_greedy_policy_from_action_values(self._Q[state], self._epsilon) 
+    self._policy[state] = utils.get_epsilon_greedy_policy_from_action_values(self._Q[state], self._epsilon) 
     return new_action 
 
 def test_sarsa_agent():

@@ -1,12 +1,9 @@
 import gym
 import numpy as np
-from numpy.core.getlimits import inf
-from collections import defaultdict
 from gym.spaces import Discrete
 import random
 
 from source.agents.agent import Agent
-from source.utils import *
 
 
 class PolicyIterationAgent(Agent):
@@ -20,7 +17,7 @@ class PolicyIterationAgent(Agent):
         self._discount_rate = discount_rate
 
     # Find state values.
-    def policy_evaluation(self, env_dynamic: np.array, threshold):
+    def policy_evaluation(self, env_dynamic: np.ndarray, threshold):
         converged = False
         terminal_states = [self._num_state-1]
         while not converged:
@@ -44,7 +41,7 @@ class PolicyIterationAgent(Agent):
                 self._state_values[s] = new_state_value
 
     # Find policy.
-    def policy_improvement(self, env_dynamic: np.array) -> bool:
+    def policy_improvement(self, env_dynamic: np.ndarray) -> bool:
         policy_stable = True
         for s in range(self._num_state):
             action_values = []
@@ -60,7 +57,7 @@ class PolicyIterationAgent(Agent):
                          self._state_values[new_state])
                 action_values.append(action_value)
             new_optimal_actions = np.where(
-                action_values == np.max(action_values))[0]
+                action_values == np.max(np.array(action_values)))[0]
             old_optimal_actions = np.where(
                 self._policy[s] == np.max(self._policy[s]))[0]
             if not np.array_equal(new_optimal_actions, old_optimal_actions):
@@ -69,7 +66,7 @@ class PolicyIterationAgent(Agent):
                 new_optimal_actions) else 0 for i in range(self._num_action)]
         return policy_stable
 
-    def policy_iteration(self, env_dynamic: np.array):
+    def policy_iteration(self, env_dynamic: np.ndarray):
         policy_stable = False
         step = 0
         while not policy_stable:

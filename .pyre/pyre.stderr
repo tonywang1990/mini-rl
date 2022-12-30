@@ -2629,3 +2629,1096 @@
 2022-12-23 21:08:12,145 [PID 967] INFO File closed: /Users/tonywy/Desktop/mini-rl/source/utils.py
 2022-12-23 21:08:12,382 [PID 967] DEBUG Received LSP request: Request(method='textDocument/didOpen', id=None, activity_key=None, parameters=ByNameParameters(values={'textDocument': {'uri': 'file:///Users/tonywy/Desktop/mini-rl/source/utils.py', 'languageId': 'python', 'version': 1, 'text': 'from base64 import b64encode\nfrom typing import Dict, List, Optional, Set, Tuple\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nfrom gym import Env\nfrom tqdm i..[truncated 4982 characters]
 2022-12-23 21:08:12,382 [PID 967] INFO File opened: /Users/tonywy/Desktop/mini-rl/source/utils.py
+2022-12-30 12:08:23,100 [PID 79870] INFO Waiting for server...
+2022-12-30 12:08:23,105 [PID 79870] INFO Cannot find a running Pyre server. Starting a new one...
+2022-12-30 12:08:23,106 [PID 79870] INFO No binary specified, looking for `pyre.bin` in PATH
+2022-12-30 12:08:23,106 [PID 79870] INFO Could not determine the number of Pyre workers from configuration. Auto-set the value to 9.
+2022-12-30 12:08:23,141 [PID 79870] INFO No typeshed specified, looking for it...
+2022-12-30 12:08:23,141 [PID 79870] INFO Found: `/Users/tonywy/micromamba/lib/pyre_check/typeshed`
+2022-12-30 12:08:23,143 [PID 79870] INFO Starting server at `/Users/tonywy/Desktop/mini-rl`...
+2022-12-30 12:08:23,144 [PID 79870] INFO Writing arguments into /var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_arguments_r0fv44cy.json...
+2022-12-30 12:08:23,144 [PID 79870] DEBUG Arguments:
+{
+  "source_paths": {
+    "kind": "simple",
+    "paths": [
+      "/Users/tonywy/Desktop/mini-rl"
+    ]
+  },
+  "search_paths": [
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pettingzoo",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$marshmallow",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$dataclasses_json",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$certifi",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$kiwisolver",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$importlib_metadata",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jinja2",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$click",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$testslide",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_client",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$stack_data",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$cryptography",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyparsing",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$markupsafe",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$platformdirs",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$attr",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$executing",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$termcolor",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$anyio",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbformat",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyvirtualdisplay",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$traitlets",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$charset_normalizer",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pure_eval",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$idna",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$soupsieve",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyrsistent",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbconvert",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$attrs",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$ipykernel",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pygame",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$terminado",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$gym",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$packaging",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$libcst",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$argon2",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$tornado",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_server",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_core",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$typeguard",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$importlib_resources",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$sniffio",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$zmq",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$torch",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pip",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$numpy",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$prometheus_client",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$gymnasium",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$asttokens",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$chess",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$prompt_toolkit",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbclient",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stdlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/DateTimeRange",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Deprecated",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Flask-Cors",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Flask-SQLAlchemy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/JACK-Client",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Markdown",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Pillow",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/PyMySQL",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/PyYAML",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Pygments",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/SQLAlchemy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Send2Trash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/aiofiles",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/annoy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/appdirs",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/atomicwrites",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/aws-xray-sdk",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/babel",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/backports.ssl_match_hostname",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/beautifulsoup4",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/bleach",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/boto",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/braintree",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/cachetools",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/caldav",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/certifi",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/chardet",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/chevron",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/click-spinner",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/colorama",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/commonmark",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/contextvars",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/croniter",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/cryptography",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/dateparser",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/decorator",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/dj-database-url",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/docopt",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/docutils",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/editdistance",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/emoji",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/entrypoints",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/first",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-2020",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-bugbear",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-builtins",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-docstrings",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-plugin-utils",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-rst-docstrings",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-simplify",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-typing-imports",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/fpdf2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/freezegun",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/gdb",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/google-cloud-ndb",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/hdbcli",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/html5lib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/httplib2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/humanfriendly",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/invoke",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/jmespath",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/jsonschema",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ldap3",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mock",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mypy-extensions",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mysqlclient",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/oauthlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/openpyxl",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/opentracing",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/paramiko",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/parsimonious",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/passlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/passpy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pep8-naming",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/playsound",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/polib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/prettytable",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/protobuf",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/psutil",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/psycopg2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyOpenSSL",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyRFC3339",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyaudio",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pycurl",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyfarmhash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyflakes",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pynput",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pysftp",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pytest-lazy-fixture",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-dateutil",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-gflags",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-jose",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-nmap",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-slugify",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pytz",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyvmomi",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/redis",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/regex",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/requests",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/retry",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/selenium",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/setuptools",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/simplejson",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/singledispatch",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/six",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/slumber",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/stdlib-list",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/stripe",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tabulate",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/termcolor",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/toml",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/toposort",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tqdm",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ttkthemes",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/typed-ast",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tzlocal",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ujson",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/urllib3",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/vobject",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/waitress",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/whatthepatch",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/xmltodict",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/xxhash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/zxcvbn"
+  ],
+  "excludes": [],
+  "checked_directory_allowlist": [
+    "/Users/tonywy/Desktop/mini-rl"
+  ],
+  "checked_directory_blocklist": [],
+  "extensions": [],
+  "log_path": "/Users/tonywy/Desktop/mini-rl/.pyre",
+  "global_root": "/Users/tonywy/Desktop/mini-rl",
+  "debug": false,
+  "python_version": {
+    "major": 3,
+    "minor": 9,
+    "micro": 13
+  },
+  "shared_memory": {},
+  "parallel": true,
+  "number_of_workers": 9,
+  "strict": false,
+  "socket_path": "/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock",
+  "show_error_traces": false,
+  "additional_logging_sections": [
+    "server"
+  ],
+  "watchman_root": "/Users/tonywy/Desktop/mini-rl",
+  "taint_model_paths": [],
+  "store_type_check_resolution": false,
+  "critical_files": [
+    {
+      "full_path": "/Users/tonywy/Desktop/mini-rl/.pyre_configuration"
+    }
+  ],
+  "skip_initial_type_check": false,
+  "use_lazy_module_tracking": false
+}
+2022-12-30 12:08:23,148 [PID 79870] INFO Server is starting in the background.
+
+2022-12-30 12:08:23,328 [PID 79870] WARNING  Pyre server needs to restart as it is notified on potential changes in `/Users/tonywy/Desktop/mini-rl/.pyre_configuration`
+2022-12-30 12:08:23,328 [PID 79870] INFO  Initializing file watching service...
+2022-12-30 12:08:23,394 [PID 79870] INFO  Connecting to watchman...
+2022-12-30 12:08:23,394 [PID 79870] INFO  Established watchman connection.
+2022-12-30 12:08:23,394 [PID 79870] INFO  Request watchman subscription at /Users/tonywy/Desktop/mini-rl
+2022-12-30 12:08:23,396 [PID 79870] INFO  Server has started listening on socket `/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock`
+2022-12-30 12:08:23,402 [PID 79870] INFO  Initializing shared memory [heap_size=8589934592, dep_table_pow=27, hash_table_pow=26]
+2022-12-30 12:08:23,402 [PID 79870] INFO  Initializing server state from scratch...
+2022-12-30 12:08:23,439 [PID 79870] INFO  Creating environment...
+2022-12-30 12:08:23,439 [PID 79870] INFO  Building module tracker...
+2022-12-30 12:08:24,320 [PID 79870] PERFORMANCE  Module tracker built: 0.882s
+2022-12-30 12:08:24,403 [PID 79870] PERFORMANCE  Full environment built: 0.967s
+2022-12-30 12:08:24,601 [PID 79870] INFO  Checking 247 functions...
+2022-12-30 12:08:25,198 [PID 79870] INFO  Processed 14 of 247 functions
+2022-12-30 12:08:25,214 [PID 79870] INFO  Processed 28 of 247 functions
+2022-12-30 12:08:25,244 [PID 79870] INFO  Processed 42 of 247 functions
+2022-12-30 12:08:25,453 [PID 79870] INFO  Processed 56 of 247 functions
+2022-12-30 12:08:25,543 [PID 79870] INFO  Processed 70 of 247 functions
+2022-12-30 12:08:25,563 [PID 79870] INFO  Processed 84 of 247 functions
+2022-12-30 12:08:25,565 [PID 79870] INFO  Processed 98 of 247 functions
+2022-12-30 12:08:25,597 [PID 79870] INFO  Processed 112 of 247 functions
+2022-12-30 12:08:25,601 [PID 79870] INFO  Processed 126 of 247 functions
+2022-12-30 12:08:25,628 [PID 79870] INFO  Processed 140 of 247 functions
+2022-12-30 12:08:25,630 [PID 79870] INFO  Processed 154 of 247 functions
+2022-12-30 12:08:25,632 [PID 79870] INFO  Processed 168 of 247 functions
+2022-12-30 12:08:25,633 [PID 79870] INFO  Processed 182 of 247 functions
+2022-12-30 12:08:25,669 [PID 79870] INFO  Processed 196 of 247 functions
+2022-12-30 12:08:25,711 [PID 79870] INFO  Processed 210 of 247 functions
+2022-12-30 12:08:25,727 [PID 79870] INFO  Processed 219 of 247 functions
+2022-12-30 12:08:25,730 [PID 79870] INFO  Processed 233 of 247 functions
+2022-12-30 12:08:25,778 [PID 79870] INFO  Processed 247 of 247 functions
+2022-12-30 12:08:25,779 [PID 79870] PERFORMANCE  Check_TypeCheck: 1.177s
+2022-12-30 12:08:25,779 [PID 79870] MEMORY  Shared memory size post-typecheck (size: 6)
+2022-12-30 12:08:25,779 [PID 79870] INFO  Postprocessing 28 sources...
+2022-12-30 12:08:25,793 [PID 79870] INFO  Postprocessed 28 of 28 sources
+2022-12-30 12:08:25,793 [PID 79870] PERFORMANCE  Check_Postprocessing: 0.014s
+2022-12-30 12:08:25,822 [PID 79870] INFO Waiting for server...
+2022-12-30 12:08:25,832 [PID 79870] PERFORMANCE  Server request: 0.006s
+2022-12-30 12:08:25,832 [PID 79870] SERVER  Request `(DisplayTypeError())` processed
+2022-12-30 12:08:25,833 [PID 79870] SERVER  Connection closed
+2022-12-30 12:08:25,837 [PID 79870] ERROR Found 108 type errors!
+2022-12-30 12:17:15,576 [PID 81743] INFO Waiting for server...
+2022-12-30 12:17:15,580 [PID 81743] INFO Cannot find a running Pyre server. Starting a new one...
+2022-12-30 12:17:15,580 [PID 81743] INFO No binary specified, looking for `pyre.bin` in PATH
+2022-12-30 12:17:15,580 [PID 81743] INFO Could not determine the number of Pyre workers from configuration. Auto-set the value to 9.
+2022-12-30 12:17:15,616 [PID 81743] INFO No typeshed specified, looking for it...
+2022-12-30 12:17:15,617 [PID 81743] INFO Found: `/Users/tonywy/micromamba/lib/pyre_check/typeshed`
+2022-12-30 12:17:15,618 [PID 81743] INFO Starting server at `/Users/tonywy/Desktop/mini-rl`...
+2022-12-30 12:17:15,619 [PID 81743] INFO Writing arguments into /var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_arguments_fq0t39qr.json...
+2022-12-30 12:17:15,619 [PID 81743] DEBUG Arguments:
+{
+  "source_paths": {
+    "kind": "simple",
+    "paths": [
+      "/Users/tonywy/Desktop/mini-rl"
+    ]
+  },
+  "search_paths": [
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pettingzoo",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$numpy",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$gymnasium",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$packaging",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$chess",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyparsing",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$attrs",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_core",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$termcolor",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$sniffio",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$platformdirs",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$gym",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyrsistent",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_client",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$argon2",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$ipykernel",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$dataclasses_json",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$testslide",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$click",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jinja2",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$idna",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$importlib_metadata",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$marshmallow",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$prometheus_client",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$markupsafe",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$zmq",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$asttokens",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$soupsieve",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$libcst",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pip",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$executing",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$attr",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyvirtualdisplay",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pure_eval",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$certifi",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pygame",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbclient",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$charset_normalizer",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$kiwisolver",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$stack_data",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_server",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$cryptography",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$anyio",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$terminado",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbformat",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$tornado",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$typeguard",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$importlib_resources",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$prompt_toolkit",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$traitlets",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbconvert",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$torch",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$numpy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stdlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/DateTimeRange",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Deprecated",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Flask-Cors",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Flask-SQLAlchemy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/JACK-Client",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Markdown",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Pillow",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/PyMySQL",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/PyYAML",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Pygments",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/SQLAlchemy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Send2Trash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/aiofiles",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/annoy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/appdirs",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/atomicwrites",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/aws-xray-sdk",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/babel",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/backports.ssl_match_hostname",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/beautifulsoup4",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/bleach",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/boto",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/braintree",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/cachetools",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/caldav",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/certifi",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/chardet",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/chevron",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/click-spinner",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/colorama",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/commonmark",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/contextvars",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/croniter",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/cryptography",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/dateparser",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/decorator",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/dj-database-url",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/docopt",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/docutils",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/editdistance",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/emoji",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/entrypoints",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/first",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-2020",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-bugbear",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-builtins",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-docstrings",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-plugin-utils",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-rst-docstrings",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-simplify",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-typing-imports",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/fpdf2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/freezegun",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/gdb",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/google-cloud-ndb",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/hdbcli",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/html5lib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/httplib2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/humanfriendly",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/invoke",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/jmespath",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/jsonschema",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ldap3",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mock",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mypy-extensions",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mysqlclient",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/oauthlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/openpyxl",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/opentracing",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/paramiko",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/parsimonious",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/passlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/passpy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pep8-naming",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/playsound",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/polib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/prettytable",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/protobuf",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/psutil",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/psycopg2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyOpenSSL",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyRFC3339",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyaudio",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pycurl",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyfarmhash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyflakes",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pynput",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pysftp",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pytest-lazy-fixture",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-dateutil",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-gflags",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-jose",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-nmap",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-slugify",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pytz",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyvmomi",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/redis",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/regex",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/requests",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/retry",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/selenium",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/setuptools",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/simplejson",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/singledispatch",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/six",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/slumber",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/stdlib-list",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/stripe",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tabulate",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/termcolor",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/toml",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/toposort",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tqdm",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ttkthemes",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/typed-ast",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tzlocal",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ujson",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/urllib3",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/vobject",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/waitress",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/whatthepatch",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/xmltodict",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/xxhash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/zxcvbn"
+  ],
+  "excludes": [],
+  "checked_directory_allowlist": [
+    "/Users/tonywy/Desktop/mini-rl"
+  ],
+  "checked_directory_blocklist": [],
+  "extensions": [],
+  "log_path": "/Users/tonywy/Desktop/mini-rl/.pyre",
+  "global_root": "/Users/tonywy/Desktop/mini-rl",
+  "debug": false,
+  "python_version": {
+    "major": 3,
+    "minor": 9,
+    "micro": 13
+  },
+  "shared_memory": {},
+  "parallel": true,
+  "number_of_workers": 9,
+  "strict": false,
+  "socket_path": "/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock",
+  "show_error_traces": false,
+  "additional_logging_sections": [
+    "server"
+  ],
+  "watchman_root": "/Users/tonywy/Desktop/mini-rl",
+  "taint_model_paths": [],
+  "store_type_check_resolution": false,
+  "critical_files": [
+    {
+      "full_path": "/Users/tonywy/Desktop/mini-rl/.pyre_configuration"
+    }
+  ],
+  "skip_initial_type_check": false,
+  "use_lazy_module_tracking": false
+}
+2022-12-30 12:17:15,624 [PID 81743] INFO Server is starting in the background.
+
+2022-12-30 12:17:15,671 [PID 81743] WARNING  Pyre server needs to restart as it is notified on potential changes in `/Users/tonywy/Desktop/mini-rl/.pyre_configuration`
+2022-12-30 12:17:15,672 [PID 81743] INFO  Initializing file watching service...
+2022-12-30 12:17:15,718 [PID 81743] INFO  Connecting to watchman...
+2022-12-30 12:17:15,718 [PID 81743] INFO  Established watchman connection.
+2022-12-30 12:17:15,718 [PID 81743] INFO  Request watchman subscription at /Users/tonywy/Desktop/mini-rl
+2022-12-30 12:17:15,720 [PID 81743] INFO  Server has started listening on socket `/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock`
+2022-12-30 12:17:15,726 [PID 81743] INFO  Initializing shared memory [heap_size=8589934592, dep_table_pow=27, hash_table_pow=26]
+2022-12-30 12:17:15,726 [PID 81743] INFO  Initializing server state from scratch...
+2022-12-30 12:17:15,774 [PID 81743] INFO  Creating environment...
+2022-12-30 12:17:15,774 [PID 81743] INFO  Building module tracker...
+2022-12-30 12:17:16,382 [PID 81743] PERFORMANCE  Module tracker built: 0.610s
+2022-12-30 12:17:16,445 [PID 81743] PERFORMANCE  Full environment built: 0.674s
+2022-12-30 12:17:16,643 [PID 81743] INFO  Checking 247 functions...
+2022-12-30 12:17:17,204 [PID 81743] INFO  Processed 14 of 247 functions
+2022-12-30 12:17:17,227 [PID 81743] INFO  Processed 28 of 247 functions
+2022-12-30 12:17:17,264 [PID 81743] INFO  Processed 42 of 247 functions
+2022-12-30 12:17:17,461 [PID 81743] INFO  Processed 56 of 247 functions
+2022-12-30 12:17:17,556 [PID 81743] INFO  Processed 70 of 247 functions
+2022-12-30 12:17:17,576 [PID 81743] INFO  Processed 84 of 247 functions
+2022-12-30 12:17:17,584 [PID 81743] INFO  Processed 98 of 247 functions
+2022-12-30 12:17:17,614 [PID 81743] INFO  Processed 112 of 247 functions
+2022-12-30 12:17:17,619 [PID 81743] INFO  Processed 126 of 247 functions
+2022-12-30 12:17:17,645 [PID 81743] INFO  Processed 140 of 247 functions
+2022-12-30 12:17:17,647 [PID 81743] INFO  Processed 154 of 247 functions
+2022-12-30 12:17:17,647 [PID 81743] INFO  Processed 168 of 247 functions
+2022-12-30 12:17:17,649 [PID 81743] INFO  Processed 182 of 247 functions
+2022-12-30 12:17:17,676 [PID 81743] INFO  Processed 196 of 247 functions
+2022-12-30 12:17:17,720 [PID 81743] INFO  Processed 210 of 247 functions
+2022-12-30 12:17:17,744 [PID 81743] INFO  Processed 219 of 247 functions
+2022-12-30 12:17:17,798 [PID 81743] INFO  Processed 233 of 247 functions
+2022-12-30 12:17:17,798 [PID 81743] INFO  Processed 247 of 247 functions
+2022-12-30 12:17:17,798 [PID 81743] PERFORMANCE  Check_TypeCheck: 1.155s
+2022-12-30 12:17:17,798 [PID 81743] MEMORY  Shared memory size post-typecheck (size: 6)
+2022-12-30 12:17:17,798 [PID 81743] INFO  Postprocessing 28 sources...
+2022-12-30 12:17:17,811 [PID 81743] INFO  Postprocessed 28 of 28 sources
+2022-12-30 12:17:17,811 [PID 81743] PERFORMANCE  Check_Postprocessing: 0.013s
+2022-12-30 12:17:17,840 [PID 81743] INFO Waiting for server...
+2022-12-30 12:17:17,843 [PID 81743] SERVER  Connection established
+2022-12-30 12:17:17,844 [PID 81743] SERVER  Processing request (DisplayTypeError())...
+2022-12-30 12:17:17,850 [PID 81743] PERFORMANCE  Server request: 0.006s
+2022-12-30 12:17:17,850 [PID 81743] SERVER  Request `(DisplayTypeError())` processed
+2022-12-30 12:17:17,852 [PID 81743] SERVER  Connection closed
+2022-12-30 12:17:17,854 [PID 81743] ERROR Found 94 type errors!
+2022-12-30 12:23:50,458 [PID 83039] INFO Waiting for server...
+2022-12-30 12:23:50,463 [PID 83039] INFO Cannot find a running Pyre server. Starting a new one...
+2022-12-30 12:23:50,463 [PID 83039] INFO No binary specified, looking for `pyre.bin` in PATH
+2022-12-30 12:23:50,464 [PID 83039] INFO Could not determine the number of Pyre workers from configuration. Auto-set the value to 9.
+2022-12-30 12:23:50,464 [PID 83039] WARNING Site package does not exist: `matplotlib.pyplot`
+2022-12-30 12:23:50,486 [PID 83039] INFO No typeshed specified, looking for it...
+2022-12-30 12:23:50,486 [PID 83039] INFO Found: `/Users/tonywy/micromamba/lib/pyre_check/typeshed`
+2022-12-30 12:23:50,488 [PID 83039] INFO Starting server at `/Users/tonywy/Desktop/mini-rl`...
+2022-12-30 12:23:50,488 [PID 83039] INFO Writing arguments into /var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_arguments_3swhaj_m.json...
+2022-12-30 12:23:50,489 [PID 83039] DEBUG Arguments:
+{
+  "source_paths": {
+    "kind": "simple",
+    "paths": [
+      "/Users/tonywy/Desktop/mini-rl"
+    ]
+  },
+  "search_paths": [
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pettingzoo",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$chess",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$sniffio",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$click",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$libcst",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$kiwisolver",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$markupsafe",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pip",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$prometheus_client",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$torch",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyrsistent",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$importlib_resources",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$numpy",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$certifi",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$idna",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$asttokens",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyparsing",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$testslide",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyvirtualdisplay",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$attr",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$ipykernel",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$terminado",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$marshmallow",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$importlib_metadata",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$typeguard",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$charset_normalizer",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$gymnasium",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$dataclasses_json",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$attrs",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$packaging",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$argon2",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pure_eval",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbclient",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$zmq",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$platformdirs",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$stack_data",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$termcolor",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pygame",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_core",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$cryptography",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$traitlets",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbformat",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jinja2",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$soupsieve",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_server",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_client",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$prompt_toolkit",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$executing",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbconvert",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$anyio",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$tornado",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$gym",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stdlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/DateTimeRange",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Deprecated",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Flask-Cors",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Flask-SQLAlchemy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/JACK-Client",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Markdown",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Pillow",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/PyMySQL",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/PyYAML",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Pygments",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/SQLAlchemy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Send2Trash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/aiofiles",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/annoy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/appdirs",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/atomicwrites",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/aws-xray-sdk",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/babel",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/backports.ssl_match_hostname",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/beautifulsoup4",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/bleach",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/boto",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/braintree",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/cachetools",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/caldav",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/certifi",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/chardet",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/chevron",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/click-spinner",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/colorama",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/commonmark",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/contextvars",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/croniter",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/cryptography",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/dateparser",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/decorator",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/dj-database-url",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/docopt",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/docutils",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/editdistance",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/emoji",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/entrypoints",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/first",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-2020",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-bugbear",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-builtins",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-docstrings",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-plugin-utils",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-rst-docstrings",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-simplify",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-typing-imports",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/fpdf2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/freezegun",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/gdb",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/google-cloud-ndb",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/hdbcli",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/html5lib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/httplib2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/humanfriendly",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/invoke",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/jmespath",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/jsonschema",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ldap3",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mock",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mypy-extensions",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mysqlclient",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/oauthlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/openpyxl",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/opentracing",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/paramiko",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/parsimonious",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/passlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/passpy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pep8-naming",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/playsound",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/polib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/prettytable",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/protobuf",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/psutil",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/psycopg2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyOpenSSL",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyRFC3339",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyaudio",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pycurl",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyfarmhash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyflakes",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pynput",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pysftp",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pytest-lazy-fixture",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-dateutil",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-gflags",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-jose",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-nmap",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-slugify",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pytz",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyvmomi",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/redis",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/regex",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/requests",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/retry",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/selenium",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/setuptools",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/simplejson",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/singledispatch",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/six",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/slumber",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/stdlib-list",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/stripe",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tabulate",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/termcolor",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/toml",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/toposort",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tqdm",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ttkthemes",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/typed-ast",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tzlocal",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ujson",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/urllib3",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/vobject",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/waitress",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/whatthepatch",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/xmltodict",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/xxhash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/zxcvbn"
+  ],
+  "excludes": [],
+  "checked_directory_allowlist": [
+    "/Users/tonywy/Desktop/mini-rl"
+  ],
+  "checked_directory_blocklist": [],
+  "extensions": [],
+  "log_path": "/Users/tonywy/Desktop/mini-rl/.pyre",
+  "global_root": "/Users/tonywy/Desktop/mini-rl",
+  "debug": false,
+  "python_version": {
+    "major": 3,
+    "minor": 9,
+    "micro": 13
+  },
+  "shared_memory": {},
+  "parallel": true,
+  "number_of_workers": 9,
+  "strict": false,
+  "socket_path": "/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock",
+  "show_error_traces": false,
+  "additional_logging_sections": [
+    "server"
+  ],
+  "watchman_root": "/Users/tonywy/Desktop/mini-rl",
+  "taint_model_paths": [],
+  "store_type_check_resolution": false,
+  "critical_files": [
+    {
+      "full_path": "/Users/tonywy/Desktop/mini-rl/.pyre_configuration"
+    }
+  ],
+  "skip_initial_type_check": false,
+  "use_lazy_module_tracking": false
+}
+2022-12-30 12:23:50,493 [PID 83039] INFO Server is starting in the background.
+
+2022-12-30 12:23:50,541 [PID 83039] WARNING  Pyre server needs to restart as it is notified on potential changes in `/Users/tonywy/Desktop/mini-rl/.pyre_configuration`
+2022-12-30 12:23:50,542 [PID 83039] INFO  Initializing file watching service...
+2022-12-30 12:23:50,585 [PID 83039] INFO  Connecting to watchman...
+2022-12-30 12:23:50,585 [PID 83039] INFO  Established watchman connection.
+2022-12-30 12:23:50,585 [PID 83039] INFO  Request watchman subscription at /Users/tonywy/Desktop/mini-rl
+2022-12-30 12:23:50,587 [PID 83039] INFO  Server has started listening on socket `/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock`
+2022-12-30 12:23:50,594 [PID 83039] INFO  Initializing shared memory [heap_size=8589934592, dep_table_pow=27, hash_table_pow=26]
+2022-12-30 12:23:50,594 [PID 83039] INFO  Initializing server state from scratch...
+2022-12-30 12:23:50,637 [PID 83039] INFO  Creating environment...
+2022-12-30 12:23:50,637 [PID 83039] INFO  Building module tracker...
+2022-12-30 12:23:51,492 [PID 83039] PERFORMANCE  Module tracker built: 0.857s
+2022-12-30 12:23:51,552 [PID 83039] PERFORMANCE  Full environment built: 0.919s
+2022-12-30 12:23:51,641 [PID 83039] INFO  Checking 246 functions...
+2022-12-30 12:23:52,161 [PID 83039] INFO  Processed 14 of 246 functions
+2022-12-30 12:23:52,190 [PID 83039] INFO  Processed 28 of 246 functions
+2022-12-30 12:23:52,222 [PID 83039] INFO  Processed 42 of 246 functions
+2022-12-30 12:23:52,393 [PID 83039] INFO  Processed 56 of 246 functions
+2022-12-30 12:23:52,506 [PID 83039] INFO  Processed 70 of 246 functions
+2022-12-30 12:23:52,536 [PID 83039] INFO  Processed 84 of 246 functions
+2022-12-30 12:23:52,552 [PID 83039] INFO  Processed 98 of 246 functions
+2022-12-30 12:23:52,569 [PID 83039] INFO  Processed 112 of 246 functions
+2022-12-30 12:23:52,584 [PID 83039] INFO  Processed 126 of 246 functions
+2022-12-30 12:23:52,585 [PID 83039] INFO  Processed 140 of 246 functions
+2022-12-30 12:23:52,588 [PID 83039] INFO  Processed 154 of 246 functions
+2022-12-30 12:23:52,590 [PID 83039] INFO  Processed 168 of 246 functions
+2022-12-30 12:23:52,591 [PID 83039] INFO  Processed 182 of 246 functions
+2022-12-30 12:23:52,634 [PID 83039] INFO  Processed 196 of 246 functions
+2022-12-30 12:23:52,680 [PID 83039] INFO  Processed 210 of 246 functions
+2022-12-30 12:23:52,693 [PID 83039] INFO  Processed 218 of 246 functions
+2022-12-30 12:23:52,738 [PID 83039] INFO  Processed 232 of 246 functions
+2022-12-30 12:23:52,741 [PID 83039] INFO  Processed 246 of 246 functions
+2022-12-30 12:23:52,742 [PID 83039] PERFORMANCE  Check_TypeCheck: 1.101s
+2022-12-30 12:23:52,742 [PID 83039] MEMORY  Shared memory size post-typecheck (size: 6)
+2022-12-30 12:23:52,742 [PID 83039] INFO  Postprocessing 28 sources...
+2022-12-30 12:23:52,758 [PID 83039] INFO  Postprocessed 28 of 28 sources
+2022-12-30 12:23:52,758 [PID 83039] PERFORMANCE  Check_Postprocessing: 0.014s
+2022-12-30 12:23:52,794 [PID 83039] INFO Waiting for server...
+2022-12-30 12:23:52,801 [PID 83039] PERFORMANCE  Server request: 0.003s
+2022-12-30 12:23:52,801 [PID 83039] SERVER  Request `(DisplayTypeError())` processed
+2022-12-30 12:23:52,803 [PID 83039] SERVER  Connection closed
+2022-12-30 12:23:52,805 [PID 83039] ERROR Found 86 type errors!
+2022-12-30 12:24:17,278 [PID 83213] INFO Waiting for server...
+2022-12-30 12:24:17,282 [PID 83213] INFO Cannot find a running Pyre server. Starting a new one...
+2022-12-30 12:24:17,282 [PID 83213] INFO No binary specified, looking for `pyre.bin` in PATH
+2022-12-30 12:24:17,283 [PID 83213] INFO Could not determine the number of Pyre workers from configuration. Auto-set the value to 9.
+2022-12-30 12:24:17,300 [PID 83213] INFO No typeshed specified, looking for it...
+2022-12-30 12:24:17,300 [PID 83213] INFO Found: `/Users/tonywy/micromamba/lib/pyre_check/typeshed`
+2022-12-30 12:24:17,302 [PID 83213] INFO Starting server at `/Users/tonywy/Desktop/mini-rl`...
+2022-12-30 12:24:17,303 [PID 83213] INFO Writing arguments into /var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_arguments_e1k6j35e.json...
+2022-12-30 12:24:17,303 [PID 83213] DEBUG Arguments:
+{
+  "source_paths": {
+    "kind": "simple",
+    "paths": [
+      "/Users/tonywy/Desktop/mini-rl"
+    ]
+  },
+  "search_paths": [
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pettingzoo",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$matplotlib",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$argon2",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_core",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$platformdirs",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyvirtualdisplay",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$traitlets",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$marshmallow",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$certifi",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$prompt_toolkit",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyparsing",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$soupsieve",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_client",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$attrs",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbformat",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$tornado",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pygame",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$typeguard",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$charset_normalizer",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pyrsistent",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$stack_data",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pip",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$numpy",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jupyter_server",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbclient",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$chess",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$ipykernel",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$importlib_resources",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$prometheus_client",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$cryptography",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$asttokens",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$dataclasses_json",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$anyio",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$idna",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$jinja2",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$packaging",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$nbconvert",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$sniffio",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$markupsafe",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$executing",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$terminado",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$gymnasium",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$torch",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$kiwisolver",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$click",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$gym",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$importlib_metadata",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$termcolor",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$zmq",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$libcst",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$testslide",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$pure_eval",
+    "/Users/tonywy/micromamba/lib/python3.9/site-packages$attr",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stdlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/DateTimeRange",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Deprecated",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Flask-Cors",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Flask-SQLAlchemy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/JACK-Client",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Markdown",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Pillow",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/PyMySQL",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/PyYAML",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Pygments",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/SQLAlchemy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/Send2Trash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/aiofiles",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/annoy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/appdirs",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/atomicwrites",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/aws-xray-sdk",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/babel",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/backports.ssl_match_hostname",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/beautifulsoup4",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/bleach",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/boto",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/braintree",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/cachetools",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/caldav",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/certifi",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/chardet",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/chevron",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/click-spinner",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/colorama",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/commonmark",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/contextvars",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/croniter",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/cryptography",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/dateparser",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/decorator",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/dj-database-url",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/docopt",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/docutils",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/editdistance",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/emoji",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/entrypoints",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/first",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-2020",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-bugbear",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-builtins",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-docstrings",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-plugin-utils",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-rst-docstrings",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-simplify",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/flake8-typing-imports",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/fpdf2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/freezegun",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/gdb",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/google-cloud-ndb",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/hdbcli",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/html5lib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/httplib2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/humanfriendly",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/invoke",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/jmespath",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/jsonschema",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ldap3",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mock",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mypy-extensions",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/mysqlclient",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/oauthlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/openpyxl",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/opentracing",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/paramiko",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/parsimonious",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/passlib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/passpy",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pep8-naming",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/playsound",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/polib",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/prettytable",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/protobuf",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/psutil",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/psycopg2",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyOpenSSL",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyRFC3339",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyaudio",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pycurl",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyfarmhash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyflakes",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pynput",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pysftp",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pytest-lazy-fixture",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-dateutil",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-gflags",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-jose",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-nmap",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/python-slugify",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pytz",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/pyvmomi",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/redis",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/regex",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/requests",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/retry",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/selenium",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/setuptools",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/simplejson",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/singledispatch",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/six",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/slumber",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/stdlib-list",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/stripe",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tabulate",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/termcolor",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/toml",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/toposort",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tqdm",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ttkthemes",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/typed-ast",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/tzlocal",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/ujson",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/urllib3",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/vobject",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/waitress",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/whatthepatch",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/xmltodict",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/xxhash",
+    "/Users/tonywy/micromamba/lib/pyre_check/typeshed/stubs/zxcvbn"
+  ],
+  "excludes": [],
+  "checked_directory_allowlist": [
+    "/Users/tonywy/Desktop/mini-rl"
+  ],
+  "checked_directory_blocklist": [],
+  "extensions": [],
+  "log_path": "/Users/tonywy/Desktop/mini-rl/.pyre",
+  "global_root": "/Users/tonywy/Desktop/mini-rl",
+  "debug": false,
+  "python_version": {
+    "major": 3,
+    "minor": 9,
+    "micro": 13
+  },
+  "shared_memory": {},
+  "parallel": true,
+  "number_of_workers": 9,
+  "strict": false,
+  "socket_path": "/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock",
+  "show_error_traces": false,
+  "additional_logging_sections": [
+    "server"
+  ],
+  "watchman_root": "/Users/tonywy/Desktop/mini-rl",
+  "taint_model_paths": [],
+  "store_type_check_resolution": false,
+  "critical_files": [
+    {
+      "full_path": "/Users/tonywy/Desktop/mini-rl/.pyre_configuration"
+    }
+  ],
+  "skip_initial_type_check": false,
+  "use_lazy_module_tracking": false
+}
+2022-12-30 12:24:17,310 [PID 83213] INFO Server is starting in the background.
+
+2022-12-30 12:24:17,354 [PID 83213] WARNING  Pyre server needs to restart as it is notified on potential changes in `/Users/tonywy/Desktop/mini-rl/.pyre_configuration`
+2022-12-30 12:24:17,354 [PID 83213] INFO  Initializing file watching service...
+2022-12-30 12:24:17,400 [PID 83213] INFO  Connecting to watchman...
+2022-12-30 12:24:17,400 [PID 83213] INFO  Established watchman connection.
+2022-12-30 12:24:17,400 [PID 83213] INFO  Request watchman subscription at /Users/tonywy/Desktop/mini-rl
+2022-12-30 12:24:17,408 [PID 83213] INFO  Server has started listening on socket `/var/folders/mg/2p2_pc4n3fzgdjdz9h88kd1c0000gn/T/pyre_server_804d16cc984c0370775e8196a3eb3800.sock`
+2022-12-30 12:24:17,418 [PID 83213] INFO  Initializing shared memory [heap_size=8589934592, dep_table_pow=27, hash_table_pow=26]
+2022-12-30 12:24:17,418 [PID 83213] INFO  Initializing server state from scratch...
+2022-12-30 12:24:17,474 [PID 83213] INFO  Creating environment...
+2022-12-30 12:24:17,474 [PID 83213] INFO  Building module tracker...
+2022-12-30 12:24:18,112 [PID 83213] PERFORMANCE  Module tracker built: 0.638s
+2022-12-30 12:24:18,169 [PID 83213] PERFORMANCE  Full environment built: 0.697s
+2022-12-30 12:24:18,243 [PID 83213] INFO  Checking 246 functions...
+2022-12-30 12:24:18,800 [PID 83213] INFO  Processed 14 of 246 functions
+2022-12-30 12:24:18,868 [PID 83213] INFO  Processed 28 of 246 functions
+2022-12-30 12:24:18,914 [PID 83213] INFO  Processed 42 of 246 functions
+2022-12-30 12:24:19,081 [PID 83213] INFO  Processed 56 of 246 functions
+2022-12-30 12:24:19,105 [PID 83213] INFO  Processed 70 of 246 functions
+2022-12-30 12:24:19,162 [PID 83213] INFO  Processed 84 of 246 functions
+2022-12-30 12:24:19,179 [PID 83213] INFO  Processed 98 of 246 functions
+2022-12-30 12:24:19,196 [PID 83213] INFO  Processed 112 of 246 functions
+2022-12-30 12:24:19,213 [PID 83213] INFO  Processed 126 of 246 functions
+2022-12-30 12:24:19,213 [PID 83213] INFO  Processed 140 of 246 functions
+2022-12-30 12:24:19,240 [PID 83213] INFO  Processed 154 of 246 functions
+2022-12-30 12:24:19,240 [PID 83213] INFO  Processed 168 of 246 functions
+2022-12-30 12:24:19,318 [PID 83213] INFO  Processed 182 of 246 functions
+2022-12-30 12:24:19,356 [PID 83213] INFO  Processed 190 of 246 functions
+2022-12-30 12:24:19,379 [PID 83213] INFO  Processed 204 of 246 functions
+2022-12-30 12:24:19,382 [PID 83213] INFO  Processed 218 of 246 functions
+2022-12-30 12:24:19,573 [PID 83213] INFO  Processed 232 of 246 functions
+2022-12-30 12:24:19,609 [PID 83213] INFO  Processed 246 of 246 functions
+2022-12-30 12:24:19,609 [PID 83213] PERFORMANCE  Check_TypeCheck: 1.366s
+2022-12-30 12:24:19,609 [PID 83213] MEMORY  Shared memory size post-typecheck (size: 8)
+2022-12-30 12:24:19,609 [PID 83213] INFO  Postprocessing 28 sources...
+2022-12-30 12:24:19,622 [PID 83213] INFO  Postprocessed 28 of 28 sources
+2022-12-30 12:24:19,622 [PID 83213] PERFORMANCE  Check_Postprocessing: 0.013s
+2022-12-30 12:24:19,651 [PID 83213] INFO Waiting for server...
+2022-12-30 12:24:19,660 [PID 83213] PERFORMANCE  Server request: 0.002s
+2022-12-30 12:24:19,660 [PID 83213] SERVER  Request `(DisplayTypeError())` processed
+2022-12-30 12:24:19,661 [PID 83213] SERVER  Connection closed
+2022-12-30 12:24:19,664 [PID 83213] ERROR Found 84 type errors!

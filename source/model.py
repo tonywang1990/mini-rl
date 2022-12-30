@@ -36,7 +36,7 @@ class Model(object):
         if self.check_action(state, action) == False:
             return 0, -1, True
         if self._updated[state][action] == True:
-            total_count = np.sum(list(self._data[state][action].values()))
+            total_count = np.sum(np.array(list(self._data[state][action].values())))
             probs = []
             outcomes = []
             for rnt, count in self._data[state][action].items():

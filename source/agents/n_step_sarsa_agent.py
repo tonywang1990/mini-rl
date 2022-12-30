@@ -1,15 +1,14 @@
 import numpy as np
-from numpy.core.getlimits import inf
 from collections import defaultdict
 from gym.spaces import Discrete
 import random
 import gym
 import sys
-from typing import Union
+from typing import Union, Optional, Tuple
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 from source.agents.agent import Agent
-from source.utils import *
+from source.utils import utils
 
 class nStepSarsaAgent(Agent):
   def __init__(self, state_space: Discrete, action_space: Discrete, discount_rate: float, epsilon:float, learning_rate:float, n:int):
@@ -18,7 +17,7 @@ class nStepSarsaAgent(Agent):
     # action values
     self._Q = np.random.rand(state_space.n, action_space.n) #np.full((state_space.n, action_space.n), 0.0) 
     # policy
-    self._policy = get_epsilon_greedy_policy_from_action_values(self._Q, self._epsilon)
+    self._policy = utils.get_epsilon_greedy_policy_from_action_values(self._Q, self._epsilon)
     self.reset()
 
   def reset(self):
@@ -31,11 +30,11 @@ class nStepSarsaAgent(Agent):
     self._actions.append(action)
     return action 
 
-  def record(self, state, reward: Optional[int] = None):
+  def record(self, state, reward: Optional[float] = None):
     self._states.append(state)
     if reward is not None:
       self._rewards.append(reward)
-  
+  #pyre-fixme[14] 
   def control(self, t: int, T: int):
     n = self._n
     # state that is visited at time step tao will be updated (it's n step before t)
@@ -51,10 +50,10 @@ class nStepSarsaAgent(Agent):
       # update Q value 
       self._Q[self._states[tao], self._actions[tao]] += self._learning_rate* (G - self._Q[self._states[tao], self._actions[tao]])
       # update policy of updated state 
-      self._policy[self._states[tao]] = get_epsilon_greedy_policy_from_action_values(self._Q[self._states[tao]], self._epsilon) 
+      self._policy[self._states[tao]] = utils.get_epsilon_greedy_policy_from_action_values(self._Q[self._states[tao]], self._epsilon) 
     return tao == T-1
   
-  def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):
+  def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None)->Tuple[float, int]:
     if video_path is not None:
       video = VideoRecorder(env, video_path)
     if epsilon is not None:
@@ -66,6 +65,7 @@ class nStepSarsaAgent(Agent):
     self.reset()
     self.record(state)
     t = 0
+    reward = 0
     T = sys.maxsize
     action = self.sample_action(state)
     stop = False
