@@ -2,7 +2,6 @@ from base64 import b64encode
 from typing import Dict, List, Optional, Set, Tuple
 from collections import defaultdict
 
-import matplotlib.pyplot as plt
 import numpy as np
 from gym import Env
 from tqdm import tqdm

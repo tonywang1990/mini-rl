@@ -1,5 +1,4 @@
 import numpy as np
-from collections import namedtuple, deque
 from gym.spaces import Discrete, Box, Space
 import random
 import gym
@@ -15,24 +14,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
-
-Transition = namedtuple('Transition',
-                        ('state', 'action', 'next_state', 'reward', 'terminal'))
-
-
-class ReplayMemory(object):
-    def __init__(self, capacity):
-        self.memory = deque([],maxlen=capacity)
-
-    def push(self, *args):
-        """Save a transition"""
-        self.memory.append(Transition(*args))
-
-    def sample(self, batch_size):
-        return random.sample(self.memory, batch_size)
-
-    def __len__(self):
-        return len(self.memory)
 
 class DenseNet(nn.Module):
     def __init__(self, n_observations, n_actions):
@@ -51,27 +32,29 @@ class DenseNet(nn.Module):
         return self.layer_output(x)
 
 class DQNAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, batch_size: int, tau: float):
+    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, learning: bool, batch_size: int, tau: float, eps_decay:float):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         # TAU is the update rate of the target network
         # LR is the learning rate of the AdamW optimizer
+        self._learning = learning 
         self._batch_size = batch_size
         self._tau = tau
+        self._eps_decay=eps_decay
         self._device = 'cpu' #torch.device("mps" if torch.backends.mps.is_available() else "cpu")
         print(f'using device: {self._device}')
         MEMORY_SIZE = 10000
 
         # Get number of actions from gym action space
         self._n_actions = action_space.n
-        self._state_dim = state_space.sample().shape
-        self._n_states = len(state_space.sample().flatten())
+        self._state_dim = state_space.shape
+        self._n_states = np.prod(np.array(self._state_dim))
 
         self._policy_net = DenseNet(self._n_states, self._n_actions).to(self._device)
         self._target_net = DenseNet(self._n_states, self._n_actions).to(self._device)
         self._target_net.load_state_dict(self._policy_net.state_dict())
 
         self._optimizer = optim.AdamW(self._policy_net.parameters(), lr=self._learning_rate, amsgrad=True)
-        self._memory = ReplayMemory(MEMORY_SIZE)
+        self._memory = utils.ReplayMemory(MEMORY_SIZE)
 
         self._step = 0
         self._debug = True
@@ -87,21 +70,30 @@ class DQNAgent(Agent):
     def to_array(self, tensor: torch.Tensor, shape: list) -> np.ndarray:
         return tensor.cpu().numpy().reshape(shape)
 
-    def sample_action(self, state: torch.Tensor) -> torch.Tensor:
+    def sample_action(self, state: torch.Tensor, action_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
         # state: tensor of shape [1, n_states]
         # return: tensor of shape [1, n_actions]
         sample = random.random()
         #eps_threshold = self._epsilon #self._epsilon.get(self._step)
-        self._epsilon = utils.epsilon(self._step)
+        self._epsilon = utils.epsilon(self._step, eps_decay=self._eps_decay)
         self._step += 1
         if sample > self._epsilon:
             with torch.no_grad():
                 # t.max(1) will return largest column value of each row.
                 # second column on max result is index of where max element was
                 # found, so we pick action with the larger expected reward.
-                action = self._policy_net(state).max(1)[1].view(1, 1)
+                action_prob = self._policy_net(state) 
+                if action_mask is not None:
+                    large = torch.finfo(action_prob.dtype).max
+                    action_prob -= (1-action_mask) * large
+                action = action_prob.max(1)[1].view(1, 1)
         else:
-            action = torch.tensor([[self._action_space.sample()]], device=self._device, dtype=torch.long)
+            if action_mask is not None:
+                legal_actions = np.nonzero(action_mask.numpy())[0]
+                random_action = np.random.choice(legal_actions)
+            else:
+                random_action = self._action_space.sample()
+            action = torch.tensor([[random_action]], device=self._device, dtype=torch.long)
         assert list(action.shape) == [1, 1], f"{list(action.shape)} != {[1, 1]}"
         return action
 
@@ -112,7 +104,7 @@ class DQNAgent(Agent):
         # Transpose the batch (see https://stackoverflow.com/a/19343/3343043 for
         # detailed explanation). This converts batch-array of Transitions
         # to Transition of batch-arrays.
-        batch = Transition(*zip(*transitions))
+        batch = utils.Transition(*zip(*transitions))
 
         state_batch = torch.cat(batch.state) # [batch_size, n_states]
         action_batch = torch.cat(batch.action) # [batch_size, 1] - additional dim needed to perform gather
@@ -220,7 +212,7 @@ class DQNAgent(Agent):
         return total_reward, steps
 
 def test_agent():
-    agent = DQNAgent(Box(low=0, high=1, shape=[4,5,3]), Discrete(2), 1.0, 0.1, 1.0, 2, 0.001)
+    agent = DQNAgent(Box(low=0, high=1, shape=[4,5,3]), Discrete(2), 1.0, 0.1, 1.0, True, 2, 0.001, 1000)
     state =  agent._state_space.sample()
     state_tensor = agent.to_feature(state)
     action = agent.sample_action(state_tensor)

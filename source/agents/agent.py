@@ -22,6 +22,9 @@ class Agent(object):
     def control(self, state: Any, action: Any, reward: float, new_state: Any, terminal: bool):
         raise NotImplementedError
     
+    def reset(self):
+        pass
+    
     def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:
         if video_path is not None:
             video = VideoRecorder(env, video_path)

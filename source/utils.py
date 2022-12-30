@@ -1,15 +1,21 @@
 from base64 import b64encode
 from typing import Dict, List, Optional, Set, Tuple
 
+from collections import namedtuple, deque
 import matplotlib.pyplot as plt
 import numpy as np
 from gym import Env
 from tqdm import tqdm
 import math
-
+import torch
+import random
 from source.agents.agent import Agent
 
 # Utils
+
+
+Transition = namedtuple('Transition',
+                        ('state', 'action', 'next_state', 'reward', 'terminal'))
 
 
 def render_mp4(videopath: str) -> str:
@@ -23,6 +29,8 @@ def render_mp4(videopath: str) -> str:
         f'base64,{base64_encoded_mp4}" type="video/mp4"></video>'
 
 # TODO: extend this function to take ActionValue as input
+
+
 def get_epsilon_greedy_policy_from_action_values(action_values: np.ndarray, epsilon: float = 0.0) -> np.ndarray:
     optimal_actions = np.argmax(action_values, axis=-1)
     num_actions = action_values.shape[-1]
@@ -45,14 +53,15 @@ def get_state_values_from_action_values(action_values: np.ndarray, policy: Optio
     return state_values
 
 
-def plot_history(history: list[float]):
+def plot_history(history: list[float], smoothing:bool=True):
     num_episode = len(history)
     plt.figure(0, figsize=(16, 4))
     plt.title("average reward per step")
     history_smoothed = [
         np.mean(history[max(0, i-num_episode//10): i+1]) for i in range(num_episode)]
     plt.plot(history, 'o', alpha=0.2)
-    plt.plot(history_smoothed, linewidth=5)
+    if smoothing:
+        plt.plot(history_smoothed, linewidth=5)
 
 
 def show_state_action_values(agent: Agent, game: str):
@@ -80,7 +89,7 @@ def show_state_action_values(agent: Agent, game: str):
     #actions = actions.reshape(shape[:2])
     #named_actions = np.chararray(actions.shape, itemsize=4)
     #map = [[""] * shape[1]] * shape[0]
-    #for idx, val in np.ndenumerate(actions):
+    # for idx, val in np.ndenumerate(actions):
     #    named_actions[idx] = direction[val]
     #    #map[idx[0]][idx[1]] = direction[val]
     # print(named_actions)
@@ -118,8 +127,9 @@ def evaluate_agent(agent: Agent, env: Env, num_episode: int = 100000, epsilon: f
         reward, _ = agent.play_episode(env, learning=False, epsilon=epsilon)
         if reward > threshold:
             successful_episode += 1
-        total_reward += reward 
-    return total_reward / num_episode, successful_episode / num_episode 
+        total_reward += reward
+    return total_reward / num_episode, successful_episode / num_episode
+
 
 def estimate_success_rate(agent: Agent, env: Env, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
     return evaluate_agent(agent, env, num_episode, epsilon, threshold)[0]
@@ -130,11 +140,37 @@ def create_decay_schedule(num_episodes: int, value_start: float = 0.9, value_dec
     value_decay = 0.2 ** (1/(0.5 * num_episodes))
     return [max(value_min, (value_decay**i)*value_start) for i in range(num_episodes)]
 
-def epsilon(step: int) -> float:
+
+def epsilon(step: int, eps_start: float = 0.9, eps_end: float = 0.05, eps_decay: float = 1000) -> float:
     # EPS_START is the starting value of epsilon
     # EPS_END is the final value of epsilon
     # EPS_DECAY controls the rate of exponential decay of epsilon, higher means a slower decay
-    _eps_start = 0.9
-    _eps_end = 0.05
-    _eps_decay = 1000
-    return _eps_end + (_eps_start - _eps_end) * math.exp(-1. * step / _eps_decay)
+    return eps_end + (eps_start - eps_end) * math.exp(-1. * step / eps_decay)
+
+
+def to_feature(data: np.ndarray, device: str = 'cpu', debug: bool = True) -> torch.Tensor:
+    # Convert state into tensor and unsqueeze: insert a new dim into tensor (at dim 0): e.g. 1 -> [1] or [1] -> [[1]]
+    # state: np.array
+    # returns: torch.Tensor of shape [1]
+    assert isinstance(
+        data, np.ndarray), f'data is not of type ndarray: {type(data)}'
+    return torch.tensor(data.flatten(), dtype=torch.float32, device=device).unsqueeze(0)
+
+
+def to_array(tensor: torch.Tensor, shape: list) -> np.ndarray:
+    return tensor.cpu().numpy().reshape(shape)
+
+
+class ReplayMemory(object):
+    def __init__(self, capacity):
+        self.memory = deque([], maxlen=capacity)
+
+    def push(self, *args):
+        """Save a transition"""
+        self.memory.append(Transition(*args))
+
+    def sample(self, batch_size):
+        return random.sample(self.memory, batch_size)
+
+    def __len__(self):
+        return len(self.memory)

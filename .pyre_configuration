@@ -3,4 +3,7 @@
   "source_directories": [
     "."
   ]
+  "search_path": [
+    {"site-package": "pettingzoo"}
+  ]
 }
