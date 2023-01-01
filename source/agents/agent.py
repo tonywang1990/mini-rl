@@ -25,6 +25,12 @@ class Agent(object):
     
     def reset(self):
         pass
+
+    def pre_process(self):
+        pass
+
+    def post_process(self):
+        pass
     
     def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:
         if video_path is not None:
@@ -47,8 +53,6 @@ class Agent(object):
                              new_state, terminal)
             state = new_state
             steps += 1
-            #if steps > 1000:
-            #    terminal = True
             if video_path is not None:
                 video.capture_frame()
         if video_path is not None:

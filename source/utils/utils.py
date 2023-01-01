@@ -206,9 +206,9 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv) -> Tuple[
             action = agent.sample_action(observation['observation'], observation['action_mask'])
         env.step(action)
         # Train the agent
-        if agent._learning and agent_id in history:
+        if agent_id in history:
             prev_ob, prev_action = history[agent_id][-1]
-            agent.control(prev_ob, prev_action, reward, observation['observation'],
+            agent.post_process(prev_ob, prev_action, reward, observation['observation'],
                           terminal)
         history[agent_id].append((observation['observation'], action))
         # bookkeeping
@@ -216,6 +216,8 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv) -> Tuple[
         steps[agent_id] += 1
         # if steps > 1000:
         #    terminal = True
+    if agent._learning:
+        agent.control()
     return total_reward, steps
 
 

@@ -17,25 +17,8 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 
-class DenseNet1(nn.Module):
-    def __init__(self, n_observations, n_actions):
-        super(DenseNet1, self).__init__()
-        self.layer1 = nn.Linear(n_observations, 128)
-        self.layer2 = nn.Linear(128, 128)
-        self.layer3 = nn.Linear(128, 128)
-        self.layer_output = nn.Linear(128, n_actions)
-
-    # Called with either one element to determine next action, or a batch
-    # during optimization. Returns tensor([[left0exp,right0exp]...]).
-    def forward(self, x):
-        x = F.relu(self.layer1(x))
-        x = F.relu(self.layer2(x))
-        x = F.relu(self.layer3(x))
-        return self.layer_output(x)
-
-
 class DQNAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, learning: bool, batch_size: int, tau: float, eps_decay: float, net_params:dict):
+    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, learning: bool, batch_size: int, tau: float, eps_decay: float, net_params:dict, update_freq:int):
         super().__init__(state_space, action_space,
                          discount_rate, epsilon, learning_rate, learning)
         # TAU is the update rate of the target network
@@ -43,6 +26,7 @@ class DQNAgent(Agent):
         self._batch_size = batch_size
         self._tau = tau
         self._eps_decay = eps_decay
+        self._update_freq = update_freq
         # torch.device("mps" if torch.backends.mps.is_available() else "cpu")
         self._device = 'cpu'
         print(f'using device: {self._device}')
@@ -184,7 +168,7 @@ class DQNAgent(Agent):
                 self._tau + target_net_state_dict[key]*(1-self._tau)
         self._target_net.load_state_dict(target_net_state_dict)
 
-    def control(self, state: np.ndarray, action: Union[int,float], reward: float, new_state: np.ndarray, terminal: bool):
+    def post_process(self, state: np.ndarray, action: Union[int,float], reward: float, new_state: np.ndarray, terminal: bool):
         state_tensor = utils.to_feature(state).unsqueeze(0)
         action_tensor = torch.tensor([[action]], dtype=torch.long, device=self._device)
         reward_tensor = torch.tensor(
@@ -199,9 +183,12 @@ class DQNAgent(Agent):
         # Store the transition in memory
         self._memory.push(state_tensor, action_tensor, new_state_tensor,
                           reward_tensor, terminal_tensor)
-        # Perform one step of the optimization (on the policy network)
-        self._optimize_model()
-        self._update_target_net()
+
+    # Perform one step of the optimization (on the policy network)
+    def control(self):
+        for _ in range(self._update_freq):
+            self._optimize_model()
+            self._update_target_net()
 
     def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):
         if video_path is not None:
@@ -217,17 +204,16 @@ class DQNAgent(Agent):
         while not terminal:
             action = self.sample_action(state)
             new_state, reward, terminal, truncated, info = env.step(action)
+            self.post_process(state, action, reward,
+                             new_state, terminal)
             total_reward += reward
             terminal = terminal or truncated
-            if self._learning:
-                self.control(state, action, reward,
-                             new_state, terminal)
             state = new_state
             steps += 1
-            # if steps > 1000:
-            #    terminal = True
             if video_path is not None:
                 video.capture_frame()
+        if self._learning:
+            self.control()
         if video_path is not None:
             video.close()
         return total_reward, steps
@@ -235,11 +221,13 @@ class DQNAgent(Agent):
 
 def test_agent():
     agent = DQNAgent(state_space=Box(low=0, high=1, shape=[4, 5, 3]), action_space=Discrete(
-        2), discount_rate=0.9, epsilon=0.1, learning_rate=1e-3, learning=True, batch_size=2, tau=0.001, eps_decay=1000, net_params={'width': 128, 'n_hidden':2})
+        2), discount_rate=0.9, epsilon=0.1, learning_rate=1e-3, learning=True, batch_size=2, tau=0.001, eps_decay=1000, net_params={'width': 128, 'n_hidden':2}, update_freq=500)
     state = agent._state_space.sample()
     new_state = agent._state_space.sample()
     action = agent.sample_action(state)
-    agent.control(state, action, 1.0, new_state, terminal=False)
+    agent.post_process(state, action, 1.0, new_state, terminal=False)
+    agent.control()
+    #agent.control(state, action, 1.0, new_state, terminal=False)
     #np.testing.assert_equal(state, new_state)
     print('dqn_agent test passed!')
 
