@@ -17,14 +17,12 @@ class RandomAgent(Agent):
         self._device = 'cpu'
         self._leraning = False
 
-    def sample_action(self, state: torch.Tensor, action_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
+    def sample_action(self, state: np.ndarray, action_mask: Optional[np.ndarray] = None) -> int:
         if action_mask is not None:
-            legal_actions = np.nonzero(action_mask.numpy())[0]
-            random_action = np.random.choice(legal_actions)
+            legal_actions = np.nonzero(action_mask)[0]
+            action = np.random.choice(legal_actions)
         else:
-            random_action = self._action_space.sample()
-        action = torch.tensor(
-            [[random_action]], device=self._device, dtype=torch.long)
+            action = self._action_space.sample()
         return action
 
     def control(self, state: Any, action: Any, reward: float, new_state: Any, terminal: bool):

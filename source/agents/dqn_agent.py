@@ -8,6 +8,7 @@ import math
 
 from source.agents.agent import Agent
 from source.utils import utils
+from source.net import DenseNet
 
 
 import torch
@@ -16,9 +17,9 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 
-class DenseNet(nn.Module):
+class DenseNet1(nn.Module):
     def __init__(self, n_observations, n_actions):
-        super(DenseNet, self).__init__()
+        super(DenseNet1, self).__init__()
         self.layer1 = nn.Linear(n_observations, 128)
         self.layer2 = nn.Linear(128, 128)
         self.layer3 = nn.Linear(128, 128)
@@ -34,7 +35,7 @@ class DenseNet(nn.Module):
 
 
 class DQNAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, learning: bool, batch_size: int, tau: float, eps_decay: float):
+    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, learning: bool, batch_size: int, tau: float, eps_decay: float, net_params:dict):
         super().__init__(state_space, action_space,
                          discount_rate, epsilon, learning_rate, learning)
         # TAU is the update rate of the target network
@@ -50,12 +51,12 @@ class DQNAgent(Agent):
         # Get number of actions from gym action space
         self._n_actions = action_space.n
         self._state_dim = state_space.shape
-        self._n_states = np.prod(np.array(self._state_dim))
+        self._n_states = np.prod(np.array(self._state_dim)).astype(int)
 
-        self._policy_net = DenseNet(
-            self._n_states, self._n_actions).to(self._device)
-        self._target_net = DenseNet(
-            self._n_states, self._n_actions).to(self._device)
+        self._policy_net = DenseNet(self._n_states, self._n_actions, net_params['width'], net_params['n_hidden'], softmax=False).to(self._device)
+        #self._policy_net = DenseNet1(self._n_states, self._n_actions).to(self._device)
+        self._target_net = DenseNet(self._n_states, self._n_actions, net_params['width'], net_params['n_hidden'], softmax=False).to(self._device)
+        #self._target_net = DenseNet1(self._n_states, self._n_actions).to(self._device)
         self._target_net.load_state_dict(self._policy_net.state_dict())
 
         self._optimizer = optim.AdamW(
@@ -77,33 +78,31 @@ class DQNAgent(Agent):
     def to_array(self, tensor: torch.Tensor, shape: list) -> np.ndarray:
         return tensor.cpu().numpy().reshape(shape)
 
-    def sample_action(self, state: torch.Tensor, action_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
+    def sample_action(self, state: np.ndarray, action_mask: Optional[np.ndarray] = None) -> Union[int, float]:
         # state: tensor of shape [1, n_states]
         # return: tensor of shape [1, n_actions]
         sample = random.random()
         # eps_threshold = self._epsilon #self._epsilon.get(self._step)
-        self._epsilon = utils.epsilon(self._step, eps_decay=self._eps_decay)
+        self._epsilon = utils.epsilon(self._step, eps_start=self._epsilon, eps_decay=self._eps_decay)
         self._step += 1
         if sample > self._epsilon:
+            state_tensor = utils.to_feature(state, device=self._device)
             with torch.no_grad():
                 # t.max(1) will return largest column value of each row.
                 # second column on max result is index of where max element was
                 # found, so we pick action with the larger expected reward.
-                action_prob = self._policy_net(state)
+                action_prob = self._policy_net(state_tensor)
                 if action_mask is not None:
                     large = torch.finfo(action_prob.dtype).max
                     action_prob -= (1-action_mask) * large
-                action = action_prob.max(1)[1].view(1, 1)
+                # -1 is the non batch dimension 
+                action = action_prob.max(-1)[1].item()
         else:
             if action_mask is not None:
-                legal_actions = np.nonzero(action_mask.numpy())[0]
-                random_action = np.random.choice(legal_actions)
+                legal_actions = np.nonzero(action_mask)[0]
+                action = np.random.choice(legal_actions)
             else:
-                random_action = self._action_space.sample()
-            action = torch.tensor(
-                [[random_action]], device=self._device, dtype=torch.long)
-        assert list(action.shape) == [
-            1, 1], f"{list(action.shape)} != {[1, 1]}"
+                action = self._action_space.sample()
         return action
 
     def _optimize_model(self):
@@ -185,18 +184,20 @@ class DQNAgent(Agent):
                 self._tau + target_net_state_dict[key]*(1-self._tau)
         self._target_net.load_state_dict(target_net_state_dict)
 
-    def control(self, state: torch.Tensor, action: torch.Tensor, reward: float, new_state: torch.Tensor, terminal: bool):
+    def control(self, state: np.ndarray, action: Union[int,float], reward: float, new_state: np.ndarray, terminal: bool):
+        state_tensor = utils.to_feature(state).unsqueeze(0)
+        action_tensor = torch.tensor([[action]], dtype=torch.long, device=self._device)
         reward_tensor = torch.tensor(
             [reward], dtype=torch.float32, device=self._device)
         if terminal:
-            next_state = torch.zeros(
+            new_state_tensor = torch.zeros(
                 self._n_states, device=self._device).unsqueeze(0)
         else:
-            next_state = new_state
+            new_state_tensor = utils.to_feature(new_state).unsqueeze(0)
         terminal_tensor = torch.tensor(
             [terminal], device=self._device, dtype=torch.bool)
         # Store the transition in memory
-        self._memory.push(state, action, next_state,
+        self._memory.push(state_tensor, action_tensor, new_state_tensor,
                           reward_tensor, terminal_tensor)
         # Perform one step of the optimization (on the policy network)
         self._optimize_model()
@@ -206,7 +207,6 @@ class DQNAgent(Agent):
         if video_path is not None:
             video = VideoRecorder(env, video_path)
         state, info = env.reset()
-        state = utils.to_feature(state).unsqueeze(0)
         terminal = False
         steps = 0
         total_reward = 0
@@ -216,11 +216,9 @@ class DQNAgent(Agent):
             self._learning_rate = learning_rate
         while not terminal:
             action = self.sample_action(state)
-            new_state, reward, terminal, truncated, info = env.step(
-                action.item())
+            new_state, reward, terminal, truncated, info = env.step(action)
             total_reward += reward
             terminal = terminal or truncated
-            new_state = utils.to_feature(new_state).unsqueeze(0)
             if self._learning:
                 self.control(state, action, reward,
                              new_state, terminal)
@@ -236,13 +234,13 @@ class DQNAgent(Agent):
 
 
 def test_agent():
-    agent = DQNAgent(Box(low=0, high=1, shape=[4, 5, 3]), Discrete(
-        2), 1.0, 0.1, 1.0, True, 2, 0.001, 1000)
+    agent = DQNAgent(state_space=Box(low=0, high=1, shape=[4, 5, 3]), action_space=Discrete(
+        2), discount_rate=0.9, epsilon=0.1, learning_rate=1e-3, learning=True, batch_size=2, tau=0.001, eps_decay=1000, net_params={'width': 128, 'n_hidden':2})
     state = agent._state_space.sample()
-    state_tensor = utils.to_feature(state).unsqueeze(0)
-    action = agent.sample_action(state_tensor)
-    new_state = agent.to_array(state_tensor, agent._state_dim)
-    np.testing.assert_equal(state, new_state)
+    new_state = agent._state_space.sample()
+    action = agent.sample_action(state)
+    agent.control(state, action, 1.0, new_state, terminal=False)
+    #np.testing.assert_equal(state, new_state)
     print('dqn_agent test passed!')
 
 

@@ -199,20 +199,18 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv) -> Tuple[
         observation, reward, terminal, truncated, info = env.last()
         if observation is None:
             continue
-        ob_tensor = to_feature(observation['observation'])
-        mask_tensor = torch.tensor(observation['action_mask'])
         # Select action
         if terminal or truncated:
             action = None
         else:
-            action = agent.sample_action(ob_tensor, mask_tensor)
-        env.step(None if action is None else action.item())
+            action = agent.sample_action(observation['observation'], observation['action_mask'])
+        env.step(action)
         # Train the agent
         if agent._learning and agent_id in history:
             prev_ob, prev_action = history[agent_id][-1]
-            agent.control(prev_ob, prev_action, reward, ob_tensor,
+            agent.control(prev_ob, prev_action, reward, observation['observation'],
                           terminal)
-        history[agent_id].append((ob_tensor, action))
+        history[agent_id].append((observation['observation'], action))
         # bookkeeping
         total_reward[agent_id] += reward
         steps[agent_id] += 1
