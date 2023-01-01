@@ -157,7 +157,7 @@ def to_feature(data: np.ndarray, device: str = 'cpu', debug: bool = True) -> tor
     # returns: torch.Tensor of shape [1]
     assert isinstance(
         data, np.ndarray), f'data is not of type ndarray: {type(data)}'
-    return torch.tensor(data.flatten(), dtype=torch.float32, device=device).unsqueeze(0)
+    return torch.tensor(data.flatten(), dtype=torch.float32, device=device)
 
 
 def to_array(tensor: torch.Tensor, shape: list) -> np.ndarray:

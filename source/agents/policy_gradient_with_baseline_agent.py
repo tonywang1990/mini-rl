@@ -8,7 +8,7 @@ from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
 
 from source.agents.agent import Agent
-from source import utils
+from source.utils import utils
 
 
 import torch
@@ -20,7 +20,7 @@ from torch.distributions import Categorical
 class DenseNet(nn.Module):
     def __init__(self, n_observations, n_actions):
         super(DenseNet, self).__init__()
-        width = 128
+        width = 32
         self.layer1 = nn.Linear(n_observations, width)
         self.layer2 = nn.Linear(width, width)
         self.layer3 = nn.Linear(width, width)
@@ -31,7 +31,7 @@ class DenseNet(nn.Module):
     def forward(self, x):
         x = F.relu(self.layer1(x))
         x = F.relu(self.layer2(x))
-        x = F.relu(self.layer3(x))
+        #x = F.relu(self.layer3(x))
         x = self.layer4(x)
         return F.softmax(x, dim=-1)
 
@@ -64,14 +64,6 @@ class PolicyGradientWithBaselineAgent(Agent):
         self._step = 0
         self._debug = True
 
-    def to_feature(self, data: np.ndarray) -> torch.Tensor:
-        # Convert state into tensor and unsqueeze: insert a new dim into tensor (at dim 0): e.g. 1 -> [1] or [1] -> [[1]] 
-        # state: np.array
-        # returns: torch.Tensor of shape [1]
-        if self._debug:
-            assert isinstance(data, np.ndarray), f'data is not of type ndarray: {type(data)}'
-        return torch.tensor(data.flatten(), dtype=torch.float32, device=self._device)
-
     def reset(self):
         del self._rewards[:]
         del self._log_prob[:]
@@ -80,7 +72,7 @@ class PolicyGradientWithBaselineAgent(Agent):
     def sample_action(self, state: np.ndarray) -> int:
         # state: tensor of shape [n_states]
         # return: int
-        state_tensor = self.to_feature(state) # [n_states]
+        state_tensor = utils.to_feature(state) # [n_states]
         if self._debug:
             assert list(state_tensor.shape) == [self._n_states], f"state_tensor has wrong shape: {state_tensor.shape}"
         p_actions = self._policy_net(state_tensor) # [n_actions]
@@ -101,10 +93,6 @@ class PolicyGradientWithBaselineAgent(Agent):
             G = self._discount_rate * G + reward 
             returns.appendleft(G)  # insert left to maintain same order as _log_prob
         returns_tensor = torch.tensor(returns, device=self._device)
-        state_value_tensor = torch.cat(self._state_value) 
-        ## is this correct?
-        with torch.no_grad():
-            returns_tensor -= state_value_tensor 
         # batch norm
         returns_tensor = (returns_tensor - returns_tensor.mean()) / (returns_tensor.std() + self._eps)
         if self._debug:
@@ -112,8 +100,10 @@ class PolicyGradientWithBaselineAgent(Agent):
 
         ## Value Update
         criterion = nn.SmoothL1Loss()
-        #state_value_tensor = torch.cat(self._state_value) 
-        value_loss_tensor = criterion(returns_tensor, state_value_tensor)
+        state_value_tensor = torch.cat(self._state_value) 
+        #state_value_tensor = (state_value_tensor - state_value_tensor.mean()) / (state_value_tensor.std() + self._eps)
+        assert returns_tensor.requires_grad == False and state_value_tensor.requires_grad == True
+        value_loss_tensor = criterion(returns_tensor.detach(), state_value_tensor)
         # backprop
         self._value_optimizer.zero_grad()
         value_loss_tensor.backward()
@@ -121,7 +111,10 @@ class PolicyGradientWithBaselineAgent(Agent):
 
         ## Policy Update
         log_prob_tensor = torch.cat(self._log_prob)
-        policy_loss_tensor = (-returns_tensor * log_prob_tensor).sum()
+        advantage_tensor = (returns_tensor - state_value_tensor).detach()
+        advantage_tensor = (advantage_tensor - advantage_tensor.mean()) / (advantage_tensor.std() + self._eps)
+        assert advantage_tensor.requires_grad == False and log_prob_tensor.requires_grad == True
+        policy_loss_tensor = (-advantage_tensor * log_prob_tensor).sum()
         # backprop
         self._policy_optimizer.zero_grad()
         policy_loss_tensor.backward()

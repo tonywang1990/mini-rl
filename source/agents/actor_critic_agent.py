@@ -8,7 +8,7 @@ from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
 
 from source.agents.agent import Agent
-from source import utils
+from source.utils import utils
 
 
 import torch
@@ -20,7 +20,7 @@ from torch.distributions import Categorical
 class DenseNet(nn.Module):
     def __init__(self, n_observations: int, n_actions: int, softmax: bool):
         super(DenseNet, self).__init__()
-        width = 128
+        width = 32
         self.layer1 = nn.Linear(n_observations, width)
         self.layer2 = nn.Linear(width, width)
         self.layer3 = nn.Linear(width, width)
@@ -32,7 +32,7 @@ class DenseNet(nn.Module):
     def forward(self, x):
         x = F.relu(self.layer1(x))
         x = F.relu(self.layer2(x))
-        x = F.relu(self.layer3(x))
+        #x = F.relu(self.layer3(x))
         x = self.layer4(x)
         if self.softmax:
             x = F.softmax(x, dim=-1)
@@ -64,54 +64,49 @@ class ActorCriticAgent(Agent):
         self._step = 0
         self._debug = True
 
-    def to_feature(self, data: np.ndarray) -> torch.Tensor:
-        # Convert state into tensor and unsqueeze: insert a new dim into tensor (at dim 0): e.g. 1 -> [1] or [1] -> [[1]] 
-        # state: np.array
-        # returns: torch.Tensor of shape [1]
-        if self._debug:
-            assert isinstance(data, np.ndarray), f'data is not of type ndarray: {type(data)}'
-        return torch.tensor(data.flatten(), dtype=torch.float32, device=self._device)
-
     def sample_action(self, state: np.ndarray) -> tuple[int, torch.Tensor]:
         # state: tensor of shape [n_states]
         # return: int
-        state_tensor = self.to_feature(state) # [n_states]
+        state_tensor = utils.to_feature(state) # [n_states]
         # policy
         p_actions = self._policy_net(state_tensor) # [n_actions]
         dist = Categorical(p_actions)
         action = dist.sample()
         if self._debug:
-            assert list(p_actions.shape) == [self._n_actions], f"p_actions has wrong shape: {p_actions.shape}"
+            assert list(p_actions.shape) == [self._n_actions], f"p_actions has wrong shape: {p_actions.shape} != {[self._n_actions]}"
         return action.item(), dist.log_prob(action).view(1)
     
     def control(self, state: np.ndarray, action: int, reward: float, new_state: np.ndarray, terminal: bool, action_log_prob: torch.Tensor):
         # calculate TD error
-        state_tensor = self.to_feature(state) # [n_states]
+        state_tensor = utils.to_feature(state) # [n_states]
         state_value_tensor = self._value_net(state_tensor)
         reward_tensor = torch.tensor([reward], device=self._device)
         #with torch.no_grad():
         if terminal:
             td_tensor = reward_tensor 
         else:
-            new_state_tensor = self.to_feature(new_state)
+            new_state_tensor = utils.to_feature(new_state)
             new_state_value_tensor = self._value_net(new_state_tensor)
             td_tensor = reward_tensor + self._discount_rate * new_state_value_tensor 
+        #td_tensor = td_tensor.detach()
         ## Value Update
         criterion = nn.SmoothL1Loss()
         #state_value_tensor = torch.cat(self._state_value) 
-        value_loss_tensor = criterion(td_tensor, state_value_tensor)
+        #assert state_value_tensor.grad_fn is not None and td_tensor.grad_fn is None 
+        value_loss_tensor = criterion(td_tensor.detach(), state_value_tensor)
         # backprop
         self._value_optimizer.zero_grad()
         value_loss_tensor.backward()
+        torch.nn.utils.clip_grad_value_(self._value_net.parameters(), 1000)
         self._value_optimizer.step()
 
         ## Policy Update
-        with torch.no_grad():
-            td_error_tensor = td_tensor - state_value_tensor
-        policy_loss_tensor = -td_error_tensor * action_log_prob
+        td_error_tensor = td_tensor - state_value_tensor
+        policy_loss_tensor = -td_error_tensor.detach() * action_log_prob
         # backprop
         self._policy_optimizer.zero_grad()
         policy_loss_tensor.backward()
+        torch.nn.utils.clip_grad_value_(self._policy_net.parameters(), 1000)
         self._policy_optimizer.step()
 
     def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):

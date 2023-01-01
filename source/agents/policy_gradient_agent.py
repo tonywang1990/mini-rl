@@ -8,7 +8,7 @@ from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
 
 from source.agents.agent import Agent
-from source import utils
+from source.utils import utils
 
 
 import torch
@@ -20,7 +20,7 @@ from torch.distributions import Categorical
 class DenseNet(nn.Module):
     def __init__(self, n_observations, n_actions):
         super(DenseNet, self).__init__()
-        width = 128
+        width = 32
         self.layer1 = nn.Linear(n_observations, width)
         self.layer2 = nn.Linear(width, width)
         self.layer3 = nn.Linear(width, width)
@@ -31,7 +31,7 @@ class DenseNet(nn.Module):
     def forward(self, x):
         x = F.relu(self.layer1(x))
         x = F.relu(self.layer2(x))
-        x = F.relu(self.layer3(x))
+        #x = F.relu(self.layer3(x))
         x = self.layer4(x)
         return F.softmax(x, dim=-1)
 
@@ -56,14 +56,6 @@ class PolicyGradientAgent(Agent):
         self._step = 0
         self._debug = True
 
-    def to_feature(self, data: np.ndarray) -> torch.Tensor:
-        # Convert state into tensor and unsqueeze: insert a new dim into tensor (at dim 0): e.g. 1 -> [1] or [1] -> [[1]] 
-        # state: np.array
-        # returns: torch.Tensor of shape [1]
-        if self._debug:
-            assert isinstance(data, np.ndarray), f'data is not of type ndarray: {type(data)}'
-        return torch.tensor(data.flatten(), dtype=torch.float32, device=self._device)
-
     def reset(self):
         del self._rewards[:]
         del self._log_prob[:]
@@ -71,7 +63,7 @@ class PolicyGradientAgent(Agent):
     def sample_action(self, state: np.ndarray) -> int:
         # state: tensor of shape [n_states]
         # return: int
-        state_tensor = self.to_feature(state) # [n_states]
+        state_tensor = utils.to_feature(state) # [n_states]
         if self._debug:
             assert list(state_tensor.shape) == [self._n_states], f"state_tensor has wrong shape: {state_tensor.shape}"
         p_actions = self._policy_net(state_tensor) # [n_actions]
@@ -97,7 +89,7 @@ class PolicyGradientAgent(Agent):
         if self._debug:
             assert list(returns_tensor.shape) == [len(self._rewards)], f"returns_tensor has wrong shape: {returns_tensor.shape}"
         # calcuate loss term
-        for R, log_prob in zip(returns_tensor, self._log_prob):
+        for R, log_prob in zip(returns_tensor.detach(), self._log_prob):
             policy_loss.append((-R*log_prob).view(1)) # reshape to allow concat
         # sum up loss to a single value
         policy_loss_tensor = torch.cat(policy_loss).sum() 
@@ -108,7 +100,7 @@ class PolicyGradientAgent(Agent):
         # reset
         self.reset()
 
-    def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):
+    def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):
         if video_path is not None:
             video = VideoRecorder(env, video_path)
         state, info = env.reset()
@@ -126,7 +118,7 @@ class PolicyGradientAgent(Agent):
             num_steps += 1
             if video_path is not None:
                 video.capture_frame()
-        if learning:
+        if self._learning:
             self.control()
         if video_path is not None:
             video.close()

@@ -206,7 +206,7 @@ class DQNAgent(Agent):
         if video_path is not None:
             video = VideoRecorder(env, video_path)
         state, info = env.reset()
-        state = self.to_feature(state)
+        state = utils.to_feature(state).unsqueeze(0)
         terminal = False
         steps = 0
         total_reward = 0
@@ -220,7 +220,7 @@ class DQNAgent(Agent):
                 action.item())
             total_reward += reward
             terminal = terminal or truncated
-            new_state = self.to_feature(new_state)
+            new_state = utils.to_feature(new_state).unsqueeze(0)
             if self._learning:
                 self.control(state, action, reward,
                              new_state, terminal)
@@ -239,7 +239,7 @@ def test_agent():
     agent = DQNAgent(Box(low=0, high=1, shape=[4, 5, 3]), Discrete(
         2), 1.0, 0.1, 1.0, True, 2, 0.001, 1000)
     state = agent._state_space.sample()
-    state_tensor = agent.to_feature(state)
+    state_tensor = utils.to_feature(state).unsqueeze(0)
     action = agent.sample_action(state_tensor)
     new_state = agent.to_array(state_tensor, agent._state_dim)
     np.testing.assert_equal(state, new_state)
