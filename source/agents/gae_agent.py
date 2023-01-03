@@ -78,6 +78,7 @@ class GAEAgent(Agent):
             state_tensor, action, next_state_tensor, reward, terminal))
 
     def process_batch(self, batch_size:int = -1) -> Tuple[torch.Tensor, torch.Tensor]:
+        # Calculate advantage.
         adv_list = list()
         advantage = torch.tensor(0, dtype=torch.float)
         for trans in reversed(self._transitions):
@@ -88,22 +89,17 @@ class GAEAgent(Agent):
                 self._exp_average_discount * advantage * (1 - terminal)
             adv_list.append(advantage)
         adv_list.reverse()
+        # Get batch size data.
         if batch_size != -1 and batch_size < len(adv_list):
             adv_list = adv_list[:batch_size]
-            prob_list = self._log_prob[:batch_size]
+            self._log_prob = self._log_prob[:batch_size]
         adv_tensor = torch.concat(adv_list)
-        prob_tensor = torch.concat(prob_list)
+        prob_tensor = torch.concat(self._log_prob)
         return adv_tensor, prob_tensor
 
     def control(self):
         advantage_tensor, log_prob_tensor = self.process_batch()
-        #print(advantage_tensor.shape)
-        # Value Update
-        # criterion = nn.SmoothL1Loss()
-        # state_value_tensor = torch.cat(self._state_value)
-        # state_value_tensor = (state_value_tensor - state_value_tensor.mean()) / (state_value_tensor.std() + self._eps)
-        # assert state_value_tensor.requires_grad == True
-        # not sure if this works?
+        # Value Update.
         value_loss_tensor = (advantage_tensor ** 2).sum()
         # backprop
         self._value_optimizer.zero_grad()
@@ -122,35 +118,6 @@ class GAEAgent(Agent):
 
         # reset
         self.reset()
-
-    def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:
-        if video_path is not None:
-            video = VideoRecorder(env, video_path)
-        state, info = env.reset()
-        stop = False
-        steps = 0
-        total_reward = 0
-        if epsilon is not None:
-            self._epsilon = epsilon
-        if learning_rate is not None:
-            self._learning_rate = learning_rate
-        while not stop:
-            action = self.sample_action(state)
-            next_state, reward, terminal, truncated, info = env.step(action)
-            self.post_process(state, action, reward, next_state, terminal)
-            state = next_state
-            stop = terminal or truncated
-            # bookkeeping
-            total_reward += reward
-            steps += 1
-            if video_path is not None:
-                video.capture_frame()
-
-        if self._learning:
-            self.control()
-        if video_path is not None:
-            video.close()
-        return total_reward, steps
 
 
 def test_agent():
