@@ -106,7 +106,7 @@ class DQNAgent(Agent):
             batch.next_state)  # [batch_size, n_states]
         terminal_batch = torch.cat(batch.terminal)  # [batch_size]
         # update Q_policy to minimize:
-        # reward + discount_rate * Q_target(new_state, new_action) - Q_policy(state, action)
+        # reward + discount_rate * Q_target(next_state, new_action) - Q_policy(state, action)
 
         # Compute Q(s_t, a) - the model computes Q(s_t), then we select the
         # columns of actions taken. These are the actions which would've been taken
@@ -168,20 +168,20 @@ class DQNAgent(Agent):
                 self._tau + target_net_state_dict[key]*(1-self._tau)
         self._target_net.load_state_dict(target_net_state_dict)
 
-    def post_process(self, state: np.ndarray, action: Union[int,float], reward: float, new_state: np.ndarray, terminal: bool):
+    def post_process(self, state: np.ndarray, action: Union[int,float], reward: float, next_state: np.ndarray, terminal: bool):
         state_tensor = utils.to_feature(state).unsqueeze(0)
         action_tensor = torch.tensor([[action]], dtype=torch.long, device=self._device)
         reward_tensor = torch.tensor(
             [reward], dtype=torch.float32, device=self._device)
         if terminal:
-            new_state_tensor = torch.zeros(
+            next_state_tensor = torch.zeros(
                 self._n_states, device=self._device).unsqueeze(0)
         else:
-            new_state_tensor = utils.to_feature(new_state).unsqueeze(0)
+            next_state_tensor = utils.to_feature(next_state).unsqueeze(0)
         terminal_tensor = torch.tensor(
             [terminal], device=self._device, dtype=torch.bool)
         # Store the transition in memory
-        self._memory.push(state_tensor, action_tensor, new_state_tensor,
+        self._memory.push(state_tensor, action_tensor, next_state_tensor,
                           reward_tensor, terminal_tensor)
 
     # Perform one step of the optimization (on the policy network)
@@ -203,12 +203,12 @@ class DQNAgent(Agent):
             self._learning_rate = learning_rate
         while not terminal:
             action = self.sample_action(state)
-            new_state, reward, terminal, truncated, info = env.step(action)
+            next_state, reward, terminal, truncated, info = env.step(action)
             self.post_process(state, action, reward,
-                             new_state, terminal)
+                             next_state, terminal)
             total_reward += reward
             terminal = terminal or truncated
-            state = new_state
+            state = next_state
             steps += 1
             if video_path is not None:
                 video.capture_frame()
@@ -223,12 +223,12 @@ def test_agent():
     agent = DQNAgent(state_space=Box(low=0, high=1, shape=[4, 5, 3]), action_space=Discrete(
         2), discount_rate=0.9, epsilon=0.1, learning_rate=1e-3, learning=True, batch_size=2, tau=0.001, eps_decay=1000, net_params={'width': 128, 'n_hidden':2}, update_freq=500)
     state = agent._state_space.sample()
-    new_state = agent._state_space.sample()
+    next_state = agent._state_space.sample()
     action = agent.sample_action(state)
-    agent.post_process(state, action, 1.0, new_state, terminal=False)
+    agent.post_process(state, action, 1.0, next_state, terminal=False)
     agent.control()
-    #agent.control(state, action, 1.0, new_state, terminal=False)
-    #np.testing.assert_equal(state, new_state)
+    #agent.control(state, action, 1.0, next_state, terminal=False)
+    #np.testing.assert_equal(state, next_state)
     print('dqn_agent test passed!')
 
 

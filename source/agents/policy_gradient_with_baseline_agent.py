@@ -17,7 +17,7 @@ import torch.optim as optim
 from torch.distributions import Categorical
 
 
-class A2CAgent(Agent):
+class PolicyGradientWithBaselineAgent(Agent):
     def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: dict):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._rewards = []

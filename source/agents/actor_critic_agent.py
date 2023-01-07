@@ -63,7 +63,7 @@ class ActorCriticAgent(Agent):
                 self._n_actions], f"p_actions has wrong shape: {p_actions.shape} != {[self._n_actions]}"
         return action.item(), dist.log_prob(action).view(1)
 
-    def control(self, state: np.ndarray, action: int, reward: float, new_state: np.ndarray, terminal: bool, action_log_prob: torch.Tensor):
+    def control(self, state: np.ndarray, action: int, reward: float, next_state: np.ndarray, terminal: bool, action_log_prob: torch.Tensor):
         # calculate TD error
         state_tensor = utils.to_feature(state)  # [n_states]
         state_value_tensor = self._value_net(state_tensor)
@@ -72,9 +72,9 @@ class ActorCriticAgent(Agent):
         if terminal:
             td_tensor = reward_tensor
         else:
-            new_state_tensor = utils.to_feature(new_state)
-            new_state_value_tensor = self._value_net(new_state_tensor)
-            td_tensor = reward_tensor + self._discount_rate * new_state_value_tensor
+            next_state_tensor = utils.to_feature(next_state)
+            next_state_value_tensor = self._value_net(next_state_tensor)
+            td_tensor = reward_tensor + self._discount_rate * next_state_value_tensor
         #td_tensor = td_tensor.detach()
         # Value Update
         criterion = nn.SmoothL1Loss()
@@ -106,11 +106,11 @@ class ActorCriticAgent(Agent):
             self._learning_rate = learning_rate
         while not terminal:
             action, action_log_prob = self.sample_action(state)
-            new_state, reward, terminal, truncated, info = env.step(action)
+            next_state, reward, terminal, truncated, info = env.step(action)
             if learning:
-                self.control(state, action, reward, new_state,
+                self.control(state, action, reward, next_state,
                              terminal, action_log_prob)
-            state = new_state
+            state = next_state
             terminal = terminal or truncated
             total_reward += reward
             num_steps += 1
@@ -127,8 +127,8 @@ def test_agent():
     state = agent._state_space.sample()
     action, prob = agent.sample_action(state)
     reward = 1
-    new_state = agent._state_space.sample()
-    agent.control(state, action, reward, new_state, False, prob)
+    next_state = agent._state_space.sample()
+    agent.control(state, action, reward, next_state, False, prob)
     print('policy_gradient_agent_test passed!')
 
 

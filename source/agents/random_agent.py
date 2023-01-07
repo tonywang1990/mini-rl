@@ -28,5 +28,3 @@ class RandomAgent(Agent):
     def control(self, state: Any, action: Any, reward: float, new_state: Any, terminal: bool):
         raise NotImplementedError
 
-    def post_process(self, state: Any, action: Any, reward: float, new_state: Any, terminal: bool):
-        pass

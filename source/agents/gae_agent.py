@@ -129,7 +129,7 @@ def test_agent():
         agent.post_process(np.array([1.0,2,3,4]), 1, 0.5, np.array([-1,-1,-1,-1]), False)
     # print(agent._memory)
     agent.control()
-    print('policy_gradient_agent_test passed!')
+    print('gae_agent passed!')
 
 
 test_agent()

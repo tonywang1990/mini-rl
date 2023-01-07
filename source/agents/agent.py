@@ -20,7 +20,7 @@ class Agent(object):
     def sample_action(self, state: Any):
         raise NotImplementedError
 
-    def control(self, state: Any, action: Any, reward: float, new_state: Any, terminal: bool):
+    def control():
         raise NotImplementedError
     
     def reset(self):
@@ -29,7 +29,7 @@ class Agent(object):
     def pre_process(self):
         pass
 
-    def post_process(self, state: Any, action: Any, reward: float, new_state: Any, terminal: bool):
+    def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
         pass
     
     def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:
