@@ -3,7 +3,7 @@ from collections import namedtuple, deque
 from gym.spaces import Discrete, Box, Space
 import random
 import gym
-from typing import Union, Optional
+from typing import Union, Optional, Any
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
 
@@ -92,30 +92,8 @@ class PolicyGradientAgent(Agent):
         # reset
         self.reset()
 
-    def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):
-        if video_path is not None:
-            video = VideoRecorder(env, video_path)
-        state, info = env.reset()
-        terminal = False
-        total_reward, num_steps = 0, 0
-        if learning_rate is not None:
-            self._learning_rate = learning_rate
-        while not terminal:
-            action = self.sample_action(state)
-            new_state, reward, terminal, truncated, info = env.step(action)
-            self._rewards.append(reward)
-            terminal = terminal or truncated
-            state = new_state
-            total_reward += reward
-            num_steps += 1
-            if video_path is not None:
-                video.capture_frame()
-        if self._learning:
-            self.control()
-        if video_path is not None:
-            video.close()
-        return total_reward, num_steps
-
+    def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
+        self._rewards.append(reward)
 
 def test_agent():
     agent = PolicyGradientAgent(Box(low=0, high=1, shape=[4, 4, 3]), Discrete(

@@ -1,8 +1,6 @@
 from typing import Dict, List, Optional, Set, Tuple
 
-import gym
 from gym.spaces import Space
-from gym.wrappers.monitoring.video_recorder import VideoRecorder
 from typing import Any
 
 
@@ -32,31 +30,3 @@ class Agent(object):
     def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
         pass
     
-    def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:
-        if video_path is not None:
-            video = VideoRecorder(env, video_path)
-        state, info = env.reset()
-        stop = False
-        steps = 0
-        total_reward = 0
-        if epsilon is not None:
-            self._epsilon = epsilon
-        if learning_rate is not None:
-            self._learning_rate = learning_rate
-        while not stop:
-            action = self.sample_action(state)
-            new_state, reward, terminal, truncated, info = env.step(action)
-            self.post_process(state, action, reward, new_state, terminal)
-            state = new_state
-            stop = terminal or truncated
-            # bookkeeping
-            total_reward += reward 
-            steps += 1
-            if video_path is not None:
-                video.capture_frame()
-
-        if self._learning:
-            self.control()
-        if video_path is not None:
-            video.close()
-        return total_reward, steps

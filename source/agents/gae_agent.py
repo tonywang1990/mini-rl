@@ -100,7 +100,7 @@ class GAEAgent(Agent):
     def control(self):
         advantage_tensor, log_prob_tensor = self.process_batch()
         # Value Update.
-        value_loss_tensor = (advantage_tensor ** 2).sum()
+        value_loss_tensor = (advantage_tensor ** 2).mean()
         # backprop
         self._value_optimizer.zero_grad()
         value_loss_tensor.backward()
@@ -110,7 +110,7 @@ class GAEAgent(Agent):
         #print(log_prob_tensor.shape)
         assert log_prob_tensor.requires_grad == True and advantage_tensor.shape == log_prob_tensor.shape
         policy_loss_tensor = (-advantage_tensor.detach()
-                              * log_prob_tensor).sum()
+                              * log_prob_tensor).mean()
         # backprop
         self._policy_optimizer.zero_grad()
         policy_loss_tensor.backward()

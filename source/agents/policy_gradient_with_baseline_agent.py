@@ -3,7 +3,7 @@ from collections import namedtuple, deque
 from gym.spaces import Discrete, Box, Space
 import random
 import gym
-from typing import Union, Optional
+from typing import Union, Optional, Any
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
 
@@ -56,7 +56,7 @@ class PolicyGradientWithBaselineAgent(Agent):
         del self._log_prob[:]
         del self._state_value[:]
 
-    def sample_action(self, state: np.ndarray) -> int:
+    def sample_action(self, state: np.ndarray, mask: Optional[np.ndarray]=None) -> int:
         # state: tensor of shape [n_states]
         # return: int
         state_tensor = utils.to_feature(state)  # [n_states]
@@ -68,6 +68,10 @@ class PolicyGradientWithBaselineAgent(Agent):
         if self._debug:
             assert list(p_actions.shape) == [
                 self._n_actions], f"p_actions has wrong shape: {p_actions.shape}"
+            if mask is not None:
+                assert list(p_actions.shape) == list(mask.shape), f"mask has the wrong shape: {mask.shape} != {p_actions.shape}"
+        if mask is not None:
+            p_actions = p_actions * torch.from_numpy(mask)
         dist = Categorical(p_actions)
         action = dist.sample()
         self._log_prob.append(dist.log_prob(action).view(1))
@@ -105,10 +109,8 @@ class PolicyGradientWithBaselineAgent(Agent):
         # Policy Update
         log_prob_tensor = torch.cat(self._log_prob)
         advantage_tensor = (returns_tensor - state_value_tensor).detach()
-        advantage_tensor = (advantage_tensor - advantage_tensor.mean()
-                            ) / (advantage_tensor.std() + self._eps)
         assert advantage_tensor.requires_grad == False and log_prob_tensor.requires_grad == True
-        policy_loss_tensor = (-advantage_tensor * log_prob_tensor).sum()
+        policy_loss_tensor = (-advantage_tensor * log_prob_tensor).mean()
         # backprop
         self._policy_optimizer.zero_grad()
         policy_loss_tensor.backward()
@@ -116,31 +118,9 @@ class PolicyGradientWithBaselineAgent(Agent):
 
         # reset
         self.reset()
-
-    def play_episode(self, env: gym.Env, learning: Optional[bool] = True, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):
-        if video_path is not None:
-            video = VideoRecorder(env, video_path)
-        state, info = env.reset()
-        terminal = False
-        total_reward, num_steps = 0, 0
-        if learning_rate is not None:
-            self._learning_rate = learning_rate
-        while not terminal:
-            action = self.sample_action(state)
-            new_state, reward, terminal, truncated, info = env.step(action)
-            self._rewards.append(reward)
-            terminal = terminal or truncated
-            state = new_state
-            total_reward += reward
-            num_steps += 1
-            if video_path is not None:
-                video.capture_frame()
-        if learning:
-            self.control()
-        if video_path is not None:
-            video.close()
-        return total_reward, num_steps
-
+    
+    def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
+        self._rewards.append(reward)
 
 def test_agent():
     agent = PolicyGradientWithBaselineAgent(Box(low=0, high=1, shape=[4, 4, 3]), Discrete(

@@ -190,35 +190,6 @@ class DQNAgent(Agent):
             self._optimize_model()
             self._update_target_net()
 
-    def play_episode(self, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None):
-        if video_path is not None:
-            video = VideoRecorder(env, video_path)
-        state, info = env.reset()
-        terminal = False
-        steps = 0
-        total_reward = 0
-        if epsilon is not None:
-            self._epsilon = epsilon
-        if learning_rate is not None:
-            self._learning_rate = learning_rate
-        while not terminal:
-            action = self.sample_action(state)
-            next_state, reward, terminal, truncated, info = env.step(action)
-            self.post_process(state, action, reward,
-                             next_state, terminal)
-            total_reward += reward
-            terminal = terminal or truncated
-            state = next_state
-            steps += 1
-            if video_path is not None:
-                video.capture_frame()
-        if self._learning:
-            self.control()
-        if video_path is not None:
-            video.close()
-        return total_reward, steps
-
-
 def test_agent():
     agent = DQNAgent(state_space=Box(low=0, high=1, shape=[4, 5, 3]), action_space=Discrete(
         2), discount_rate=0.9, epsilon=0.1, learning_rate=1e-3, learning=True, batch_size=2, tau=0.001, eps_decay=1000, net_params={'width': 128, 'n_hidden':2}, update_freq=500)

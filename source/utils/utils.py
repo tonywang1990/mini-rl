@@ -9,8 +9,10 @@ from tqdm import tqdm
 import math
 import torch
 import random
+import gym
 from source.agents.agent import Agent
 from pettingzoo.utils.env import AECEnv
+from gym.wrappers.monitoring.video_recorder import VideoRecorder
 
 # Utils
 
@@ -23,7 +25,7 @@ def evaluate_agent(agent: Agent, env: Env, num_episode: int = 100000, epsilon: f
     ## Set learning to false
     agent._learning=False
     for _ in tqdm(range(num_episode)):
-        reward, _ = agent.play_episode(env, epsilon=epsilon)
+        reward, _ = play_episode(agent, env, epsilon=epsilon)
         if reward > threshold:
             successful_episode += 1
         total_reward += reward
@@ -45,6 +47,11 @@ def epsilon(step: int, eps_start: float = 0.9, eps_end: float = 0.05, eps_decay:
     # EPS_END is the final value of epsilon
     # EPS_DECAY controls the rate of exponential decay of epsilon, higher means a slower decay
     return eps_end + (eps_start - eps_end) * math.exp(-1. * step / eps_decay)
+
+def normalize(tensor: torch.Tensor):
+    eps = np.finfo(np.float32).eps.item()
+    return (tensor - tensor.mean()
+                          ) / (tensor.std() + eps)
 
 # Tabular
 
@@ -183,14 +190,42 @@ class ReplayMemory(object):
     def __len__(self):
         return len(self.memory)
 
+# gym environment
+def play_episode(agent: Agent, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:
+    if video_path is not None:
+        video = VideoRecorder(env, video_path)
+    state, info = env.reset()
+    stop = False
+    steps = 0
+    total_reward = 0
+    if epsilon is not None:
+        agent._epsilon = epsilon
+    if learning_rate is not None:
+        agent._learning_rate = learning_rate
+    while not stop:
+        action = agent.sample_action(state)
+        new_state, reward, terminal, truncated, info = env.step(action)
+        agent.post_process(state, action, reward, new_state, terminal)
+        state = new_state
+        stop = terminal or truncated
+        # bookkeeping
+        total_reward += reward 
+        steps += 1
+        if video_path is not None:
+            video.capture_frame()
+    if agent._learning:
+        agent.control()
+    if video_path is not None:
+        video.close()
+    return total_reward, steps
+
+
 # Pettingzoo.classsic environment
-
-
-def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv) -> Tuple[defaultdict, defaultdict]:
+def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv) -> Tuple[defaultdict, defaultdict, defaultdict]:
     env.reset()
     for agent in agent_dict.values():
         agent.reset()
-    steps, total_reward = defaultdict(int), defaultdict(float)
+    steps, total_reward, wins = defaultdict(int), defaultdict(float), defaultdict(int)
     history = defaultdict(list)
 
     for agent_id in env.agent_iter():
@@ -213,12 +248,13 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv) -> Tuple[
         history[agent_id].append((observation['observation'], action))
         # bookkeeping
         total_reward[agent_id] += reward
+        wins[agent_id] += (reward > 0)
         steps[agent_id] += 1
         # if steps > 1000:
         #    terminal = True
     if agent._learning:
         agent.control()
-    return total_reward, steps
+    return total_reward, wins, steps
 
 
 def evaluate_multiagent(agent_dict: Dict[str, Agent], env: AECEnv, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
@@ -227,7 +263,7 @@ def evaluate_multiagent(agent_dict: Dict[str, Agent], env: AECEnv, num_episode: 
     total_reward = defaultdict(float)
     successful_episode = 0
     for _ in tqdm(range(num_episode)):
-        rewards, steps = play_multiagent_episode(
+        rewards, wins, steps = play_multiagent_episode(
             agent_dict, env)  # ,epsilon=epsilon_schedule[i])
         for agent, reward in rewards.items():
             total_reward[agent] += reward
