@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import numpy as np
 from collections import namedtuple, deque, defaultdict
 from gym.spaces import Discrete, Box, Space
@@ -17,14 +19,15 @@ import torch.optim as optim
 from torch.distributions import Categorical
 
 
+
 class PPOAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: dict, exp_average_discount: float, policy_shift_tol: float, num_updates: int):
+    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: dict, exp_average_discount: float, clip_ratio: float, num_updates: int):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._action_prob = []
         self._transitions = []
         self._eps = np.finfo(np.float32).eps.item()
         self._exp_average_discount = exp_average_discount
-        self._policy_shift_tol = policy_shift_tol
+        self._clip_ratio = clip_ratio
         self._num_updates = num_updates
         # torch.device("mps" if torch.backends.mps.is_available() else "cpu")
         self._device = 'cpu'
@@ -74,10 +77,11 @@ class PPOAgent(Agent):
             if mask is not None:
                 if np.isnan(p_actions[0]):
                     print(p_actions, mask, state)
-                p_actions = p_actions * torch.from_numpy(mask)
+                p_actions = (p_actions + 1e-20) * torch.from_numpy(mask)
             dist = Categorical(p_actions)
             action = dist.sample()
         self._action_prob.append(p_actions[action])
+        assert p_actions[action].item() != 0, f'{p_actions}, {action}'
         return action.item()
 
     def post_process(self, state: np.ndarray, action: int, reward: float, next_state: np.ndarray, terminal: bool):
@@ -107,7 +111,9 @@ class PPOAgent(Agent):
             state_tensor, action_tensor, *_ = trans
             p_actions = self._policy_net(state_tensor)
             p_action = p_actions[action_tensor]
-            imp_sample.append(p_action.view(1) / prev_p_action.view(1))
+            imp_sample.append(p_action.view(1) / (prev_p_action + utils.eps()).view(1))
+            assert prev_p_action.item() != 0, 'prev_p_action is zero'
+            assert ~np.isnan(imp_sample[-1].item()), 'importance sampling ratio is nan!'
             kl_divs.append(np.log(prev_p_action.detach().numpy()) - np.log(p_action.detach().numpy()))
 
         # Get batch size data.
@@ -127,7 +133,7 @@ class PPOAgent(Agent):
             # backprop
             self._value_optimizer.zero_grad()
             value_loss_tensor.backward()
-            torch.nn.utils.clip_grad_value_(self._value_net.parameters(), 1)
+            #torch.nn.utils.clip_grad_value_(self._value_net.parameters(), 100)
             self._value_optimizer.step()
 
             # Policy Update
@@ -138,13 +144,13 @@ class PPOAgent(Agent):
                 break
 
             policy_loss_tensor = (-torch.minimum(advantage_tensor.detach() * importance_tensor, torch.clip(
-                importance_tensor, 1-self._policy_shift_tol, 1+self._policy_shift_tol) * advantage_tensor.detach())).mean()
+                importance_tensor, 1-self._clip_ratio, 1+self._clip_ratio) * advantage_tensor.detach())).mean()
             assert ~np.isnan(policy_loss_tensor.item()), 'policy loss is nan!'
 
             # backprop
             self._policy_optimizer.zero_grad()
             policy_loss_tensor.backward()
-            torch.nn.utils.clip_grad_value_(self._policy_net.parameters(), 1)
+            #torch.nn.utils.clip_grad_value_(self._policy_net.parameters(), 100)
             self._policy_optimizer.step()
 
         # reset

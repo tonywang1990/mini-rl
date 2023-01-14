@@ -17,8 +17,8 @@ import torch.optim as optim
 from torch.distributions import Categorical
 
 
-class PolicyGradientWithBaselineAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: dict):
+class A2CAgent(Agent):
+    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: dict, tempreture: float):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._rewards = []
         self._log_prob = []
@@ -37,7 +37,7 @@ class PolicyGradientWithBaselineAgent(Agent):
 
         # Policy
         self._policy_net = DenseNet(self._n_states, self._n_actions,
-                                    net_params['width'], net_params['n_hidden'], softmax=True).to(self._device)
+                                    net_params['width'], net_params['n_hidden'], softmax=True, tempreture=tempreture).to(self._device)
         self._policy_optimizer = optim.AdamW(
             self._policy_net.parameters(), lr=self._policy_lr, amsgrad=True)
         #self._optimizer = optim.Adam(self._policy_net.parameters(), lr=self._learning_rate)
@@ -50,6 +50,7 @@ class PolicyGradientWithBaselineAgent(Agent):
 
         self._step = 0
         self._debug = True
+        #torch.autograd.set_detect_anomaly(True)
 
     def reset(self):
         del self._rewards[:]
@@ -70,8 +71,9 @@ class PolicyGradientWithBaselineAgent(Agent):
                 self._n_actions], f"p_actions has wrong shape: {p_actions.shape}"
             if mask is not None:
                 assert list(p_actions.shape) == list(mask.shape), f"mask has the wrong shape: {mask.shape} != {p_actions.shape}"
+        assert ~np.isnan(p_actions[0].item()), (p_actions, state_tensor, )
         if mask is not None:
-            p_actions = p_actions * torch.from_numpy(mask)
+            p_actions = (p_actions + 1e-20) * torch.from_numpy(mask)
         dist = Categorical(p_actions)
         action = dist.sample()
         self._log_prob.append(dist.log_prob(action).view(1))
@@ -86,21 +88,23 @@ class PolicyGradientWithBaselineAgent(Agent):
             G = self._discount_rate * G + reward
             # insert left to maintain same order as _log_prob
             returns.appendleft(G)
-        returns_tensor = torch.tensor(returns, device=self._device)
-        # batch norm
-        returns_tensor = (returns_tensor - returns_tensor.mean()
+        with torch.no_grad():
+            returns_tensor = torch.tensor(returns, device=self._device)
+            # batch norm
+            returns_tensor = (returns_tensor - returns_tensor.mean()
                           ) / (returns_tensor.std() + self._eps)
         if self._debug:
             assert list(returns_tensor.shape) == [
                 len(self._rewards)], f"returns_tensor has wrong shape: {returns_tensor.shape}"
 
         # Value Update
-        criterion = nn.SmoothL1Loss()
+        #criterion = nn.SmoothL1Loss()
         state_value_tensor = torch.cat(self._state_value)
         #state_value_tensor = (state_value_tensor - state_value_tensor.mean()) / (state_value_tensor.std() + self._eps)
         assert returns_tensor.requires_grad == False and state_value_tensor.requires_grad == True
-        value_loss_tensor = criterion(
-            returns_tensor.detach(), state_value_tensor)
+        assert ~np.isnan(returns_tensor.sum().item())
+        assert ~np.isnan(state_value_tensor.sum().item())
+        value_loss_tensor = ((returns_tensor - state_value_tensor)**2).mean()
         # backprop
         self._value_optimizer.zero_grad()
         value_loss_tensor.backward()
@@ -110,6 +114,7 @@ class PolicyGradientWithBaselineAgent(Agent):
         log_prob_tensor = torch.cat(self._log_prob)
         advantage_tensor = (returns_tensor - state_value_tensor).detach()
         assert advantage_tensor.requires_grad == False and log_prob_tensor.requires_grad == True
+        assert ~np.isnan(log_prob_tensor.mean().item())
         policy_loss_tensor = (-advantage_tensor * log_prob_tensor).mean()
         # backprop
         self._policy_optimizer.zero_grad()
@@ -118,19 +123,21 @@ class PolicyGradientWithBaselineAgent(Agent):
 
         # reset
         self.reset()
+
+        return value_loss_tensor.item(), policy_loss_tensor.item() 
     
     def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
         self._rewards.append(reward)
 
 def test_agent():
-    agent = PolicyGradientWithBaselineAgent(Box(low=0, high=1, shape=[4, 4, 3]), Discrete(
-        2), 1.0, 0.1, None, 1.0, 1.0, {'width': 8, 'n_hidden': 1})
+    agent = A2CAgent(Box(low=0, high=1, shape=[4, 4, 3]), Discrete(
+        2), 1.0, 0.1, None, 1.0, 1.0, {'width': 8, 'n_hidden': 1}, 1)
     for _ in range(5):
         state = agent._state_space.sample()
         _ = agent.sample_action(state)
     agent._rewards = [1] * 5
     agent.control()
-    print('policy_gradient_agent_test passed!')
+    print('a2c_agent test passed!')
 
 
 test_agent()

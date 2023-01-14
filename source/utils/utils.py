@@ -13,6 +13,7 @@ import gym
 from source.agents.agent import Agent
 from pettingzoo.utils.env import AECEnv
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
+import json
 
 # Utils
 
@@ -42,16 +43,18 @@ def create_decay_schedule(num_episodes: int, value_start: float = 0.9, value_dec
     return [max(value_min, (value_decay**i)*value_start) for i in range(num_episodes)]
 
 
-def epsilon(step: int, eps_start: float = 0.9, eps_end: float = 0.05, eps_decay: float = 1000) -> float:
+def epsilon(step: int, eps_start: float = 0.9, eps_end: float = 0.00, eps_decay: float = 1000) -> float:
     # EPS_START is the starting value of epsilon
     # EPS_END is the final value of epsilon
     # EPS_DECAY controls the rate of exponential decay of epsilon, higher means a slower decay
     return eps_end + (eps_start - eps_end) * math.exp(-1. * step / eps_decay)
 
+def eps():
+    return np.finfo(np.float32).eps.item()
+
 def normalize(tensor: torch.Tensor):
-    eps = np.finfo(np.float32).eps.item()
     return (tensor - tensor.mean()
-                          ) / (tensor.std() + eps)
+                          ) / (tensor.std() + eps())
 
 # Tabular
 
@@ -90,13 +93,13 @@ def render_mp4(videopath: str) -> str:
         f'base64,{base64_encoded_mp4}" type="video/mp4"></video>'
 
 
-def plot_history(history: list[float], smoothing: bool = True):
-    num_episode = len(history)
+def plot_history(rewards: list[float], smoothing: bool = True):
+    num_episode = len(rewards)
     plt.figure(0, figsize=(16, 4))
     plt.title("average reward per step")
     history_smoothed = [
-        np.mean(np.array(history[max(0, i-num_episode//10): i+1])) for i in range(num_episode)]
-    plt.plot(history, 'o', alpha=0.2)
+        np.mean(np.array(rewards[max(0, i-num_episode//10): i+1])) for i in range(num_episode)]
+    plt.plot(rewards, 'o', alpha=0.2)
     if smoothing:
         plt.plot(history_smoothed, linewidth=5)
 
@@ -219,21 +222,32 @@ def play_episode(agent: Agent, env: gym.Env, epsilon: Optional[float] = None, le
         video.close()
     return total_reward, steps
 
+def create_shuffled_agent(agent_dict: Dict[str, Agent], shuffle: bool) -> Dict[str, str]:
+    agent_names = list(agent_dict.keys())
+    if shuffle:
+        shuffled = dict(zip(agent_names, random.sample(agent_names, len(agent_names))))
+        return shuffled
+    else:
+        return dict(zip(agent_names, agent_names))
 
 # Pettingzoo.classsic environment
-def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv) -> Tuple[defaultdict, defaultdict, defaultdict]:
+# TODO: randomize agent so that different agent take turns to start first.
+def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: bool = False, debug: bool = False) -> Tuple[defaultdict, defaultdict, defaultdict, defaultdict]:
+    if debug: 
+        # In debug mode, we fix the random behavior so it's the same sequence for every episode
+        np.random.seed(101)
+    shuffled = create_shuffled_agent(agent_dict, shuffle)
     env.reset()
     for agent in agent_dict.values():
         agent.reset()
-    steps, total_reward, wins = defaultdict(int), defaultdict(float), defaultdict(int)
+    steps, rewards, vloss, ploss = defaultdict(int), defaultdict(float), defaultdict(float), defaultdict(float)
     history = defaultdict(list)
 
     for agent_id in env.agent_iter():
-        agent = agent_dict[agent_id]
+        agent = agent_dict[shuffled[agent_id]]
         # Make observation
         observation, reward, terminal, truncated, info = env.last()
-        if observation is None:
-            continue
+        assert observation is not None
         # Select action
         if terminal or truncated:
             action = None
@@ -241,20 +255,22 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv) -> Tuple[
             action = agent.sample_action(observation['observation'], observation['action_mask'])
         env.step(action)
         # Train the agent
-        if agent_id in history:
-            prev_ob, prev_action = history[agent_id][-1]
+        if shuffled[agent_id] in history:
+            prev_ob, prev_action = history[shuffled[agent_id]][-1]
             agent.post_process(prev_ob, prev_action, reward, observation['observation'],
                           terminal)
-        history[agent_id].append((observation['observation'], action))
+        history[shuffled[agent_id]].append((observation['observation'], action))
         # bookkeeping
-        total_reward[agent_id] += reward
-        wins[agent_id] += (reward > 0)
-        steps[agent_id] += 1
+        rewards[shuffled[agent_id]] += reward
+        steps[shuffled[agent_id]] += 1
         # if steps > 1000:
         #    terminal = True
-    if agent._learning:
-        agent.control()
-    return total_reward, wins, steps
+    for id, agent in agent_dict.items():
+        if agent._learning:
+            value_loss, policy_loss = agent.control()
+            vloss[id] = value_loss
+            ploss[id] = policy_loss
+    return rewards, steps, vloss, ploss
 
 
 def evaluate_multiagent(agent_dict: Dict[str, Agent], env: AECEnv, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
@@ -263,8 +279,8 @@ def evaluate_multiagent(agent_dict: Dict[str, Agent], env: AECEnv, num_episode: 
     total_reward = defaultdict(float)
     successful_episode = 0
     for _ in tqdm(range(num_episode)):
-        rewards, wins, steps = play_multiagent_episode(
-            agent_dict, env)  # ,epsilon=epsilon_schedule[i])
+        rewards, steps, vloss, ploss = play_multiagent_episode(
+            agent_dict, env, False)  # ,epsilon=epsilon_schedule[i])
         for agent, reward in rewards.items():
             total_reward[agent] += reward
     return total_reward, num_episode

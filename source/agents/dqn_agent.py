@@ -89,9 +89,9 @@ class DQNAgent(Agent):
                 action = self._action_space.sample()
         return action
 
-    def _optimize_model(self):
+    def _optimize_model(self) -> float:
         if len(self._memory) < self._batch_size:
-            return
+            return 0.0
         transitions = self._memory.sample(self._batch_size)
         # Transpose the batch (see https://stackoverflow.com/a/19343/3343043 for
         # detailed explanation). This converts batch-array of Transitions
@@ -158,6 +158,8 @@ class DQNAgent(Agent):
         torch.nn.utils.clip_grad_value_(self._policy_net.parameters(), 100)
         self._optimizer.step()
 
+        return loss.item()
+
     def _update_target_net(self):
         # Soft update of the target network's weights
         # θ′ ← τ θ + (1 −τ )θ′
@@ -186,9 +188,13 @@ class DQNAgent(Agent):
 
     # Perform one step of the optimization (on the policy network)
     def control(self):
+        loss = 0
         for _ in range(self._update_freq):
-            self._optimize_model()
+            loss += self._optimize_model() / self._update_freq 
             self._update_target_net()
+        return loss, 0.0
+
+        
 
 def test_agent():
     agent = DQNAgent(state_space=Box(low=0, high=1, shape=[4, 5, 3]), action_space=Discrete(

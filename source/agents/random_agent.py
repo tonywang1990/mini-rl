@@ -15,7 +15,7 @@ class RandomAgent(Agent):
         super().__init__(state_space, action_space,
                          discount_rate, epsilon, learning_rate, learning)
         self._device = 'cpu'
-        self._leraning = False
+        self._learning = False
 
     def sample_action(self, state: np.ndarray, action_mask: Optional[np.ndarray] = None) -> int:
         if action_mask is not None:
