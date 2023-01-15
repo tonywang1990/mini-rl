@@ -187,12 +187,14 @@ class DQNAgent(Agent):
                           reward_tensor, terminal_tensor)
 
     # Perform one step of the optimization (on the policy network)
-    def control(self):
+    def control(self) -> dict:
+        if not self._learning:
+            return {}
         loss = 0
         for _ in range(self._update_freq):
             loss += self._optimize_model() / self._update_freq 
             self._update_target_net()
-        return loss, 0.0
+        return {'value_loss': loss} 
 
         
 

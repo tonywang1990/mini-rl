@@ -92,6 +92,29 @@ def render_mp4(videopath: str) -> str:
     return f'<video width=400 controls><source src="data:video/mp4;' \
         f'base64,{base64_encoded_mp4}" type="video/mp4"></video>'
 
+metric_metadata = {'reward': {'format': '-', 'smooth':True}}
+
+def plot_logs(logs: list[defaultdict], window: int = 10):
+    data = defaultdict(lambda: defaultdict(list))
+    num_episode = len(logs)
+    for ep in logs:
+        for agent_id, metrics in ep.items():
+            for name, metric in metrics.items():
+                data[agent_id][name].append(metric)
+    idx = 0
+    for agent_id, metrics in data.items():
+        plt.figure(idx, figsize=(16,4))
+        plt.title(agent_id)
+        for name, metric in metrics.items():
+            #if name in metric_metadata and metric_metadata[name]['smooth']:
+            metric = apply_smooth(metric, window)
+            plt.plot(metric, linewidth=3, label=name)
+        plt.legend()
+        idx+=1
+
+def apply_smooth(data: list, window:int = 10) -> list:
+    length = len(data)
+    return [np.mean(np.array(data[max(0, i-length//window): i+1])) for i in range(length)]
 
 def plot_history(rewards: list[float], smoothing: bool = True):
     num_episode = len(rewards)
@@ -232,7 +255,7 @@ def create_shuffled_agent(agent_dict: Dict[str, Agent], shuffle: bool) -> Dict[s
 
 # Pettingzoo.classsic environment
 # TODO: randomize agent so that different agent take turns to start first.
-def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: bool = False, debug: bool = False) -> Tuple[defaultdict, defaultdict, defaultdict, defaultdict]:
+def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: bool = False, debug: bool = False) -> defaultdict:
     if debug: 
         # In debug mode, we fix the random behavior so it's the same sequence for every episode
         np.random.seed(101)
@@ -240,7 +263,7 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
     env.reset()
     for agent in agent_dict.values():
         agent.reset()
-    steps, rewards, vloss, ploss = defaultdict(int), defaultdict(float), defaultdict(float), defaultdict(float)
+    logs = defaultdict(lambda: defaultdict(float))
     history = defaultdict(list)
 
     for agent_id in env.agent_iter():
@@ -261,23 +284,21 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
                           terminal)
         history[shuffled[agent_id]].append((observation['observation'], action))
         # bookkeeping
-        rewards[shuffled[agent_id]] += reward
-        steps[shuffled[agent_id]] += 1
+        logs[shuffled[agent_id]]['reward'] += reward
+        logs[shuffled[agent_id]]['episode_len'] += 1
         # if steps > 1000:
         #    terminal = True
-    for id, agent in agent_dict.items():
-        if agent._learning:
-            value_loss, policy_loss = agent.control()
-            vloss[id] = value_loss
-            ploss[id] = policy_loss
-    return rewards, steps, vloss, ploss
+    for agent_id, agent in agent_dict.items():
+        loss_dict = agent.control()
+        logs[shuffled[agent_id]] |= loss_dict
+
+    return logs
 
 
 def evaluate_multiagent(agent_dict: Dict[str, Agent], env: AECEnv, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
     for agent in agent_dict.values():
         agent._epsilon = 0.0
     total_reward = defaultdict(float)
-    successful_episode = 0
     for _ in tqdm(range(num_episode)):
         rewards, steps, vloss, ploss = play_multiagent_episode(
             agent_dict, env, False)  # ,epsilon=epsilon_schedule[i])

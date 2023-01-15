@@ -80,7 +80,9 @@ class A2CAgent(Agent):
         self._state_value.append(state_value)
         return action.item()
 
-    def control(self):
+    def control(self) -> dict:
+        if not self._learning: 
+            return {}
         G = 0
         returns = deque()
         # reconstruct returns from MC
@@ -102,8 +104,7 @@ class A2CAgent(Agent):
         state_value_tensor = torch.cat(self._state_value)
         #state_value_tensor = (state_value_tensor - state_value_tensor.mean()) / (state_value_tensor.std() + self._eps)
         assert returns_tensor.requires_grad == False and state_value_tensor.requires_grad == True
-        assert ~np.isnan(returns_tensor.sum().item())
-        assert ~np.isnan(state_value_tensor.sum().item())
+        assert ~np.isnan(returns_tensor.sum().item()) and ~np.isnan(state_value_tensor.sum().item())
         value_loss_tensor = ((returns_tensor - state_value_tensor)**2).mean()
         # backprop
         self._value_optimizer.zero_grad()
@@ -124,7 +125,7 @@ class A2CAgent(Agent):
         # reset
         self.reset()
 
-        return value_loss_tensor.item(), policy_loss_tensor.item() 
+        return {'value_loss': value_loss_tensor.item(), 'policy_loss':policy_loss_tensor.item()}
     
     def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
         self._rewards.append(reward)

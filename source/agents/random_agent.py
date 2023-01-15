@@ -25,6 +25,6 @@ class RandomAgent(Agent):
             action = self._action_space.sample()
         return action
 
-    def control(self, state: Any, action: Any, reward: float, new_state: Any, terminal: bool):
-        raise NotImplementedError
+    def control(self) -> dict:
+        return {}
 
