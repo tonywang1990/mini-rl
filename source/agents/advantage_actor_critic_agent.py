@@ -61,23 +61,20 @@ class A2CAgent(Agent):
         # state: tensor of shape [n_states]
         # return: int
         state_tensor = utils.to_feature(state)  # [n_states]
+        p_actions = self._policy_net(state_tensor)  # [n_actions]
         if self._debug:
             assert list(state_tensor.shape) == [
                 self._n_states], f"state_tensor has wrong shape: {state_tensor.shape}"
-        p_actions = self._policy_net(state_tensor)  # [n_actions]
-        state_value = self._value_net(state_tensor)
-        if self._debug:
             assert list(p_actions.shape) == [
                 self._n_actions], f"p_actions has wrong shape: {p_actions.shape}"
+            assert ~np.isnan(p_actions.sum().item()), (p_actions, state_tensor)
             if mask is not None:
                 assert list(p_actions.shape) == list(mask.shape), f"mask has the wrong shape: {mask.shape} != {p_actions.shape}"
-        assert ~np.isnan(p_actions[0].item()), (p_actions, state_tensor, )
         if mask is not None:
             p_actions = (p_actions + 1e-20) * torch.from_numpy(mask)
         dist = Categorical(p_actions)
         action = dist.sample()
         self._log_prob.append(dist.log_prob(action).view(1))
-        self._state_value.append(state_value)
         return action.item()
 
     def control(self) -> dict:
@@ -105,7 +102,7 @@ class A2CAgent(Agent):
         #state_value_tensor = (state_value_tensor - state_value_tensor.mean()) / (state_value_tensor.std() + self._eps)
         assert returns_tensor.requires_grad == False and state_value_tensor.requires_grad == True
         assert ~np.isnan(returns_tensor.sum().item()) and ~np.isnan(state_value_tensor.sum().item())
-        value_loss_tensor = ((returns_tensor - state_value_tensor)**2).mean()
+        value_loss_tensor = ((returns_tensor - state_value_tensor)**2).mean() #pyre-fixme[58]
         # backprop
         self._value_optimizer.zero_grad()
         value_loss_tensor.backward()
@@ -128,6 +125,9 @@ class A2CAgent(Agent):
         return {'value_loss': value_loss_tensor.item(), 'policy_loss':policy_loss_tensor.item()}
     
     def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
+        state_tensor = utils.to_feature(state)  # [n_states]
+        state_value = self._value_net(state_tensor)
+        self._state_value.append(state_value)
         self._rewards.append(reward)
 
 def test_agent():
@@ -135,8 +135,9 @@ def test_agent():
         2), 1.0, 0.1, None, 1.0, 1.0, {'width': 8, 'n_hidden': 1}, 1)
     for _ in range(5):
         state = agent._state_space.sample()
-        _ = agent.sample_action(state)
-    agent._rewards = [1] * 5
+        action = agent.sample_action(state)
+    #agent._rewards = [1] * 5
+        agent.post_process(state, action, 1, None, None)
     agent.control()
     print('a2c_agent test passed!')
 

@@ -92,9 +92,9 @@ def render_mp4(videopath: str) -> str:
     return f'<video width=400 controls><source src="data:video/mp4;' \
         f'base64,{base64_encoded_mp4}" type="video/mp4"></video>'
 
-metric_metadata = {'reward': {'format': '-', 'smooth':True}}
+metric_metadata = {'default': {'format': '-', 'smooth':True}, 'episode_len': {'skip':True}}
 
-def plot_logs(logs: list[defaultdict], window: int = 10):
+def plot_logs(logs: list[defaultdict], window: int = 50):
     data = defaultdict(lambda: defaultdict(list))
     num_episode = len(logs)
     for ep in logs:
@@ -107,6 +107,8 @@ def plot_logs(logs: list[defaultdict], window: int = 10):
         plt.title(agent_id)
         for name, metric in metrics.items():
             #if name in metric_metadata and metric_metadata[name]['smooth']:
+            if name == 'episode_len': 
+                continue
             metric = apply_smooth(metric, window)
             plt.plot(metric, linewidth=3, label=name)
         plt.legend()
@@ -290,7 +292,8 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
         #    terminal = True
     for agent_id, agent in agent_dict.items():
         loss_dict = agent.control()
-        logs[shuffled[agent_id]] |= loss_dict
+        if len(loss_dict) > 0:
+            logs[shuffled[agent_id]] |= loss_dict
 
     return logs
 

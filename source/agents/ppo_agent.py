@@ -21,12 +21,13 @@ from torch.distributions import Categorical
 
 
 class PPOAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: dict, exp_average_discount: float, clip_ratio: float, num_updates: int):
+    # Default param values are from openai spinup
+    def __init__(self, state_space: Space, action_space: Discrete, net_params: dict, discount_rate: float = 0.99, epsilon: float = -1, learning_rate: float = -1, policy_lr: float = 3e-4, value_lr: float=1e-4, gae_lambda: float=0.97, clip_ratio: float=0.1, num_updates: int=80):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._action_prob = []
         self._transitions = []
         self._eps = np.finfo(np.float32).eps.item()
-        self._exp_average_discount = exp_average_discount
+        self._gae_lambda = gae_lambda
         self._clip_ratio = clip_ratio
         self._num_updates = num_updates
         # torch.device("mps" if torch.backends.mps.is_available() else "cpu")
@@ -75,9 +76,8 @@ class PPOAgent(Agent):
                 if mask is not None:
                     assert list(p_actions.shape) == list(mask.shape), f"mask has the wrong shape: {mask.shape} != {p_actions.shape}"
             if mask is not None:
-                if np.isnan(p_actions[0]):
-                    print(p_actions, mask, state)
-                p_actions = (p_actions + 1e-20) * torch.from_numpy(mask)
+                assert ~np.isnan(p_actions[0]), (p_actions, mask, state)
+                p_actions = p_actions * torch.from_numpy(mask)
             dist = Categorical(p_actions)
             action = dist.sample()
         self._action_prob.append(p_actions[action])
@@ -102,7 +102,7 @@ class PPOAgent(Agent):
             delta = reward + self._discount_rate * \
                 next_state_value_tensor * (1 - terminal) - state_value_tensor
             advantage = delta + self._discount_rate * \
-                self._exp_average_discount * advantage * (1 - terminal)
+                self._gae_lambda * advantage * (1 - terminal)
             adv_list.append(advantage)
         adv_list.reverse()
 
@@ -122,13 +122,13 @@ class PPOAgent(Agent):
             imp_sample = imp_sample[:batch_size]
         adv_tensor = torch.concat(adv_list)
         importance_tensor = torch.concat(imp_sample)
-        return utils.normalize(adv_tensor), importance_tensor, np.mean(np.array(kl_divs)).astype(float)
+        return adv_tensor, importance_tensor, np.mean(np.array(kl_divs)).astype(float)
 
-    def control(self):
-        for i in range(self._num_updates):
+    def control(self) -> dict:
+        # Value Update
+        for _ in range(self._num_updates):
             advantage_tensor, importance_tensor, mean_approx_kl = self.process_batch()
-            # Value Update.
-            value_loss_tensor = (advantage_tensor ** 2).mean()
+            value_loss_tensor = (advantage_tensor ** 2).mean() #pyre-fixme[58]
             assert ~np.isnan(value_loss_tensor.item()), 'value loss is nan!'
             # backprop
             self._value_optimizer.zero_grad()
@@ -136,17 +136,17 @@ class PPOAgent(Agent):
             #torch.nn.utils.clip_grad_value_(self._value_net.parameters(), 100)
             self._value_optimizer.step()
 
-            # Policy Update
-            # print(action_prob_tensor.shape)
-            assert importance_tensor.requires_grad == True and advantage_tensor.shape == importance_tensor.shape
+           
+        # Policy Update
+        for _ in range(self._num_updates):
+            advantage_tensor, importance_tensor, mean_approx_kl = self.process_batch()
+            policy_loss_tensor = (-torch.minimum(advantage_tensor.detach() * importance_tensor, torch.clip(
+                importance_tensor, 1-self._clip_ratio, 1+self._clip_ratio) * advantage_tensor.detach())).mean()
             if mean_approx_kl > 1.5 * self._target_kl:
                 #print(f'Early stopping at step {i} due to reaching max kl.')
                 break
-
-            policy_loss_tensor = (-torch.minimum(advantage_tensor.detach() * importance_tensor, torch.clip(
-                importance_tensor, 1-self._clip_ratio, 1+self._clip_ratio) * advantage_tensor.detach())).mean()
+            assert importance_tensor.requires_grad == True and advantage_tensor.shape == importance_tensor.shape
             assert ~np.isnan(policy_loss_tensor.item()), 'policy loss is nan!'
-
             # backprop
             self._policy_optimizer.zero_grad()
             policy_loss_tensor.backward()
@@ -155,6 +155,8 @@ class PPOAgent(Agent):
 
         # reset
         self.reset()
+
+        return {'value_loss': value_loss_tensor.item(), 'policy_loss': policy_loss_tensor.item()}
 
 
 def test_agent():
