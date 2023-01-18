@@ -198,15 +198,7 @@ class DQNAgent(Agent):
         return {'value_loss': loss} 
     
     def update_weights_from(self, agent: DQNAgent, tau:float = 0.005):
-        source_state_dict = agent._policy_net.state_dict()
-        target_stste_dict = self._policy_net.state_dict()
-        for key in target_stste_dict:
-            target_stste_dict[key] = source_state_dict[key] * \
-                tau + target_stste_dict[key]*(1-self._tau)
-        self._target_net.load_state_dict(target_stste_dict)
-
-
-        
+        utils.update_weights(source_net=agent._policy_net, target_net=self._policy_net, tau=tau)
 
 def test_agent():
     agent = DQNAgent(state_space=Box(low=0, high=1, shape=[4, 5, 3]), action_space=Discrete(

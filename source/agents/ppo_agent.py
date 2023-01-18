@@ -22,9 +22,9 @@ from torch.distributions import Categorical
 
 class PPOAgent(Agent):
     # Default param values are from openai spinup
-    def __init__(self, state_space: Space, action_space: Discrete, net_params: dict, discount_rate: float = 0.99, epsilon: float = -1, learning_rate: float = -1, policy_lr: float = 3e-4, value_lr: float=1e-4, gae_lambda: float=0.97, clip_ratio: float=0.1, num_updates: int=80):
+    def __init__(self, state_space: Space, action_space: Discrete, net_params: dict, discount_rate: float = 0.99, epsilon: float = -1, learning_rate: float = -1, policy_lr: float = 3e-4, value_lr: float=1e-4, gae_lambda: float=0.97, clip_ratio: float=0.1, num_updates: int=80, entropy_coeff:float = 0.01):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
-        self._action_prob = []
+        self._log_probs = []
         self._transitions = []
         self._eps = np.finfo(np.float32).eps.item()
         self._gae_lambda = gae_lambda
@@ -36,6 +36,7 @@ class PPOAgent(Agent):
         self._policy_lr = policy_lr
         self._value_lr = value_lr
         self._target_kl = 0.01 
+        self._entropy_coeff = entropy_coeff
 
         # Get number of actions from gym action space
         self._n_actions = action_space.n
@@ -59,7 +60,7 @@ class PPOAgent(Agent):
         self._debug = True
 
     def reset(self):
-        del self._action_prob[:]
+        del self._log_probs[:]
         del self._transitions[:]
 
     def sample_action(self, state: Union[torch.Tensor, np.ndarray], mask: Optional[np.ndarray]=None) -> Union[bool, float, int]:
@@ -75,23 +76,24 @@ class PPOAgent(Agent):
                     self._n_actions], f"p_actions has wrong shape: {p_actions.shape}"
                 if mask is not None:
                     assert list(p_actions.shape) == list(mask.shape), f"mask has the wrong shape: {mask.shape} != {p_actions.shape}"
+                    assert ~np.isnan(p_actions[0]), (p_actions, mask, state)
             if mask is not None:
-                assert ~np.isnan(p_actions[0]), (p_actions, mask, state)
-                p_actions = p_actions * torch.from_numpy(mask)
-            dist = Categorical(p_actions)
+                mp_actions = p_actions * torch.from_numpy(mask)
+            else:
+                mp_actions = p_actions
+            dist = Categorical(mp_actions)
             action = dist.sample()
-        self._action_prob.append(p_actions[action])
-        assert p_actions[action].item() != 0, f'{p_actions}, {action}'
+        self._log_probs.append(Categorical(p_actions).log_prob(action))
         return action.item()
 
     def post_process(self, state: np.ndarray, action: int, reward: float, next_state: np.ndarray, terminal: bool):
         # Calculate state
         self._transitions.append(utils.Transition(
-            utils.to_feature(state), action, utils.to_feature(next_state), reward, terminal))
+            utils.to_feature(state), torch.tensor(action), utils.to_feature(next_state), reward, terminal))
 
-    def process_batch(self, batch_size: int = -1) -> Tuple[torch.Tensor, torch.Tensor, float]:
+    def process_batch(self, batch_size: int = -1) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, float]:
         # Calculate advantage.
-        adv_list, imp_sample, kl_divs = list(), list(), list()
+        adv_list, imp_sample, kl_divs, entropy = list(), list(), list(), list()
         advantage = torch.tensor(0, dtype=torch.float)
         for trans in reversed(self._transitions):
             # Calculate advantage using GAE
@@ -106,28 +108,31 @@ class PPOAgent(Agent):
             adv_list.append(advantage)
         adv_list.reverse()
 
-        for trans, prev_p_action in zip(self._transitions, self._action_prob):
+        for trans, prev_log_prob in zip(self._transitions, self._log_probs):
             # Calculate importance sample
             state_tensor, action_tensor, *_ = trans
             p_actions = self._policy_net(state_tensor)
-            p_action = p_actions[action_tensor]
-            imp_sample.append(p_action.view(1) / (prev_p_action + utils.eps()).view(1))
-            assert prev_p_action.item() != 0, 'prev_p_action is zero'
+            dist = Categorical(p_actions)
+            entropy.append(dist.entropy().view(1))
+            log_prob = dist.log_prob(action_tensor) 
+            imp_sample.append(torch.exp(log_prob - prev_log_prob).view(1))
             assert ~np.isnan(imp_sample[-1].item()), 'importance sampling ratio is nan!'
-            kl_divs.append(np.log(prev_p_action.detach().numpy()) - np.log(p_action.detach().numpy()))
+            kl_divs.append(prev_log_prob.item() - log_prob.item())
 
         # Get batch size data.
         if batch_size != -1 and batch_size < len(adv_list):
             adv_list = adv_list[:batch_size]
             imp_sample = imp_sample[:batch_size]
+            entropy = entropy[:batch_size]
         adv_tensor = torch.concat(adv_list)
         importance_tensor = torch.concat(imp_sample)
-        return adv_tensor, importance_tensor, np.mean(np.array(kl_divs)).astype(float)
+        entropy_tensor = torch.concat(entropy)
+        return adv_tensor, importance_tensor, entropy_tensor, np.mean(np.array(kl_divs)).astype(float)
 
     def control(self) -> dict:
         # Value Update
         for _ in range(self._num_updates):
-            advantage_tensor, importance_tensor, mean_approx_kl = self.process_batch()
+            advantage_tensor, importance_tensor, entropy_tensor, mean_approx_kl = self.process_batch()
             value_loss_tensor = (advantage_tensor ** 2).mean() #pyre-fixme[58]
             assert ~np.isnan(value_loss_tensor.item()), 'value loss is nan!'
             # backprop
@@ -136,15 +141,20 @@ class PPOAgent(Agent):
             #torch.nn.utils.clip_grad_value_(self._value_net.parameters(), 100)
             self._value_optimizer.step()
 
-           
+        num_policy_update = 0
         # Policy Update
         for _ in range(self._num_updates):
-            advantage_tensor, importance_tensor, mean_approx_kl = self.process_batch()
-            policy_loss_tensor = (-torch.minimum(advantage_tensor.detach() * importance_tensor, torch.clip(
+            advantage_tensor, importance_tensor, entropy_tensor, mean_approx_kl = self.process_batch()
+            #print('adv',  advantage_tensor, 'imp:', importance_tensor)
+            clip_loss_tensor = (-torch.minimum(advantage_tensor.detach() * importance_tensor, torch.clip(
                 importance_tensor, 1-self._clip_ratio, 1+self._clip_ratio) * advantage_tensor.detach())).mean()
+            # max entropy 
+            policy_loss_tensor = clip_loss_tensor - self._entropy_coeff * entropy_tensor.mean()
+            # If KL divergence is too large, the new policy is diverging from old policy, stop training since it could lead to unstable/bad udpates.
             if mean_approx_kl > 1.5 * self._target_kl:
-                #print(f'Early stopping at step {i} due to reaching max kl.')
+                #print(f'Early stopping at step {_} due to {mean_approx_kl} reaching max kl.')
                 break
+            num_policy_update += 1
             assert importance_tensor.requires_grad == True and advantage_tensor.shape == importance_tensor.shape
             assert ~np.isnan(policy_loss_tensor.item()), 'policy loss is nan!'
             # backprop
@@ -156,12 +166,16 @@ class PPOAgent(Agent):
         # reset
         self.reset()
 
-        return {'value_loss': value_loss_tensor.item(), 'policy_loss': policy_loss_tensor.item()}
+        return {'value_loss': value_loss_tensor.item(), 'policy_loss': policy_loss_tensor.item(), 'entropy': entropy_tensor.mean().item(), 'num_policy_udpate': num_policy_update}
+    
+    def update_weights_from(self, agent: PPOAgent, tau:float = 0.01):
+        utils.update_weights(source_net=agent._value_net, target_net=self._value_net, tau=tau)
+        utils.update_weights(source_net=agent._policy_net, target_net=self._policy_net, tau=tau)
 
 
 def test_agent():
-    agent = PPOAgent(Box(low=0, high=1, shape=[4, 1]), Discrete(
-        2), 1.0, 0.1, None, 1.0, 1.0, {'width': 8, 'n_hidden': 1}, 0.5, 0.2, 5)
+    agent = PPOAgent(state_space=Box(low=0, high=1, shape=[4, 1]), action_space=Discrete(
+        2), net_params={'width': 8, 'n_hidden': 1})
     for _ in range(5):
         state = agent._state_space.sample()
         _ = agent.sample_action(state)

@@ -13,18 +13,18 @@ import gym
 from source.agents.agent import Agent
 from pettingzoo.utils.env import AECEnv
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
-import json
+import copy
 
 # Utils
 
-## General
+# General
 
 
 def evaluate_agent(agent: Agent, env: Env, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
     total_reward = 0
     successful_episode = 0
-    ## Set learning to false
-    agent._learning=False
+    # Set learning to false
+    agent._learning = False
     for _ in tqdm(range(num_episode)):
         reward, _ = play_episode(agent, env, epsilon=epsilon)
         if reward > threshold:
@@ -49,12 +49,14 @@ def epsilon(step: int, eps_start: float = 0.9, eps_end: float = 0.00, eps_decay:
     # EPS_DECAY controls the rate of exponential decay of epsilon, higher means a slower decay
     return eps_end + (eps_start - eps_end) * math.exp(-1. * step / eps_decay)
 
+
 def eps():
     return np.finfo(np.float32).eps.item()
 
+
 def normalize(tensor: torch.Tensor):
     return (tensor - tensor.mean()
-                          ) / (tensor.std() + eps())
+            ) / (tensor.std() + eps())
 
 # Tabular
 
@@ -92,31 +94,30 @@ def render_mp4(videopath: str) -> str:
     return f'<video width=400 controls><source src="data:video/mp4;' \
         f'base64,{base64_encoded_mp4}" type="video/mp4"></video>'
 
-metric_metadata = {'default': {'format': '-', 'smooth':True}, 'episode_len': {'skip':True}}
 
-def plot_logs(logs: list[defaultdict], window: int = 50):
-    data = defaultdict(lambda: defaultdict(list))
-    num_episode = len(logs)
-    for ep in logs:
-        for agent_id, metrics in ep.items():
-            for name, metric in metrics.items():
-                data[agent_id][name].append(metric)
+metric_metadata = {'default': {'format': '-',
+                               'smooth': True}, 'episode_len': {'skip': True}}
+
+
+def plot_training_logs(logging: defaultdict, window: int = 50):
     idx = 0
-    for agent_id, metrics in data.items():
-        plt.figure(idx, figsize=(16,4))
+    for agent_id, metrics in logging.items():
+        plt.figure(idx, figsize=(16, 4))
         plt.title(agent_id)
         for name, metric in metrics.items():
-            #if name in metric_metadata and metric_metadata[name]['smooth']:
-            if name == 'episode_len': 
+            # if name in metric_metadata and metric_metadata[name]['smooth']:
+            if name == 'episode_len':
                 continue
             metric = apply_smooth(metric, window)
             plt.plot(metric, linewidth=3, label=name)
         plt.legend()
-        idx+=1
+        idx += 1
 
-def apply_smooth(data: list, window:int = 10) -> list:
+
+def apply_smooth(data: list, window: int = 10) -> list:
     length = len(data)
     return [np.mean(np.array(data[max(0, i-length//window): i+1])) for i in range(length)]
+
 
 def plot_history(rewards: list[float], smoothing: bool = True):
     num_episode = len(rewards)
@@ -219,6 +220,8 @@ class ReplayMemory(object):
         return len(self.memory)
 
 # gym environment
+
+
 def play_episode(agent: Agent, env: gym.Env, epsilon: Optional[float] = None, learning_rate: Optional[float] = None, video_path: Optional[str] = None) -> Tuple[float, int]:
     if video_path is not None:
         video = VideoRecorder(env, video_path)
@@ -237,7 +240,7 @@ def play_episode(agent: Agent, env: gym.Env, epsilon: Optional[float] = None, le
         state = new_state
         stop = terminal or truncated
         # bookkeeping
-        total_reward += reward 
+        total_reward += reward
         steps += 1
         if video_path is not None:
             video.capture_frame()
@@ -247,18 +250,22 @@ def play_episode(agent: Agent, env: gym.Env, epsilon: Optional[float] = None, le
         video.close()
     return total_reward, steps
 
+
 def create_shuffled_agent(agent_dict: Dict[str, Agent], shuffle: bool) -> Dict[str, str]:
     agent_names = list(agent_dict.keys())
     if shuffle:
-        shuffled = dict(zip(agent_names, random.sample(agent_names, len(agent_names))))
+        shuffled = dict(
+            zip(agent_names, random.sample(agent_names, len(agent_names))))
         return shuffled
     else:
         return dict(zip(agent_names, agent_names))
 
 # Pettingzoo.classsic environment
 # TODO: randomize agent so that different agent take turns to start first.
+
+
 def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: bool = False, debug: bool = False) -> defaultdict:
-    if debug: 
+    if debug:
         # In debug mode, we fix the random behavior so it's the same sequence for every episode
         np.random.seed(101)
     shuffled = create_shuffled_agent(agent_dict, shuffle)
@@ -277,14 +284,16 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
         if terminal or truncated:
             action = None
         else:
-            action = agent.sample_action(observation['observation'], observation['action_mask'])
+            action = agent.sample_action(
+                observation['observation'], observation['action_mask'])
         env.step(action)
         # Train the agent
         if shuffled[agent_id] in history:
             prev_ob, prev_action = history[shuffled[agent_id]][-1]
             agent.post_process(prev_ob, prev_action, reward, observation['observation'],
-                          terminal)
-        history[shuffled[agent_id]].append((observation['observation'], action))
+                               terminal)
+        history[shuffled[agent_id]].append(
+            (observation['observation'], action))
         # bookkeeping
         logs[shuffled[agent_id]]['reward'] += reward
         logs[shuffled[agent_id]]['episode_len'] += 1
@@ -298,13 +307,39 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
     return logs
 
 
-def evaluate_multiagent(agent_dict: Dict[str, Agent], env: AECEnv, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
-    for agent in agent_dict.values():
-        agent._epsilon = 0.0
-    total_reward = defaultdict(float)
-    for _ in tqdm(range(num_episode)):
-        rewards, steps, vloss, ploss = play_multiagent_episode(
-            agent_dict, env, False)  # ,epsilon=epsilon_schedule[i])
-        for agent, reward in rewards.items():
-            total_reward[agent] += reward
-    return total_reward, num_episode
+def update_weights(source_net: torch.nn.Module, target_net: torch.nn.Module, tau: float):
+    source_state_dict = source_net.state_dict()
+    target_stste_dict = target_net.state_dict()
+    for key in target_stste_dict:
+        target_stste_dict[key] = source_state_dict[key] * \
+            tau + target_stste_dict[key]*(1-tau)
+    target_net.load_state_dict(target_stste_dict)
+
+
+def train_double_agent(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: int, self_play: bool, shuffle: bool, verbal:bool) -> defaultdict:
+    logging = defaultdict(lambda: defaultdict(list))
+    if self_play:
+        assert agent_dict['player_1'] is not None
+        agent_dict['player_2'] = copy.deepcopy(agent_dict['player_1'])
+        agent_dict['player_2']._learning = False
+    if verbal:
+        print('agents:', agent_dict)
+    for i in range(num_epoch):
+        for _ in tqdm(range(num_episode)):
+            logs = play_multiagent_episode(
+                agent_dict, env, shuffle=shuffle, debug=False)
+            for agent_id, log in logs.items():
+                for name, metric in log.items():
+                    logging[agent_id][name].append(metric)
+        if self_play:
+            agent_dict['player_2'].update_weights_from(
+                agent_dict['player_1'], tau=1)
+        if verbal:
+            stats = ""
+            for name, metric in logging['player_1'].items():
+                data = metric[-num_episode:]
+                stats += f"{name}: {np.mean(np.array(data)):.5f}, "
+                if name == 'reward':
+                    stats += f"win: {data.count(1)}, lose: {data.count(-1)}, draw: {data.count(0)}, "
+            print(f"epoch: {i}, {stats}")
+    return logging
