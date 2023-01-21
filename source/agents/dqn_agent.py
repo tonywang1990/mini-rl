@@ -19,7 +19,7 @@ import torch.nn.functional as F
 
 
 class DQNAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, learning: bool, batch_size: int, tau: float, eps_decay: float, net_params:dict, update_freq:int):
+    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, learning: bool, batch_size: int, tau: float, eps_decay: float, net_params:list, update_freq:int):
         super().__init__(state_space, action_space,
                          discount_rate, epsilon, learning_rate, learning)
         # TAU is the update rate of the target network
@@ -38,9 +38,10 @@ class DQNAgent(Agent):
         self._state_dim = state_space.shape
         self._n_states = np.prod(np.array(self._state_dim)).astype(int)
 
-        self._policy_net = DenseNet(self._n_states, self._n_actions, net_params['width'], net_params['n_hidden'], softmax=False).to(self._device)
+        print(net_params)
+        self._policy_net = DenseNet(self._n_states, self._n_actions, net_params, softmax=False).to(self._device)
         #self._policy_net = DenseNet1(self._n_states, self._n_actions).to(self._device)
-        self._target_net = DenseNet(self._n_states, self._n_actions, net_params['width'], net_params['n_hidden'], softmax=False).to(self._device)
+        self._target_net = DenseNet(self._n_states, self._n_actions, net_params, softmax=False).to(self._device)
         #self._target_net = DenseNet1(self._n_states, self._n_actions).to(self._device)
         self._target_net.load_state_dict(self._policy_net.state_dict())
 
@@ -202,7 +203,7 @@ class DQNAgent(Agent):
 
 def test_agent():
     agent = DQNAgent(state_space=Box(low=0, high=1, shape=[4, 5, 3]), action_space=Discrete(
-        2), discount_rate=0.9, epsilon=0.1, learning_rate=1e-3, learning=True, batch_size=2, tau=0.001, eps_decay=1000, net_params={'width': 128, 'n_hidden':2}, update_freq=500)
+        2), discount_rate=0.9, epsilon=0.1, learning_rate=1e-3, learning=True, batch_size=2, tau=0.001, eps_decay=1000, net_params=[128,128], update_freq=500)
     state = agent._state_space.sample()
     next_state = agent._state_space.sample()
     action = agent.sample_action(state)

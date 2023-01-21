@@ -22,7 +22,7 @@ from torch.distributions import Categorical
 
 class PPOAgent(Agent):
     # Default param values are from openai spinup
-    def __init__(self, state_space: Space, action_space: Discrete, net_params: dict, discount_rate: float = 0.99, epsilon: float = -1, learning_rate: float = -1, policy_lr: float = 3e-4, value_lr: float=1e-4, gae_lambda: float=0.97, clip_ratio: float=0.1, num_updates: int=80, entropy_coeff:float = 0.01):
+    def __init__(self, state_space: Space, action_space: Discrete, net_params: list, discount_rate: float = 0.99, epsilon: float = -1, learning_rate: float = -1, policy_lr: float = 3e-4, value_lr: float=1e-4, gae_lambda: float=0.97, clip_ratio: float=0.1, num_updates: int=80, entropy_coeff:float = 0.01):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._log_probs = []
         self._transitions = []
@@ -45,14 +45,14 @@ class PPOAgent(Agent):
 
         # Policy
         self._policy_net = DenseNet(self._n_states, self._n_actions,
-                                    net_params['width'], net_params['n_hidden'], softmax=True).to(self._device)
+                                    net_params, softmax=True).to(self._device)
         self._policy_optimizer = optim.AdamW(
             self._policy_net.parameters(), lr=self._policy_lr, amsgrad=True)
         # self._optimizer = optim.Adam(self._policy_net.parameters(), lr=self._learning_rate)
 
         # Value
         self._value_net = DenseNet(
-            self._n_states, 1, net_params['width'], net_params['n_hidden'], softmax=False).to(self._device)
+            self._n_states, 1, net_params, softmax=False).to(self._device)
         self._value_optimizer = optim.AdamW(
             self._value_net.parameters(), lr=self._value_lr, amsgrad=True)
 
@@ -166,7 +166,7 @@ class PPOAgent(Agent):
         # reset
         self.reset()
 
-        return {'value_loss': value_loss_tensor.item(), 'policy_loss': policy_loss_tensor.item(), 'entropy': entropy_tensor.mean().item(), 'num_policy_udpate': num_policy_update}
+        return {'value_loss': value_loss_tensor.item(), 'policy_loss': policy_loss_tensor.item(), 'clip_loss': clip_loss_tensor.item(), 'entropy': -self._entropy_coeff * entropy_tensor.mean().item(), 'num_policy_udpate': num_policy_update}
     
     def update_weights_from(self, agent: PPOAgent, tau:float = 0.01):
         utils.update_weights(source_net=agent._value_net, target_net=self._value_net, tau=tau)
@@ -175,7 +175,7 @@ class PPOAgent(Agent):
 
 def test_agent():
     agent = PPOAgent(state_space=Box(low=0, high=1, shape=[4, 1]), action_space=Discrete(
-        2), net_params={'width': 8, 'n_hidden': 1})
+        2), net_params=[8])
     for _ in range(5):
         state = agent._state_space.sample()
         _ = agent.sample_action(state)

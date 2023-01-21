@@ -18,7 +18,7 @@ from torch.distributions import Categorical
 
 
 class A2CAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: dict, tempreture: float):
+    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: list, tempreture: float):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._rewards = []
         self._log_prob = []
@@ -37,14 +37,14 @@ class A2CAgent(Agent):
 
         # Policy
         self._policy_net = DenseNet(self._n_states, self._n_actions,
-                                    net_params['width'], net_params['n_hidden'], softmax=True, tempreture=tempreture).to(self._device)
+                                    net_params, softmax=True, tempreture=tempreture).to(self._device)
         self._policy_optimizer = optim.AdamW(
             self._policy_net.parameters(), lr=self._policy_lr, amsgrad=True)
         #self._optimizer = optim.Adam(self._policy_net.parameters(), lr=self._learning_rate)
 
         # Value
         self._value_net = DenseNet(
-            self._n_states, 1, net_params['width'], net_params['n_hidden'], softmax=False).to(self._device)
+            self._n_states, 1, net_params, softmax=False).to(self._device)
         self._value_optimizer = optim.AdamW(
             self._value_net.parameters(), lr=self._value_lr, amsgrad=True)
 
@@ -132,7 +132,7 @@ class A2CAgent(Agent):
 
 def test_agent():
     agent = A2CAgent(Box(low=0, high=1, shape=[4, 4, 3]), Discrete(
-        2), 1.0, 0.1, None, 1.0, 1.0, {'width': 8, 'n_hidden': 1}, 1)
+        2), 1.0, 0.1, None, 1.0, 1.0, [8], 1)
     for _ in range(5):
         state = agent._state_space.sample()
         action = agent.sample_action(state)

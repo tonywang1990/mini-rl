@@ -102,11 +102,11 @@ metric_metadata = {'default': {'format': '-',
 def plot_training_logs(logging: defaultdict, window: int = 50):
     idx = 0
     for agent_id, metrics in logging.items():
-        plt.figure(idx, figsize=(16, 4))
+        plt.figure(idx, figsize=(16, 8))
         plt.title(agent_id)
         for name, metric in metrics.items():
             # if name in metric_metadata and metric_metadata[name]['smooth']:
-            if name == 'episode_len':
+            if name in ['episode_len', 'num_policy_udpate']:
                 continue
             metric = apply_smooth(metric, window)
             plt.plot(metric, linewidth=3, label=name)
@@ -114,9 +114,9 @@ def plot_training_logs(logging: defaultdict, window: int = 50):
         idx += 1
 
 
-def apply_smooth(data: list, window: int = 10) -> list:
+def apply_smooth(data: list, window:int=10000) -> list:
     length = len(data)
-    return [np.mean(np.array(data[max(0, i-length//window): i+1])) for i in range(length)]
+    return [np.mean(np.array(data[i:i+window])) for i in range(length-window)]
 
 
 def plot_history(rewards: list[float], smoothing: bool = True):
@@ -316,7 +316,7 @@ def update_weights(source_net: torch.nn.Module, target_net: torch.nn.Module, tau
     target_net.load_state_dict(target_stste_dict)
 
 
-def train_double_agent(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: int, self_play: bool, shuffle: bool, verbal:bool) -> defaultdict:
+def duel_training(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: int, self_play: bool, shuffle: bool, verbal:bool) -> defaultdict:
     logging = defaultdict(lambda: defaultdict(list))
     if self_play:
         assert agent_dict['player_1'] is not None
@@ -333,7 +333,7 @@ def train_double_agent(env: AECEnv, agent_dict: dict, num_epoch: int, num_episod
                     logging[agent_id][name].append(metric)
         if self_play:
             agent_dict['player_2'].update_weights_from(
-                agent_dict['player_1'], tau=1)
+                agent_dict['player_1'], tau=1.0)
         if verbal:
             stats = ""
             for name, metric in logging['player_1'].items():
