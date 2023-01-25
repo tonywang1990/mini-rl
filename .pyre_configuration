@@ -5,6 +5,7 @@
   ],
   "search_path": [
     {"site-package": "pettingzoo"},
-    {"site-package": "matplotlib"}
+    {"site-package": "matplotlib"},
+    {"site-package": "scipy"}
   ]
 }

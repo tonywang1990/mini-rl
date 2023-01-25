@@ -3,7 +3,7 @@ import numpy as np
 from gym.spaces import Discrete, Box, Space
 import random
 import gym
-from typing import Union, Optional
+from typing import Union, Optional, Tuple
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
 
@@ -38,7 +38,6 @@ class DQNAgent(Agent):
         self._state_dim = state_space.shape
         self._n_states = np.prod(np.array(self._state_dim)).astype(int)
 
-        print(net_params)
         self._policy_net = DenseNet(self._n_states, self._n_actions, net_params, softmax=False).to(self._device)
         #self._policy_net = DenseNet1(self._n_states, self._n_actions).to(self._device)
         self._target_net = DenseNet(self._n_states, self._n_actions, net_params, softmax=False).to(self._device)
@@ -64,7 +63,7 @@ class DQNAgent(Agent):
     def to_array(self, tensor: torch.Tensor, shape: list) -> np.ndarray:
         return tensor.cpu().numpy().reshape(shape)
 
-    def sample_action(self, state: np.ndarray, action_mask: Optional[np.ndarray] = None) -> Union[int, float]:
+    def sample_action(self, state: np.ndarray, action_mask: Optional[np.ndarray] = None) -> Tuple[Union[int, float], dict]:
         # state: tensor of shape [1, n_states]
         # return: tensor of shape [1, n_actions]
         sample = random.random()
@@ -89,7 +88,7 @@ class DQNAgent(Agent):
                 action = np.random.choice(legal_actions)
             else:
                 action = self._action_space.sample()
-        return action
+        return action, dict()
 
     def _optimize_model(self) -> float:
         if len(self._memory) < self._batch_size:
@@ -172,7 +171,7 @@ class DQNAgent(Agent):
                 self._tau + target_net_state_dict[key]*(1-self._tau)
         self._target_net.load_state_dict(target_net_state_dict)
 
-    def post_process(self, state: np.ndarray, action: Union[int,float], reward: float, next_state: np.ndarray, terminal: bool):
+    def post_process(self, state: np.ndarray, action: Union[int,float], reward: float, next_state: np.ndarray, terminal: bool, action_info: dict):
         state_tensor = utils.to_feature(state).unsqueeze(0)
         action_tensor = torch.tensor([[action]], dtype=torch.long, device=self._device)
         reward_tensor = torch.tensor(
@@ -206,8 +205,8 @@ def test_agent():
         2), discount_rate=0.9, epsilon=0.1, learning_rate=1e-3, learning=True, batch_size=2, tau=0.001, eps_decay=1000, net_params=[128,128], update_freq=500)
     state = agent._state_space.sample()
     next_state = agent._state_space.sample()
-    action = agent.sample_action(state)
-    agent.post_process(state, action, 1.0, next_state, terminal=False)
+    action, action_info = agent.sample_action(state)
+    agent.post_process(state, action, 1.0, next_state, terminal=False, action_info=action_info)
     agent.control()
     #agent.control(state, action, 1.0, next_state, terminal=False)
     #np.testing.assert_equal(state, next_state)

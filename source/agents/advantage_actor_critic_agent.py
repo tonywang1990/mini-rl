@@ -3,7 +3,7 @@ from collections import namedtuple, deque
 from gym.spaces import Discrete, Box, Space
 import random
 import gym
-from typing import Union, Optional, Any
+from typing import Union, Optional, Any, Tuple
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
 
@@ -57,7 +57,7 @@ class A2CAgent(Agent):
         del self._log_prob[:]
         del self._state_value[:]
 
-    def sample_action(self, state: np.ndarray, mask: Optional[np.ndarray]=None) -> int:
+    def sample_action(self, state: np.ndarray, mask: Optional[np.ndarray]=None) -> Tuple[int, dict]:
         # state: tensor of shape [n_states]
         # return: int
         state_tensor = utils.to_feature(state)  # [n_states]
@@ -75,7 +75,7 @@ class A2CAgent(Agent):
         dist = Categorical(p_actions)
         action = dist.sample()
         self._log_prob.append(dist.log_prob(action).view(1))
-        return action.item()
+        return action.item(), dict(logp=dist.log_prob(action).view(1))
 
     def control(self) -> dict:
         if not self._learning: 
@@ -124,7 +124,7 @@ class A2CAgent(Agent):
 
         return {'value_loss': value_loss_tensor.item(), 'policy_loss':policy_loss_tensor.item()}
     
-    def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
+    def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool, action_info: dict):
         state_tensor = utils.to_feature(state)  # [n_states]
         state_value = self._value_net(state_tensor)
         self._state_value.append(state_value)
@@ -135,9 +135,9 @@ def test_agent():
         2), 1.0, 0.1, None, 1.0, 1.0, [8], 1)
     for _ in range(5):
         state = agent._state_space.sample()
-        action = agent.sample_action(state)
+        action, info = agent.sample_action(state)
     #agent._rewards = [1] * 5
-        agent.post_process(state, action, 1, None, None)
+        agent.post_process(state, action, 1, None, None, action_info=info)
     agent.control()
     print('a2c_agent test passed!')
 

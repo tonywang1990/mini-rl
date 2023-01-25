@@ -27,6 +27,6 @@ class Agent(object):
     def pre_process(self):
         pass
 
-    def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
+    def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool, action_info: dict):
         pass
     

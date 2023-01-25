@@ -99,22 +99,10 @@ metric_metadata = {'default': {'format': '-',
                                'smooth': True}, 'episode_len': {'skip': True}}
 
 
-def plot_training_logs(logging: defaultdict, window: int = 50):
-    idx = 0
-    for agent_id, metrics in logging.items():
-        plt.figure(idx, figsize=(16, 8))
-        plt.title(agent_id)
-        for name, metric in metrics.items():
-            # if name in metric_metadata and metric_metadata[name]['smooth']:
-            if name in ['episode_len', 'num_policy_udpate']:
-                continue
-            metric = apply_smooth(metric, window)
-            plt.plot(metric, linewidth=3, label=name)
-        plt.legend()
-        idx += 1
 
 
-def apply_smooth(data: list, window:int=10000) -> list:
+
+def apply_smooth(data: list, window: int) -> list:
     length = len(data)
     return [np.mean(np.array(data[i:i+window])) for i in range(length-window)]
 
@@ -234,9 +222,9 @@ def play_episode(agent: Agent, env: gym.Env, epsilon: Optional[float] = None, le
     if learning_rate is not None:
         agent._learning_rate = learning_rate
     while not stop:
-        action = agent.sample_action(state)
+        action, action_info = agent.sample_action(state)
         new_state, reward, terminal, truncated, info = env.step(action)
-        agent.post_process(state, action, reward, new_state, terminal)
+        agent.post_process(state, action, reward, new_state, terminal, action_info)
         state = new_state
         stop = terminal or truncated
         # bookkeeping
@@ -273,7 +261,7 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
     for agent in agent_dict.values():
         agent.reset()
     logs = defaultdict(lambda: defaultdict(float))
-    history = defaultdict(list)
+    prev_epsisode = {}
 
     for agent_id in env.agent_iter():
         agent = agent_dict[shuffled[agent_id]]
@@ -282,26 +270,24 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
         assert observation is not None
         # Select action
         if terminal or truncated:
-            action = None
+            action, action_info = None, {}
         else:
-            action = agent.sample_action(
+            action, action_info = agent.sample_action(
                 observation['observation'], observation['action_mask'])
         env.step(action)
-        # Train the agent
-        if shuffled[agent_id] in history:
-            prev_ob, prev_action = history[shuffled[agent_id]][-1]
+        # Post process
+        if shuffled[agent_id] in prev_epsisode:
+            prev_ob, prev_action, prev_action_info = prev_epsisode[shuffled[agent_id]]
             agent.post_process(prev_ob, prev_action, reward, observation['observation'],
-                               terminal)
-        history[shuffled[agent_id]].append(
-            (observation['observation'], action))
+                               terminal, prev_action_info)
+        prev_epsisode[shuffled[agent_id]] = (
+            observation['observation'], action, action_info)
         # bookkeeping
         logs[shuffled[agent_id]]['reward'] += reward
         logs[shuffled[agent_id]]['episode_len'] += 1
-        # if steps > 1000:
-        #    terminal = True
     for agent_id, agent in agent_dict.items():
         loss_dict = agent.control()
-        if len(loss_dict) > 0:
+        if loss_dict is not None and len(loss_dict) > 0:
             logs[shuffled[agent_id]] |= loss_dict
 
     return logs
@@ -316,15 +302,16 @@ def update_weights(source_net: torch.nn.Module, target_net: torch.nn.Module, tau
     target_net.load_state_dict(target_stste_dict)
 
 
-def duel_training(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: int, self_play: bool, shuffle: bool, verbal:bool) -> defaultdict:
-    logging = defaultdict(lambda: defaultdict(list))
+def duel_training(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: int, self_play: bool, shuffle: bool, verbal: bool, debug:bool) -> defaultdict:
     if self_play:
         assert agent_dict['player_1'] is not None
         agent_dict['player_2'] = copy.deepcopy(agent_dict['player_1'])
         agent_dict['player_2']._learning = False
     if verbal:
         print('agents:', agent_dict)
+    stats = defaultdict(list)
     for i in range(num_epoch):
+        logging = defaultdict(lambda: defaultdict(list))
         for _ in tqdm(range(num_episode)):
             logs = play_multiagent_episode(
                 agent_dict, env, shuffle=shuffle, debug=False)
@@ -334,12 +321,24 @@ def duel_training(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: in
         if self_play:
             agent_dict['player_2'].update_weights_from(
                 agent_dict['player_1'], tau=1.0)
+        output = ""
+        for name, metric in logging['player_1'].items():
+            stats[name].append(np.mean(np.array(metric)))
+            if name == 'reward':
+                output += f"win: {metric.count(1)}, lose: {metric.count(-1)}, draw: {metric.count(0.0)}, "
+        output += ", ".join([f"{k}: {v[-1]:.5f}" for k,v in stats.items()])
         if verbal:
-            stats = ""
-            for name, metric in logging['player_1'].items():
-                data = metric[-num_episode:]
-                stats += f"{name}: {np.mean(np.array(data)):.5f}, "
-                if name == 'reward':
-                    stats += f"win: {data.count(1)}, lose: {data.count(-1)}, draw: {data.count(0)}, "
-            print(f"epoch: {i}, {stats}")
-    return logging
+            print(f"epoch: {i}, {output}")
+    plot_training_logs(stats) 
+    return stats
+
+def plot_training_logs(metrics: defaultdict):
+    idx = 0
+    plt.figure(idx, figsize=(16, 4))
+    plt.title('training')
+    for name, metric in metrics.items():
+        # if name in metric_metadata and metric_metadata[name]['smooth']:
+        if name in ['episode_len', 'num_policy_udpate']:
+            continue
+        plt.plot(metric, linewidth=3, label=name)
+    plt.legend()

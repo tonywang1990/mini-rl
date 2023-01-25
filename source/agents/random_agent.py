@@ -17,13 +17,13 @@ class RandomAgent(Agent):
         self._device = 'cpu'
         self._learning = False
 
-    def sample_action(self, state: np.ndarray, action_mask: Optional[np.ndarray] = None) -> int:
+    def sample_action(self, state: np.ndarray, action_mask: Optional[np.ndarray] = None) -> Tuple[int, dict]:
         if action_mask is not None:
             legal_actions = np.nonzero(action_mask)[0]
             action = np.random.choice(legal_actions)
         else:
             action = self._action_space.sample()
-        return action
+        return action, dict()
 
     def control(self) -> dict:
         return {}
