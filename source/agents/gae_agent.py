@@ -18,7 +18,7 @@ from torch.distributions import Categorical
 
 
 class GAEAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: dict, exp_average_discount: float):
+    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, policy_lr: float, value_lr: float, net_params: list, exp_average_discount: float):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._log_prob = []
         self._transitions = []
@@ -37,14 +37,14 @@ class GAEAgent(Agent):
 
         # Policy
         self._policy_net = DenseNet(self._n_states, self._n_actions,
-                                    net_params['width'], net_params['n_hidden'], softmax=True).to(self._device)
+                                    net_params, softmax=True).to(self._device)
         self._policy_optimizer = optim.AdamW(
             self._policy_net.parameters(), lr=self._policy_lr, amsgrad=True)
         # self._optimizer = optim.Adam(self._policy_net.parameters(), lr=self._learning_rate)
 
         # Value
         self._value_net = DenseNet(
-            self._n_states, 1, net_params['width'], net_params['n_hidden'], softmax=False).to(self._device)
+            self._n_states, 1, net_params, softmax=False).to(self._device)
         self._value_optimizer = optim.AdamW(
             self._value_net.parameters(), lr=self._value_lr, amsgrad=True)
 
@@ -56,7 +56,7 @@ class GAEAgent(Agent):
         del self._transitions[:]
 
 
-    def sample_action(self, state: np.ndarray) -> int:
+    def sample_action(self, state: np.ndarray) -> Tuple[int, dict]:
         # state: tensor of shape [n_states]
         # return: int
         # predict actions, gradients required
@@ -67,9 +67,9 @@ class GAEAgent(Agent):
         dist = Categorical(p_actions)
         action = dist.sample()
         self._log_prob.append(dist.log_prob(action).view(1))
-        return action.item()
+        return action.item(), dict(logp=dist.log_prob(action).view(1))
 
-    def post_process(self, state: np.ndarray, action: int, reward: float, next_state: np.ndarray, terminal: bool):
+    def post_process(self, state: np.ndarray, action: int, reward: float, next_state: np.ndarray, terminal: bool, action_info:dict):
         # Calculate state 
         state_tensor = self._value_net(utils.to_feature(state))
         with torch.no_grad():
@@ -122,11 +122,11 @@ class GAEAgent(Agent):
 
 def test_agent():
     agent = GAEAgent(Box(low=0, high=1, shape=[4, 1]), Discrete(
-        2), 1.0, 0.1, None, 1.0, 1.0, {'width': 8, 'n_hidden': 1}, 0.5)
+        2), 1.0, 0.1, None, 1.0, 1.0, [8], 0.5)
     for _ in range(2):
         state = agent._state_space.sample()
         _ = agent.sample_action(state)
-        agent.post_process(np.array([1.0,2,3,4]), 1, 0.5, np.array([-1,-1,-1,-1]), False)
+        agent.post_process(np.array([1.0,2,3,4]), 1, 0.5, np.array([-1,-1,-1,-1]), False, {})
     # print(agent._memory)
     agent.control()
     print('gae_agent passed!')

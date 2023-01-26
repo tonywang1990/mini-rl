@@ -6,6 +6,7 @@ import gym
 from typing import Union, Optional, Tuple
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
+from collections import namedtuple, deque
 
 from source.agents.agent import Agent
 from source.utils import utils
@@ -17,6 +18,20 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 
+# DQN
+class ReplayMemory(object):
+    def __init__(self, capacity):
+        self.memory = deque([], maxlen=capacity)
+
+    def push(self, *args):
+        """Save a transition"""
+        self.memory.append(utils.Transition(*args))
+
+    def sample(self, batch_size):
+        return random.sample(self.memory, batch_size)
+
+    def __len__(self):
+        return len(self.memory)
 
 class DQNAgent(Agent):
     def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, learning: bool, batch_size: int, tau: float, eps_decay: float, net_params:list, update_freq:int):
@@ -46,7 +61,7 @@ class DQNAgent(Agent):
 
         self._optimizer = optim.AdamW(
             self._policy_net.parameters(), lr=self._learning_rate, amsgrad=True)
-        self._memory = utils.ReplayMemory(MEMORY_SIZE)
+        self._memory = ReplayMemory(MEMORY_SIZE)
 
         self._step = 0
         self._debug = True

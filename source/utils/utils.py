@@ -19,19 +19,8 @@ import copy
 
 # General
 
-
-def evaluate_agent(agent: Agent, env: Env, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
-    total_reward = 0
-    successful_episode = 0
-    # Set learning to false
-    agent._learning = False
-    for _ in tqdm(range(num_episode)):
-        reward, _ = play_episode(agent, env, epsilon=epsilon)
-        if reward > threshold:
-            successful_episode += 1
-        total_reward += reward
-    return total_reward / num_episode, successful_episode / num_episode
-
+Transition = namedtuple('Transition',
+                        ('state', 'action', 'next_state', 'reward', 'terminal'))
 
 def estimate_success_rate(agent: Agent, env: Env, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
     return evaluate_agent(agent, env, num_episode, epsilon, threshold)[0]
@@ -58,30 +47,6 @@ def normalize(tensor: torch.Tensor):
     return (tensor - tensor.mean()
             ) / (tensor.std() + eps())
 
-# Tabular
-
-
-def get_epsilon_greedy_policy_from_action_values(action_values: np.ndarray, epsilon: float = 0.0) -> np.ndarray:
-    optimal_actions = np.argmax(action_values, axis=-1)
-    num_actions = action_values.shape[-1]
-    policy = np.full(action_values.shape, epsilon / num_actions)
-    if optimal_actions.ndim == 0:
-        policy[optimal_actions] += 1.0 - epsilon
-    elif optimal_actions.ndim == 1:
-        for i, j in enumerate(optimal_actions):
-            policy[i, j] += 1.0 - epsilon
-    else:
-        raise NotImplementedError
-    return policy
-
-
-def get_state_values_from_action_values(action_values: np.ndarray, policy: Optional[np.ndarray] = None) -> np.ndarray:
-    if policy is None:
-        # assume greedy policy
-        policy = get_epsilon_greedy_policy_from_action_values(action_values)
-    state_values = np.sum(action_values * policy, axis=1)
-    return state_values
-
 
 # Visualization
 def render_mp4(videopath: str) -> str:
@@ -97,9 +62,6 @@ def render_mp4(videopath: str) -> str:
 
 metric_metadata = {'default': {'format': '-',
                                'smooth': True}, 'episode_len': {'skip': True}}
-
-
-
 
 
 def apply_smooth(data: list, window: int) -> list:
@@ -118,63 +80,20 @@ def plot_history(rewards: list[float], smoothing: bool = True):
         plt.plot(history_smoothed, linewidth=5)
 
 
-def show_state_action_values(agent: Agent, game: str):
-    # Plot the action values.
-    # cliff walking
-    if game == 'cliff_walking':
-        shape = (4, 12, 4)
-    # frozen lake
-    elif game == 'frozen_lake_4x4':
-        # small
-        shape = (4, 4, 4)
-    elif game == 'frozen_lake_8x8':
-        # large
-        shape = (8, 8, 4)
-    else:
-        raise NotImplemented
-
-    direction = {
-        0: "LEFT",
-        1: "DOWN",
-        2: "RIGHT",
-        3: "UP"
-    }
-    #actions = np.argmax(agent._policy, axis=1)
-    #actions = actions.reshape(shape[:2])
-    #named_actions = np.chararray(actions.shape, itemsize=4)
-    #map = [[""] * shape[1]] * shape[0]
-    # for idx, val in np.ndenumerate(actions):
-    #    named_actions[idx] = direction[val]
-    #    #map[idx[0]][idx[1]] = direction[val]
-    # print(named_actions)
-
-    # Action values
-    plt.figure(1, figsize=(16, 4))
-    action_values = agent._Q.reshape(shape)
-    num_actions = action_values.shape[-1]
-    plt.suptitle("action_values (Q)")
-    for i in range(num_actions):
-        plt.subplot(1, num_actions, i+1)
-        plt.title(f"{i}, {direction[i]}")
-        plt.imshow(action_values[:, :, i])
-        for (y, x), label in np.ndenumerate(action_values[:, :, i]):
-            plt.text(x, y, round(label, 2), ha='center', va='center')
-
-        plt.colorbar(orientation='vertical')
-        # print(action_values[:,:,i])
-
-    # State values
-    plt.figure(2)
-    state_values = get_state_values_from_action_values(agent._Q, agent._policy)
-    values = state_values.reshape(shape[:2])
-    plt.imshow(values)
-    for (j, i), label in np.ndenumerate(values):
-        plt.text(i, j, round(label, 5), ha='center', va='center')
-    plt.colorbar(orientation='vertical')
-    plt.title("state_values")
-
+def plot_training_logs(metrics: defaultdict):
+    idx = 0
+    plt.figure(idx, figsize=(16, 4))
+    plt.title('training')
+    for name, metric in metrics.items():
+        # if name in metric_metadata and metric_metadata[name]['smooth']:
+        if name in ['episode_len', 'num_policy_udpate']:
+            continue
+        plt.plot(metric, linewidth=3, label=name)
+    plt.legend()
 
 # Pytorch
+
+
 def to_feature(data: np.ndarray, device: str = 'cpu', debug: bool = True) -> torch.Tensor:
     # Convert state into tensor and unsqueeze: insert a new dim into tensor (at dim 0): e.g. 1 -> [1] or [1] -> [[1]]
     # state: np.array
@@ -188,24 +107,13 @@ def to_array(tensor: torch.Tensor, shape: list) -> np.ndarray:
     return tensor.cpu().numpy().reshape(shape)
 
 
-# DQN
-Transition = namedtuple('Transition',
-                        ('state', 'action', 'next_state', 'reward', 'terminal'))
-
-
-class ReplayMemory(object):
-    def __init__(self, capacity):
-        self.memory = deque([], maxlen=capacity)
-
-    def push(self, *args):
-        """Save a transition"""
-        self.memory.append(Transition(*args))
-
-    def sample(self, batch_size):
-        return random.sample(self.memory, batch_size)
-
-    def __len__(self):
-        return len(self.memory)
+def update_weights(source_net: torch.nn.Module, target_net: torch.nn.Module, tau: float):
+    source_state_dict = source_net.state_dict()
+    target_stste_dict = target_net.state_dict()
+    for key in target_stste_dict:
+        target_stste_dict[key] = source_state_dict[key] * \
+            tau + target_stste_dict[key]*(1-tau)
+    target_net.load_state_dict(target_stste_dict)
 
 # gym environment
 
@@ -224,7 +132,8 @@ def play_episode(agent: Agent, env: gym.Env, epsilon: Optional[float] = None, le
     while not stop:
         action, action_info = agent.sample_action(state)
         new_state, reward, terminal, truncated, info = env.step(action)
-        agent.post_process(state, action, reward, new_state, terminal, action_info)
+        agent.post_process(state, action, reward,
+                           new_state, terminal, action_info)
         state = new_state
         stop = terminal or truncated
         # bookkeeping
@@ -239,6 +148,20 @@ def play_episode(agent: Agent, env: gym.Env, epsilon: Optional[float] = None, le
     return total_reward, steps
 
 
+def evaluate_agent(agent: Agent, env: Env, num_episode: int = 100000, epsilon: float = 0.0, threshold: float = 0.0):
+    total_reward = 0
+    successful_episode = 0
+    # Set learning to false
+    agent._learning = False
+    for _ in tqdm(range(num_episode)):
+        reward, _ = play_episode(agent, env, epsilon=epsilon)
+        if reward > threshold:
+            successful_episode += 1
+        total_reward += reward
+    return total_reward / num_episode, successful_episode / num_episode
+
+
+# Pettingzoo.classsic environment
 def create_shuffled_agent(agent_dict: Dict[str, Agent], shuffle: bool) -> Dict[str, str]:
     agent_names = list(agent_dict.keys())
     if shuffle:
@@ -247,9 +170,6 @@ def create_shuffled_agent(agent_dict: Dict[str, Agent], shuffle: bool) -> Dict[s
         return shuffled
     else:
         return dict(zip(agent_names, agent_names))
-
-# Pettingzoo.classsic environment
-# TODO: randomize agent so that different agent take turns to start first.
 
 
 def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: bool = False, debug: bool = False) -> defaultdict:
@@ -293,16 +213,7 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
     return logs
 
 
-def update_weights(source_net: torch.nn.Module, target_net: torch.nn.Module, tau: float):
-    source_state_dict = source_net.state_dict()
-    target_stste_dict = target_net.state_dict()
-    for key in target_stste_dict:
-        target_stste_dict[key] = source_state_dict[key] * \
-            tau + target_stste_dict[key]*(1-tau)
-    target_net.load_state_dict(target_stste_dict)
-
-
-def duel_training(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: int, self_play: bool, shuffle: bool, verbal: bool, debug:bool) -> defaultdict:
+def duel_training(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: int, self_play: bool, shuffle: bool, verbal: bool, debug: bool) -> defaultdict:
     if self_play:
         assert agent_dict['player_1'] is not None
         agent_dict['player_2'] = copy.deepcopy(agent_dict['player_1'])
@@ -326,19 +237,8 @@ def duel_training(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: in
             stats[name].append(np.mean(np.array(metric)))
             if name == 'reward':
                 output += f"win: {metric.count(1)}, lose: {metric.count(-1)}, draw: {metric.count(0.0)}, "
-        output += ", ".join([f"{k}: {v[-1]:.5f}" for k,v in stats.items()])
+        output += ", ".join([f"{k}: {v[-1]:.5f}" for k, v in stats.items()])
         if verbal:
             print(f"epoch: {i}, {output}")
-    plot_training_logs(stats) 
+    plot_training_logs(stats)
     return stats
-
-def plot_training_logs(metrics: defaultdict):
-    idx = 0
-    plt.figure(idx, figsize=(16, 4))
-    plt.title('training')
-    for name, metric in metrics.items():
-        # if name in metric_metadata and metric_metadata[name]['smooth']:
-        if name in ['episode_len', 'num_policy_udpate']:
-            continue
-        plt.plot(metric, linewidth=3, label=name)
-    plt.legend()

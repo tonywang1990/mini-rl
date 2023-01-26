@@ -3,7 +3,7 @@ from collections import namedtuple, deque
 from gym.spaces import Discrete, Box, Space
 import random
 import gym
-from typing import Union, Optional, Any
+from typing import Union, Optional, Any, Tuple
 from gym.wrappers.monitoring.video_recorder import VideoRecorder
 import math
 
@@ -19,7 +19,7 @@ from torch.distributions import Categorical
 
 
 class PolicyGradientAgent(Agent):
-    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, net_params: dict):
+    def __init__(self, state_space: Space, action_space: Discrete, discount_rate: float, epsilon: float, learning_rate: float, net_params: list):
         super().__init__(state_space, action_space, discount_rate, epsilon, learning_rate)
         self._rewards = []
         self._log_prob = []
@@ -34,7 +34,7 @@ class PolicyGradientAgent(Agent):
         self._n_states = len(state_space.sample().flatten())
 
         self._policy_net = DenseNet(self._n_states, self._n_actions,
-                                    net_params['width'], net_params['n_hidden'], softmax=True).to(self._device)
+                                    net_params, softmax=True).to(self._device)
         self._optimizer = optim.AdamW(
             self._policy_net.parameters(), lr=self._learning_rate, amsgrad=True)
         #self._optimizer = optim.Adam(self._policy_net.parameters(), lr=self._learning_rate)
@@ -46,7 +46,7 @@ class PolicyGradientAgent(Agent):
         del self._rewards[:]
         del self._log_prob[:]
 
-    def sample_action(self, state: np.ndarray) -> int:
+    def sample_action(self, state: np.ndarray) -> Tuple[int, dict]:
         # state: tensor of shape [n_states]
         # return: int
         state_tensor = utils.to_feature(state)  # [n_states]
@@ -60,7 +60,7 @@ class PolicyGradientAgent(Agent):
         dist = Categorical(p_actions)
         action = dist.sample()
         self._log_prob.append(dist.log_prob(action))
-        return action.item()
+        return action.item(), dict(logp=dist.log_prob(action))
 
     # Reference: https://github.com/pytorch/examples/blob/main/reinforcement_learning/reinforce.py
     def control(self):
@@ -92,12 +92,12 @@ class PolicyGradientAgent(Agent):
         # reset
         self.reset()
 
-    def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool):
+    def post_process(self, state: Any, action: Any, reward: float, next_state: Any, terminal: bool, action_info:dict):
         self._rewards.append(reward)
 
 def test_agent():
     agent = PolicyGradientAgent(Box(low=0, high=1, shape=[4, 4, 3]), Discrete(
-        2), 1.0, 0.1, 1.0, {'width': 8, 'n_hidden': 1})
+        2), 1.0, 0.1, 1.0, [8])
     for _ in range(5):
         state = agent._state_space.sample()
         _ = agent.sample_action(state)

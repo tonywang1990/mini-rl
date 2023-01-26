@@ -219,6 +219,7 @@ class PPOAgent(Agent):
         # data is Batched dataset: [batch_size, ...]
         obs, returns = data['obs'], data['ret']
         state_value = self._value_net(obs)
+        #pyre-fixme[58]
         loss = ((torch.squeeze(state_value) - returns) ** 2).mean()
         return loss
 

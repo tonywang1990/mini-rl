@@ -36,14 +36,14 @@ class ActorCriticAgent(Agent):
 
         # Policy
         self._policy_net = DenseNet(
-            self._n_states, self._n_actions, 32, 1, softmax=True).to(self._device)
+            self._n_states, self._n_actions, [32], softmax=True).to(self._device)
         self._policy_optimizer = optim.AdamW(
             self._policy_net.parameters(), lr=self._policy_lr, amsgrad=True)
         #self._optimizer = optim.Adam(self._policy_net.parameters(), lr=self._learning_rate)
 
         # Value
         self._value_net = DenseNet(
-            self._n_states, 1, 32, 1, softmax=False).to(self._device)
+            self._n_states, 1, [32], softmax=False).to(self._device)
         self._value_optimizer = optim.AdamW(
             self._value_net.parameters(), lr=self._value_lr, amsgrad=True)
 
