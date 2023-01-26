@@ -91,10 +91,8 @@ class PPOBuffer(object):
         #assert self._ptr == self._batch_size, f'buffer not full: {self._ptr}'
         mean, std = np.mean(self._advantage_buffer), np.std(
             self._advantage_buffer)
-        self._advantage_buffer = (self._advantage_buffer - mean) / std
-        mean, std = np.mean(self._return_buffer), np.std(
-            self._return_buffer)
-        #self._return_buffer = (self._return_buffer - mean) / std
+        if std != 0:
+            self._advantage_buffer = (self._advantage_buffer - mean) / std 
         data = dict(obs=self._observation_buffer, act=self._action_buffer,
                    ret=self._return_buffer, adv=self._advantage_buffer, logp=self._log_prob_buffer)
         return {k: torch.as_tensor(v) for k, v in data.items()}
@@ -257,7 +255,7 @@ class PPOAgent(Agent):
             policy_loss.backward()
             self._policy_optimizer.step()
 
-        return {'value_loss': value_loss.item(), 'policy_loss': policy_loss.item(), 'num_policy_udpate': num_policy_update}
+        return info | {'value_loss': value_loss.item(), 'policy_loss': policy_loss.item(), 'num_policy_udpate': num_policy_update}
  
     def update_weights_from(self, agent: PPOAgent, tau: float = 0.01):
         utils.update_weights(source_net=agent._value_net,
