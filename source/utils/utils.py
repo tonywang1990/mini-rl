@@ -172,7 +172,9 @@ def create_shuffled_agent(agent_dict: Dict[str, Agent], shuffle: bool) -> Dict[s
         return dict(zip(agent_names, agent_names))
 
 
-def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: bool = False, debug: bool = False) -> defaultdict:
+def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: bool = False, debug: bool = False, video_path:Optional[str]=None) -> defaultdict:
+    if video_path is not None:
+        video = VideoRecorder(env, video_path)
     if debug:
         # In debug mode, we fix the random behavior so it's the same sequence for every episode
         np.random.seed(101)
@@ -184,6 +186,8 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
     prev_epsisode = {}
 
     for agent_id in env.agent_iter():
+        if video_path is not None:
+            video.capture_frame()
         agent = agent_dict[shuffled[agent_id]]
         # Make observation
         observation, reward, terminal, truncated, info = env.last()
@@ -209,15 +213,20 @@ def play_multiagent_episode(agent_dict: Dict[str, Agent], env: AECEnv, shuffle: 
         loss_dict = agent.control()
         if loss_dict is not None and len(loss_dict) > 0:
             logs[shuffled[agent_id]] |= loss_dict
+    if video_path is not None:
+        video.close()
 
     return logs
 
 
 def duel_training(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: int, self_play: bool, shuffle: bool, verbal: bool, debug: bool) -> defaultdict:
+    p1, p2 = agent_dict.keys()
+    if p1 > p2:
+        p1, p2 = p2, p1
     if self_play:
-        assert agent_dict['player_1'] is not None
-        agent_dict['player_2'] = copy.deepcopy(agent_dict['player_1'])
-        agent_dict['player_2']._learning = False
+        assert agent_dict[p1] is not None
+        agent_dict[p1] = copy.deepcopy(agent_dict[p1])
+        agent_dict[p2]._learning = False
     if verbal:
         print('agents:', agent_dict)
     stats = defaultdict(list)
@@ -230,10 +239,10 @@ def duel_training(env: AECEnv, agent_dict: dict, num_epoch: int, num_episode: in
                 for name, metric in log.items():
                     logging[agent_id][name].append(metric)
         if self_play:
-            agent_dict['player_2'].update_weights_from(
-                agent_dict['player_1'], tau=1.0)
+            agent_dict[p2].update_weights_from(
+                agent_dict[p1], tau=1.0)
         output = ""
-        for name, metric in logging['player_1'].items():
+        for name, metric in logging[p1].items():
             stats[name].append(np.mean(np.array(metric)))
             if name == 'reward':
                 output += f"win: {metric.count(1)}, lose: {metric.count(-1)}, draw: {metric.count(0.0)}, "
